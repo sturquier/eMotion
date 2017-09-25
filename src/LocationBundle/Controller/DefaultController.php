@@ -23,7 +23,7 @@ class DefaultController extends Controller
      /**
      * Creates a new vehicle entity.
      *
-     * @Route("/new", name="vehicle_new")
+     * @Route("/new-vehicle", name="vehicle_new")
      */
     public function newAction(Request $request)
     {

@@ -3,36 +3,8 @@
 
 {% block body %}
 	
-	<h4>La location c'est la vie ! </h4>
-	<div class="col-sm-12">
-		<table class="table">
-			<tr> 
-		    	<th>Marque</th>
-		    	<th>Modèle</th>
-		    	<th>Numéro de série</th>
-		    	<th>Couleur</th>
-		    	<th>N° d'immatriculation</th>
-		    	<th>Kilométrage</th>
-		    	<th>Date d'achat</th>
-		    	<th>Prix d'achat</th>
-		      </tr>
-			{% for v in vehicles %}
-			<tr> 
-				<td>{{ v.brand }}</td>
-				<td>{{ v.model }}</td>
-				<td>{{ v.serialNumber }}</td>
-				<td>{{ v.color }}</td>
-				<td>{{ v.numberPlate }}</td>
-				<td>{{ v.kilometer }}</td>
-				<td>{{ v.datePurchase | date }}</td>
-				<td>{{ v.pricePurchase }}</td>
-			</tr>
-			{% else %}
-				    <tr>
-				    	<td>Pas de voitures ajoutés</td>
-				    </tr>
-			{% endfor %}
-		</table>
+	<div class="container">
+		<h4>Home page ~</h4>
 	</div>
 
 {% endblock %}

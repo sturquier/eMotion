@@ -7,6 +7,10 @@
 				<li><a href="{{ path('homepage') }}">eMotion</a></li>
 			</ul>
 
+			<ul class="nav navbar-nav">
+				<li><a href="{{ path('view_vehicles') }}">Voir les vehicules</a></li>
+			</ul>
+
 			<ul class="nav navbar-nav navbar-right">
 				{% if app.user %}
 				<ul class="nav navbar-nav">
@@ -20,7 +24,7 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="{{ path('vehicle_new') }}">Ajouter une voiture</a></li>
+							<li><a href="{{ path('add_vehicle') }}">Ajouter un vehicule</a></li>
 						</ul>
 					</div>
 				</li>

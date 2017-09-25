@@ -38,9 +38,9 @@ class Vehicle
     /**
      * @var int
      *
-     * @ORM\Column(name="serial_numer", type="integer")
+     * @ORM\Column(name="serial_number", type="integer")
      */
-    private $serialNumer;
+    private $serialNumber;
 
     /**
      * @var string
@@ -137,27 +137,27 @@ class Vehicle
     }
 
     /**
-     * Set serialNumer
+     * Set serialNumber
      *
-     * @param integer $serialNumer
+     * @param integer $serialNumber
      *
      * @return Vehicle
      */
-    public function setSerialNumer($serialNumer)
+    public function setSerialNumber($serialNumber)
     {
-        $this->serialNumer = $serialNumer;
+        $this->serialNumber = $serialNumber;
 
         return $this;
     }
 
     /**
-     * Get serialNumer
+     * Get serialNumber
      *
      * @return int
      */
-    public function getSerialNumer()
+    public function getSerialNumber()
     {
-        return $this->serialNumer;
+        return $this->serialNumber;
     }
 
     /**

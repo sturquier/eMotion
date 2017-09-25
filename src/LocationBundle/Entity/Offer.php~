@@ -162,28 +162,4 @@ class Offer
     {
         return $this->date_begin;
     }
-
-    /**
-     * Set dateEnd
-     *
-     * @param \DateTime $dateEnd
-     *
-     * @return Offer
-     */
-    public function setDateEnd($dateEnd)
-    {
-        $this->date_end = $dateEnd;
-
-        return $this;
-    }
-
-    /**
-     * Get dateEnd
-     *
-     * @return \DateTime
-     */
-    public function getDateEnd()
-    {
-        return $this->date_end;
-    }
 }

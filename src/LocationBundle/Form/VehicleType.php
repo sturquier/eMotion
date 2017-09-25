@@ -18,15 +18,16 @@ class VehicleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('brand', TextType::class)
-        ->add('model', TextType::class)
-        ->add('serialNumber', IntegerType::class)
-        ->add('color', TextType::class)
-        ->add('numberPlate',IntegerType::class)
-        ->add('kilometer', IntegerType::class)
-        ->add('datePurchase', DateType::class)
-        ->add('pricePurchase', NumberType::class)
-        ->add('submit', SubmitType::class);
+        $builder
+        ->add('brand', TextType::class, ['label' => 'Marque'])
+        ->add('model', TextType::class, ['label' => 'Modèle'])
+        ->add('serialNumber', IntegerType::class, ['label' => 'N° de série'])
+        ->add('color', TextType::class, ['label' => 'Couleur'])
+        ->add('numberPlate',TextType::class, ['label' => 'N° d\'immatriculation'])
+        ->add('kilometer', IntegerType::class, ['label' => 'Nombre de kilomètres au compteur'])
+        ->add('datePurchase', DateType::class, ['label' => 'Date d\'achat'])
+        ->add('pricePurchase', NumberType::class, ['label' => 'Prix d\'achat'])
+        ->add('submit', SubmitType::class, ['label' => 'Enregister']);
     }
     
     /**

@@ -1,13 +1,13 @@
+location:
+    resource: "@LocationBundle/Resources/config/routing.yml"
+    prefix:   /
+
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /
 
 payment:
     resource: "@PaymentBundle/Resources/config/routing.yml"
-    prefix:   /
-
-location:
-    resource: "@LocationBundle/Resources/config/routing.yml"
     prefix:   /
 
 app:

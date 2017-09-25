@@ -19,6 +19,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $user1->setFirstName('simon');
         $user1->setLastName('turquier');
         $user1->setPlainPassword('sturquier');
+        $user1->setEnabled(1);
         $user1->setDateBirth($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));
         $user1->setAddress($faker->address);
         $user1->setPhoneNumber($faker->phoneNumber);
@@ -31,6 +32,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $user2->setFirstName('sophie');
         $user2->setLastName('lee');
         $user2->setPlainPassword('stitchMoonz');
+        $user2->setEnabled(1);
         $user2->setDateBirth($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));
         $user2->setAddress($faker->address);
         $user2->setPhoneNumber($faker->phoneNumber);
@@ -43,6 +45,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $user3->setFirstName('sarah');
         $user3->setLastName('adberemane');
         $user3->setPlainPassword('sailorMoon');
+        $user3->setEnabled(1);
         $user3->setDateBirth($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));
         $user3->setAddress($faker->address);
         $user3->setPhoneNumber($faker->phoneNumber);
@@ -56,6 +59,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $user4->setFirstName('pathé');
         $user4->setLastName('barry');
         $user4->setPlainPassword('kyller92');
+        $user4->setEnabled(1);
         $user4->setDateBirth($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));
         $user4->setAddress($faker->address);
         $user4->setPhoneNumber($faker->phoneNumber);
@@ -69,6 +73,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $adm->setFirstName('admin');
         $adm->setLastName('admin');
         $adm->setPlainPassword('admin');
+        $adm->setEnabled(1);
         $adm->setDateBirth($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));
         $adm->setAddress($faker->address);
         $adm->setPhoneNumber($faker->phoneNumber);

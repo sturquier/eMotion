@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new LocationBundle\LocationBundle(),
             new PaymentBundle\PaymentBundle(),
             new UserBundle\UserBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

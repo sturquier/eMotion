@@ -2,15 +2,16 @@
 
 namespace UserBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
  *
- * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var int
@@ -19,14 +20,19 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="last_name", type="string", length=255)
      */
-    private $name;
+    private $lastName;
 
     /**
      * @var string
@@ -75,27 +81,27 @@ class User
     }
 
     /**
-     * Set name
+     * Set lastName
      *
-     * @param string $name
+     * @param string $lastName
      *
      * @return User
      */
-    public function setName($name)
+    public function setLastName($lastName)
     {
-        $this->name = $name;
+        $this->lastName = $lastName;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get lastName
      *
      * @return string
      */
-    public function getName()
+    public function getLastName()
     {
-        return $this->name;
+        return $this->lastName;
     }
 
     /**

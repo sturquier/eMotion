@@ -69,6 +69,13 @@ class User extends BaseUser
      */
     private $drivingLicence;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mail_user", type="string", length=255)
+     */
+    private $mail_user;
+
 
     /**
      * Get id
@@ -222,5 +229,29 @@ class User extends BaseUser
     public function getDrivingLicence()
     {
         return $this->drivingLicence;
+    }
+
+    /**
+     * Set mailUser
+     *
+     * @param string $mailUser
+     *
+     * @return User
+     */
+    public function setMailUser($mailUser)
+    {
+        $this->mail_user = $mailUser;
+
+        return $this;
+    }
+
+    /**
+     * Get mailUser
+     *
+     * @return string
+     */
+    public function getMailUser()
+    {
+        return $this->mail_user;
     }
 }

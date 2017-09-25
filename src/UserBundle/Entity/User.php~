@@ -230,28 +230,4 @@ class User extends BaseUser
     {
         return $this->drivingLicence;
     }
-
-    /**
-     * Set mailUser
-     *
-     * @param string $mailUser
-     *
-     * @return User
-     */
-    public function setMailUser($mailUser)
-    {
-        $this->mail_user = $mailUser;
-
-        return $this;
-    }
-
-    /**
-     * Get mailUser
-     *
-     * @return string
-     */
-    public function getMailUser()
-    {
-        return $this->mail_user;
-    }
 }

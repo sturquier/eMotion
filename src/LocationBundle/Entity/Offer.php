@@ -45,14 +45,14 @@ class Offer
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_begin", type="datetimetz")
+     * @ORM\Column(name="date_begin", type="datetime")
      */
     private $date_begin;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_end", type="datetimetz")
+     * @ORM\Column(name="date_end", type="datetime")
      */
     private $date_end;
 

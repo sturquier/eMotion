@@ -58,7 +58,7 @@ class User extends BaseUser
     /**
      * @var int
      *
-     * @ORM\Column(name="phone_number", type="integer")
+     * @ORM\Column(name="phone_number", type="string", length=255)
      */
     private $phoneNumber;
 
@@ -68,13 +68,6 @@ class User extends BaseUser
      * @ORM\Column(name="driving_licence", type="string", length=255)
      */
     private $drivingLicence;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mail_user", type="string", length=255)
-     */
-    private $mail_user;
 
 
     /**
@@ -186,7 +179,7 @@ class User extends BaseUser
     /**
      * Set phoneNumber
      *
-     * @param integer $phoneNumber
+     * @param string $phoneNumber
      *
      * @return User
      */
@@ -200,7 +193,7 @@ class User extends BaseUser
     /**
      * Get phoneNumber
      *
-     * @return int
+     * @return string
      */
     public function getPhoneNumber()
     {
@@ -229,29 +222,5 @@ class User extends BaseUser
     public function getDrivingLicence()
     {
         return $this->drivingLicence;
-    }
-
-    /**
-     * Set mailUser
-     *
-     * @param string $mailUser
-     *
-     * @return User
-     */
-    public function setMailUser($mailUser)
-    {
-        $this->mail_user = $mailUser;
-
-        return $this;
-    }
-
-    /**
-     * Get mailUser
-     *
-     * @return string
-     */
-    public function getMailUser()
-    {
-        return $this->mail_user;
     }
 }

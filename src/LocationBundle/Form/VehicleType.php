@@ -22,7 +22,7 @@ class VehicleType extends AbstractType
         ->add('model', TextType::class)
         ->add('serialNumber', IntegerType::class)
         ->add('color', TextType::class)
-        ->add('numberPlate',IntegerType::class)
+        ->add('numberPlate',TextType::class)
         ->add('kilometer', IntegerType::class)
         ->add('datePurchase', DateType::class)
         ->add('pricePurchase', NumberType::class)

@@ -1,17 +1,13 @@
 location:
-    resource: "@LocationBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: "@LocationBundle/Controller/"
+    type: annotation
 
 user:
-    resource: "@UserBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: "@UserBundle/Controller/"
+    type: annotation
 
 payment:
-    resource: "@PaymentBundle/Resources/config/routing.yml"
-    prefix:   /
-
-app:
-    resource: '@AppBundle/Controller/'
+    resource: "@PaymentBundle/Controller/"
     type: annotation
 
 fos_user:

@@ -1,3 +1,0 @@
-location_homepage:
-    path:     /
-    defaults: { _controller: LocationBundle:Default:index }

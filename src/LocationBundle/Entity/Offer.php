@@ -49,6 +49,11 @@ class Offer
      */
     private $date_begin;
 
+    /**
+     * @var \DateTimes
+     *
+     * @ORM\Column(name="date_begin", type="datetimetz")
+     */
     private $date_end;
 
 
@@ -132,30 +137,6 @@ class Offer
     public function getPriceLocation()
     {
         return $this->priceLocation;
-    }
-
-    /**
-     * Set durationLocation
-     *
-     * @param \DateTime $durationLocation
-     *
-     * @return Offer
-     */
-    public function setDurationLocation($durationLocation)
-    {
-        $this->durationLocation = $durationLocation;
-
-        return $this;
-    }
-
-    /**
-     * Get durationLocation
-     *
-     * @return \DateTime
-     */
-    public function getDurationLocation()
-    {
-        return $this->durationLocation;
     }
 
     /**

@@ -45,9 +45,11 @@ class Offer
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="duration_location", type="datetimetz")
+     * @ORM\Column(name="date_begin", type="datetimetz")
      */
-    private $durationLocation;
+    private $date_begin;
+
+    private $date_end;
 
 
     /**
@@ -155,5 +157,28 @@ class Offer
     {
         return $this->durationLocation;
     }
-}
 
+    /**
+     * Set dateBegin
+     *
+     * @param \DateTime $dateBegin
+     *
+     * @return Offer
+     */
+    public function setDateBegin($dateBegin)
+    {
+        $this->date_begin = $dateBegin;
+
+        return $this;
+    }
+
+    /**
+     * Get dateBegin
+     *
+     * @return \DateTime
+     */
+    public function getDateBegin()
+    {
+        return $this->date_begin;
+    }
+}

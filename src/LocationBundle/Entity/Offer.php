@@ -50,7 +50,7 @@ class Offer
     private $date_begin;
 
     /**
-     * @var \DateTimes
+     * @var \DateTime
      *
      * @ORM\Column(name="date_begin", type="datetimetz")
      */

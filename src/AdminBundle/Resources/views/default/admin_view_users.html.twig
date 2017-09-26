@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% use 'templates/menu.html.twig' %}
+
+{% block body %}
+
+    <h1>Zone admin : voir les utilisateurs</h1>
+
+    <div class="row">
+    	{% for user in users %}
+        
+           	<div class="col-md-2" style="border:1px solid black; margin:10px;">
+
+           		<div>{{ user.username }}</div>
+              <div>{{ user.firstName ~ " " ~ user.lastName }}</div>
+
+           	</div>
+        
+    	{% endfor %}
+	</div>
+
+{% endblock %}

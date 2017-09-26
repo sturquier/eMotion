@@ -77,6 +77,11 @@ class Vehicle
      */
     private $pricePurchase;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="LocationBundle\Entity\Offer", inversedBy="vehicles")
+     * @ORM\JoinColumn(name="offer_id", referencedColumnName="id")
+     */
+    private $offer;
 
     /**
      * Get id
@@ -284,5 +289,28 @@ class Vehicle
     {
         return $this->brand;
     }
-}
 
+    /**
+     * Set offer
+     *
+     * @param \LocationBundle\Entity\Offer $offer
+     *
+     * @return Vehicle
+     */
+    public function setOffer(\LocationBundle\Entity\Offer $offer = null)
+    {
+        $this->offer = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Get offer
+     *
+     * @return \LocationBundle\Entity\Offer
+     */
+    public function getOffer()
+    {
+        return $this->offer;
+    }
+}

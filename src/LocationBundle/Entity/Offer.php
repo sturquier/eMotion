@@ -49,6 +49,10 @@ class Offer
      */
     private $date_end;
 
+    /**
+     * @ORM\OneToMany(targetEntity="LocationBundle\Entity\Vehicle", mappedBy="offer")
+     */
+    private $vehicles;
 
     /**
      * Get id
@@ -154,5 +158,46 @@ class Offer
     public function getDateEnd()
     {
         return $this->date_end;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->vehicles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add vehicle
+     *
+     * @param \LocationBundle\Entity\Vehicle $vehicle
+     *
+     * @return Offer
+     */
+    public function addVehicle(\LocationBundle\Entity\Vehicle $vehicle)
+    {
+        $this->vehicles[] = $vehicle;
+
+        return $this;
+    }
+
+    /**
+     * Remove vehicle
+     *
+     * @param \LocationBundle\Entity\Vehicle $vehicle
+     */
+    public function removeVehicle(\LocationBundle\Entity\Vehicle $vehicle)
+    {
+        $this->vehicles->removeElement($vehicle);
+    }
+
+    /**
+     * Get vehicles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVehicles()
+    {
+        return $this->vehicles;
     }
 }

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% use 'templates/menu.html.twig' %}
+
+{% block body %}	
+	<h4>La location c'est la vie ! </h4>
+	<div class="col-sm-12">
+		<table class="table">
+			<tr> 
+		    	<th>Véhicule</th>
+		    	<th>Prix de la location</th>
+		    	<th>Date de début</th>
+		    	<th>Date de fin</th>
+		    </tr>
+			{% for o in offers %}
+			<tr> 
+				<td>{{ o.vehicle }}</td>
+				<td>{{ o.priceLocation }}</td>
+				<td>{{ o.date_begin }}</td>
+				<td>{{ o.date_end }}</td>
+				<td><a href="{{ path('edit_offer',  { 'id': o.id } ) }}">Editer</a></td>
+				<td><a href="{{ path('delete_offer', { 'id': o.id }) }}">Supprimer</a></td>
+			</tr>
+			{% else %}
+				    <tr>
+				    	<td>Pas d'offres disponibles</td>
+				    </tr>
+			{% endfor %}
+		</table>
+	</div>
+
+{% endblock %}

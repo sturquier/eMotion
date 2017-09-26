@@ -3,6 +3,7 @@
 namespace LocationBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -25,6 +26,45 @@ class VehicleController extends Controller
             'vehicles' => $vehicles
         ]);
     }
+
+    /**
+     * Displays a form to edit an existing vehicle entity.
+     *
+     * @Route("/vehicles/{id}/edit", name="edit_vehicle")
+     */
+    public function editVehicleAction(Request $request, Vehicle $vehicle)
+    {
+        $editForm = $this->createForm('LocationBundle\Form\VehicleType', $vehicle);
+        $editForm->handleRequest($request);
+    
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('view_vehicles');
+        }
+
+        return $this->render('LocationBundle:vehicle:edit_vehicle.html.twig', array(
+            'vehicle' => $vehicle,
+            'edit_form' => $editForm->createView(),
+        ));
+    }
+
+    /**
+     * Delete a vehicle entity.
+     *
+     * @Route("/vehicles/{id}/delete", name="delete_vehicle")
+     */
+    public function deleteVehicleAction(Request $request, Vehicle $vehicle)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($vehicle);
+            $em->flush();
+
+        return $this->redirectToRoute('view_vehicles');
+    }
+
+    
 
      /**
      * Creates a new vehicle entity.

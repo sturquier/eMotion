@@ -279,5 +279,10 @@ class Vehicle
     {
         return $this->pricePurchase;
     }
+
+    public function __toString()
+    {
+        return $this->brand;
+    }
 }
 

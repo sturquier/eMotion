@@ -28,7 +28,9 @@
         {% endfor %}
 
         {% block menu %}{% endblock %}
-        {% block body %}{% endblock %}
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}
             <script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
             <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

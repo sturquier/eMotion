@@ -22,13 +22,6 @@ class Offer
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="vehicle", type="string", length=255)
-     */
-    private $vehicle;
-
-    /**
      * @var float
      *
      * @ORM\Column(name="price_location", type="float")
@@ -62,30 +55,6 @@ class Offer
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set vehicle
-     *
-     * @param string $vehicle
-     *
-     * @return Offer
-     */
-    public function setVehicle($vehicle)
-    {
-        $this->vehicle = $vehicle;
-
-        return $this;
-    }
-
-    /**
-     * Get vehicle
-     *
-     * @return string
-     */
-    public function getVehicle()
-    {
-        return $this->vehicle;
     }
 
     /**

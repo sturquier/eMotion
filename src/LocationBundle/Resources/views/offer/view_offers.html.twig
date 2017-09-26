@@ -6,7 +6,7 @@
 	<div class="">
 		<table class="table table-striped">
 			<tr> 
-		    	<th>Véhicule</th>
+		    	<th>Véhicule(s)</th>
 		    	<th>Prix de la location</th>
 		    	<th>Date de début</th>
 		    	<th>Date de fin</th>
@@ -15,7 +15,11 @@
 		    </tr>
 			{% for o in offers %}
 			<tr> 
-				<td>{{ o.vehicle }}</td>
+				<td>
+					{% for vehicle in o.vehicles %}
+						<div>{{ vehicle.brand ~ " " ~ vehicle.model ~ " " ~ vehicle.numberPlate }}</div>
+					{% endfor %}
+				</td>
 				<td>{{ o.priceLocation }}</td>
 				<td>{{ o.dateBegin|date('d M Y H:i:s') }}</td>
 				<td>{{ o.dateEnd|date('d M Y H:i:s') }}</td>

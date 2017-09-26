@@ -18,7 +18,7 @@ class OfferType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('vehicle', EntityType::class, array(
+        $builder->add('vehicles', EntityType::class, array(
                 'class' => 'LocationBundle:Vehicle',
                 'choice_label' => 'brand',
         ))

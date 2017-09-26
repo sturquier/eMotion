@@ -15,11 +15,11 @@ class LoadOfferData extends AbstractFixture implements OrderedFixtureInterface
         $faker = Faker\Factory::create('fr_FR');
 
         for ($i = 0; $i < 100; $i++) {
-            
+
             $offer = new Offer();
             $offer->setPriceLocation($faker->numberBetween($min = 10, $max = 150));
-            $offer->setDateBegin($faker->dateTimeBetween($startDate = 'now', $endDate = '+30 years', $timezone = date_default_timezone_get()));
-            $offer->setDateEnd($faker->dateTimeBetween($startDate = 'now', $endDate = '+30 years', $timezone = date_default_timezone_get()));
+            $offer->setDateBegin($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));
+            $offer->setDateEnd($faker->dateTime($min ='now', $max = '+30 years', $timezone = date_default_timezone_get()));
 
             $this->addReference('offer' . $i , $offer);
 

@@ -44,9 +44,9 @@ class User extends BaseUser
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_birth", type="datetime")
+     * @ORM\Column(name="birth_date", type="datetime")
      */
-    private $dateBirth;
+    private $birthDate;
 
     /**
      * @var string
@@ -65,9 +65,9 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="driving_licence", type="string", length=255)
+     * @ORM\Column(name="driving_license", type="string", length=255)
      */
-    private $drivingLicence;
+    private $drivingLicense;
 
 
     /**
@@ -129,27 +129,27 @@ class User extends BaseUser
     }
 
     /**
-     * Set dateBirth
+     * Set birthDate
      *
-     * @param \DateTime $dateBirth
+     * @param \DateTime $birthDate
      *
      * @return User
      */
-    public function setDateBirth($dateBirth)
+    public function setBirthDate($birthDate)
     {
-        $this->dateBirth = $dateBirth;
+        $this->birthDate = $birthDate;
 
         return $this;
     }
 
     /**
-     * Get dateBirth
+     * Get birthDate
      *
      * @return \DateTime
      */
-    public function getDateBirth()
+    public function getBirthDate()
     {
-        return $this->dateBirth;
+        return $this->birthDate;
     }
 
     /**
@@ -201,26 +201,26 @@ class User extends BaseUser
     }
 
     /**
-     * Set drivingLicence
+     * Set drivingLicense
      *
-     * @param integer $drivingLicence
+     * @param integer $drivingLicense
      *
      * @return User
      */
-    public function setDrivingLicence($drivingLicence)
+    public function setDrivingLicense($drivingLicense)
     {
-        $this->drivingLicence = $drivingLicence;
+        $this->drivingLicense = $drivingLicense;
 
         return $this;
     }
 
     /**
-     * Get drivingLicence
+     * Get drivingLicense
      *
      * @return int
      */
-    public function getDrivingLicence()
+    public function getDrivingLicense()
     {
-        return $this->drivingLicence;
+        return $this->drivingLicense;
     }
 }

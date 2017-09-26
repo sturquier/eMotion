@@ -2,13 +2,22 @@
 {% use 'templates/menu.html.twig' %}
 
 {% block body %}
-	<div>
+	<div class="container">
 		
 		<h1>{{ user.username }}</h1>
-
 		<hr/>
+		<h4>{{ " Né(e) le : " ~ user.birthDate|date('d M Y') }}</h4>
+		<h4>{{ " Habite au : " ~ user.address }}</h4>
+		<h4>{{ " Téléphone : " ~ user.phoneNumber }}</h4>
+		<h4>{{ " Permis de conduire : " ~ user.drivingLicense }}</h4>
 
-		<h4>{{ user.firstName ~ " " ~ user.lastName }}</h4>
+		<br/>
+
+		<h4>Editer son profil :
+			<a href="{{ path('fos_user_profile_edit') }}">
+				<i class="fa fa-lg fa-pencil" aria-hidden="true"></i>
+			</a>
+		</h4>
 
 	</div>
 

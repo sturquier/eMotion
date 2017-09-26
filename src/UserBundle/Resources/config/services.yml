@@ -40,3 +40,8 @@ services:
     UserBundle\Form\ProfileType:
         tags:
             - { name: form.type, alias: userbundle_user_profile }
+
+    UserBundle\EventListener\RegisterUserListener:
+        arguments: ['@router']
+        tags:
+            - { name: kernel.event_subscriber }

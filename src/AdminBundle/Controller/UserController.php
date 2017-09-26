@@ -5,10 +5,9 @@ namespace AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Doctrine\Common\Persistence\ObjectManager;
 use UserBundle\Entity\User;
 
-class DefaultController extends Controller
+class UserController extends Controller
 {
 
 	/**
@@ -24,5 +23,4 @@ class DefaultController extends Controller
 			'users' => $users,
 		]);
 	}
-
 }

@@ -35,6 +35,13 @@ class Bill
      */
     private $offer;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_return", type="datetime")
+     */
+    private $date_return;
+
 
     /**
      * Get id
@@ -93,5 +100,28 @@ class Bill
     {
         return $this->offer;
     }
-}
 
+    /**
+     * Set dateReturn
+     *
+     * @param \DateTime $dateReturn
+     *
+     * @return Bill
+     */
+    public function setDateReturn($dateReturn)
+    {
+        $this->date_return = $dateReturn;
+
+        return $this;
+    }
+
+    /**
+     * Get dateReturn
+     *
+     * @return \DateTime
+     */
+    public function getDateReturn()
+    {
+        return $this->date_return;
+    }
+}

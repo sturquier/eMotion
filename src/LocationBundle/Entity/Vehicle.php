@@ -36,9 +36,9 @@ class Vehicle
     private $model;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="serial_number", type="integer")
+     * @ORM\Column(name="serial_number", type="string", length=255)
      */
     private $serialNumber;
 

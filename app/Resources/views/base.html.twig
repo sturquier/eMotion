@@ -13,6 +13,20 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+
+        {% for message in app.session.flashbag.get('success') %}
+            <div class="alert alert-success" role="alert">{{message}}</div>
+        {% endfor %}
+        {% for message in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger" role="alert">{{message}}</div>
+        {% endfor %}
+        {% for message in app.session.flashbag.get('warning') %}
+            <div class="alert alert-warning" role="alert">{{message}}</div>
+        {% endfor %}
+        {% for message in app.session.flashbag.get('info') %}
+            <div class="alert alert-info" role="alert">{{message}}</div>
+        {% endfor %}
+
         {% block menu %}{% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}

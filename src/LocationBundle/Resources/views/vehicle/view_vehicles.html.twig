@@ -26,8 +26,8 @@
 				<td>{{ v.kilometer }}</td>
 				<td>{{ v.datePurchase | date }}</td>
 				<td>{{ v.pricePurchase }}</td>
-				<td><a href="{{ path('edit_vehicle',  { 'id': v.id } ) }}">Editer</a></td>
-				<td><a href="{{ path('delete_vehicle', { 'id': v.id }) }}">Supprimer</a></td>
+				<td><a href="{{ path('admin_edit_vehicle',  { 'id': v.id } ) }}">Editer</a></td>
+				<td><a href="{{ path('admin_delete_vehicle', { 'id': v.id }) }}">Supprimer</a></td>
 			</tr>
 			{% else %}
 				    <tr>

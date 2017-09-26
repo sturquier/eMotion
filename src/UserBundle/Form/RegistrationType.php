@@ -12,12 +12,12 @@ class RegistrationType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('firstName', TextType::class)
-        ->add('lastName', TextType::class)
-        ->add('address', TextType::class)
-        ->add('birthDate', DateType::class)
-        ->add('phoneNumber', TextType::class)
-        ->add('drivingLicense', TextType::class);
+        ->add('firstName', TextType::class, ['label' => 'Prenom'])
+        ->add('lastName', TextType::class, ['label' => 'Nom'])
+        ->add('address', TextType::class, ['label' => 'Adresse'])
+        ->add('birthDate', DateType::class, ['label' => 'Date de naissance'])
+        ->add('phoneNumber', TextType::class, ['label' => 'Numero de telephone'])
+        ->add('drivingLicense', TextType::class, ['label' => 'Numero de permis de conduire']);
     }
 
     public function getParent()

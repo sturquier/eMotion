@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use LocationBundle\Entity\Vehicle;
@@ -23,8 +23,8 @@ class OfferType extends AbstractType
                 'choice_label' => 'brand',
         ))
         ->add('priceLocation', NumberType::class, ['label' => 'Prix de la location'])
-        ->add('date_begin', DateType::class, ['label' => 'Date de début'])
-        ->add('date_end', DateType::class, ['label' => 'Date de fin'])
+        ->add('date_begin', DateTimeType::class, ['label' => 'Date de début'])
+        ->add('date_end', DateTimeType::class, ['label' => 'Date de fin'])
         ->add('submit', SubmitType::class, ['label' => 'Enregister']);
     }
     

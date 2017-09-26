@@ -15,8 +15,8 @@
 			<tr> 
 				<td>{{ o.vehicle }}</td>
 				<td>{{ o.priceLocation }}</td>
-				<td>{{ o.dateBegin | date('y m d') }}</td>
-				<td>{{ o.dateEnd | date('y m d') }}</td>
+				<td>{{ o.dateBegin|date('d M Y H:i:s') }}</td>
+				<td>{{ o.dateEnd|date('d M Y H:i:s') }}</td>
 				<td><a href="{#{ path('edit_offer',  { 'id': o.id } ) }#}">Editer</a></td>
 				<td><a href="{#{ path('delete_offer', { 'id': o.id }) }#}">Supprimer</a></td>
 			</tr>

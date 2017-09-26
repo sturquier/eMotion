@@ -64,9 +64,9 @@ class Vehicle
     private $kilometer;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
-     * @ORM\Column(name="date_purchase", type="datetime")
+     * @ORM\Column(name="date_purchase", type="date")
      */
     private $datePurchase;
 
@@ -235,7 +235,7 @@ class Vehicle
     /**
      * Set datePurchase
      *
-     * @param \DateTime $datePurchase
+     * @param \Date $datePurchase
      *
      * @return Vehicle
      */
@@ -249,7 +249,7 @@ class Vehicle
     /**
      * Get datePurchase
      *
-     * @return \DateTime
+     * @return \Date
      */
     public function getDatePurchase()
     {

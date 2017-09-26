@@ -131,7 +131,7 @@ class User extends BaseUser
     /**
      * Set birthDate
      *
-     * @param \DateTime $birthDate
+     * @param \Date $birthDate
      *
      * @return User
      */
@@ -145,7 +145,7 @@ class User extends BaseUser
     /**
      * Get birthDate
      *
-     * @return \DateTime
+     * @return \Date
      */
     public function getBirthDate()
     {

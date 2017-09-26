@@ -19,7 +19,7 @@ class UserController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$users = $em->getRepository('UserBundle:User')->findAll();
 
-		return $this->render('AdminBundle:default:admin_view_users.html.twig', [
+		return $this->render('AdminBundle:user:admin_view_users.html.twig', [
 			'users' => $users,
 		]);
 	}

@@ -12,7 +12,11 @@
 
            		<div>{{ user.username }}</div>
               <div>{{ user.firstName ~ " " ~ user.lastName }}</div>
-
+				<a 	onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce profil ?'));" 
+					href="{{ path('admin_delete_user',  { 'id': user.id } ) }}"
+				>
+					<i class="fa fa-lg fa-times" aria-hidden="true"></i>
+				</a>
            	</div>
         
     	{% endfor %}

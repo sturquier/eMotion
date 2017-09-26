@@ -8,7 +8,8 @@
             "AppBundle\\": "src/AppBundle",
             "LocationBundle\\": "src/LocationBundle",
             "PaymentBundle\\": "src/PaymentBundle",
-            "UserBundle\\": "src/UserBundle"
+            "UserBundle\\": "src/UserBundle",
+            "AdminBundle\\": "src/AdminBundle"
         },
         "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },

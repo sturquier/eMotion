@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
@@ -23,4 +24,18 @@ class UserController extends Controller
 			'users' => $users,
 		]);
 	}
+
+	/**
+     * Delete a user entity.
+     *
+     * @Route("admin/user/{id}/delete", name="admin_delete_user")
+     */
+	public function adminDeleteUserAction(Request $request, User $user)
+	{
+		$em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_view_users');
+	}   
 }

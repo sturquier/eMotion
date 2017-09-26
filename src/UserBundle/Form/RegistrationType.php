@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class RegistrationType extends AbstractType
 {
@@ -17,7 +18,8 @@ class RegistrationType extends AbstractType
         ->add('address', TextType::class, ['label' => 'Adresse'])
         ->add('birthDate', DateType::class, ['label' => 'Date de naissance'])
         ->add('phoneNumber', TextType::class, ['label' => 'Numero de telephone'])
-        ->add('drivingLicense', TextType::class, ['label' => 'Numero de permis de conduire']);
+        ->add('drivingLicense', TextType::class, ['label' => 'Numero de permis de conduire'])
+        ->add('save', SubmitType::class);
     }
 
     public function getParent()

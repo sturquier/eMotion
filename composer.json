@@ -17,6 +17,12 @@
         "psr-4": { "Tests\\": "tests/" },
         "files": [ "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php" ]
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/mattwells/faker-vehicle.git"
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "doctrine/doctrine-bundle": "^1.6",
@@ -35,7 +41,8 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^2.4",
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "mattwells/faker-vehicle": "dev-master"
     },
     "scripts": {
         "symfony-scripts": [

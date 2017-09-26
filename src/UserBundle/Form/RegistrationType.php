@@ -15,9 +15,9 @@ class RegistrationType extends AbstractType
         ->add('firstName', TextType::class)
         ->add('lastName', TextType::class)
         ->add('address', TextType::class)
-        ->add('dateBirth', DateType::class)
+        ->add('birthDate', DateType::class)
         ->add('phoneNumber', TextType::class)
-        ->add('drivingLicence', TextType::class);
+        ->add('drivingLicense', TextType::class);
     }
 
     public function getParent()

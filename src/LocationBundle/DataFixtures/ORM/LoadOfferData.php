@@ -18,8 +18,8 @@ class LoadOfferData extends AbstractFixture implements OrderedFixtureInterface
 
             $offer = new Offer();
             $offer->setPriceLocation($faker->numberBetween($min = 10, $max = 150));
-            $offer->setDateBegin($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));
-            $offer->setDateEnd($faker->dateTime($min ='now', $max = '+30 years', $timezone = date_default_timezone_get()));
+            $offer->setDateBegin($faker->dateTimeBetween($starDate = 'now', $endDate = '+10 days', $timezone = date_default_timezone_get()));
+            $offer->setDateEnd($faker->dateTimeBetween($starDate ='+11 days', $endDate = '+30 days', $timezone = date_default_timezone_get()));
 
             $this->addReference('offer' . $i , $offer);
 

@@ -78,7 +78,7 @@ class Vehicle
     private $pricePurchase;
 
     /**
-     * @ORM\OneToOne(targetEntity="Offer", mappedBy="customer")
+     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Offer", mappedBy="vehicle")
      */
     private $offer;
     

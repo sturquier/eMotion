@@ -17,17 +17,12 @@
 				<li><a href="{{ path('view_offers') }}">Voir les offres de location</a></li>
 			</ul>
 
-			<ul class="nav navbar-nav">
-				<li><a href="{{ path('view_vehicles') }}">Voir les vehicules</a></li>
-			</ul>
-
 			{% if is_granted('ROLE_ADMIN') %}
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zone admin <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<!--<li><a href="{#{ path('admin_add_vehicle') }#}">Ajouter un vehicule</a></li>-->
-						<li><a href="{{ path('view_vehicles') }}">Voir les véhicules</a></li>
+						<li><a href="{{ path('admin_view_vehicles') }}">Voir les véhicules</a></li>
 						<li><a href="{{ path('admin_add_vehicle') }}">Ajouter un vehicule</a></li>
 						<li><a href="{{ path('admin_view_users') }}">Gerer les utilisateurs</a></li>
 					</ul>

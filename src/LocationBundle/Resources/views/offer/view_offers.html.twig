@@ -1,9 +1,14 @@
 {% extends 'base.html.twig' %}
 {% use 'templates/menu.html.twig' %}
 
-{% block body %}	
-	<h4>Liste des offres de location </h4>
-	<div class="">
+{% block body %}
+	
+	<div style="display:flex; justify-content:space-between;">	
+		<h4>Liste des offres de location </h4>
+		<a class="btn btn-info" href="{{ path('admin_add_offer') }}">Ajouter une offre</a>
+	</div>
+	<br/>
+
 		<table class="table table-striped">
 			<tr> 
 		    	<th>Véhicule(s)</th>
@@ -32,7 +37,5 @@
 				    </tr>
 			{% endfor %}
 		</table>
-		<a class="btn btn-light" href="{{ path('admin_add_offer') }}">Ajouter une offre</a>
-	</div>
 
 {% endblock %}

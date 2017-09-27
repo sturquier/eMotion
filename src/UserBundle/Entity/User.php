@@ -4,6 +4,7 @@ namespace UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
@@ -22,9 +23,15 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToMany(targetEntity="LocationBundle\Entity\Bill", mappedBy="customer")
+     */
+    private $bills;
+
     public function __construct()
     {
         parent::__construct();
+        $this->bills = new ArrayCollection();
     }
 
     /**
@@ -222,5 +229,39 @@ class User extends BaseUser
     public function getDrivingLicense()
     {
         return $this->drivingLicense;
+    }
+
+    /**
+     * Add bill
+     *
+     * @param \LocationBundle\Entity\Bill $bill
+     *
+     * @return User
+     */
+    public function addBill(\LocationBundle\Entity\Bill $bill)
+    {
+        $this->bills[] = $bill;
+
+        return $this;
+    }
+
+    /**
+     * Remove bill
+     *
+     * @param \LocationBundle\Entity\Bill $bill
+     */
+    public function removeBill(\LocationBundle\Entity\Bill $bill)
+    {
+        $this->bills->removeElement($bill);
+    }
+
+    /**
+     * Get bills
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBills()
+    {
+        return $this->bills;
     }
 }

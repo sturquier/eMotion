@@ -22,11 +22,10 @@ class Bill
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="client", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="bills")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
-    private $client;
+    private $customer;
 
     /**
      * @var int
@@ -51,30 +50,6 @@ class Bill
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set client
-     *
-     * @param string $client
-     *
-     * @return Bill
-     */
-    public function setClient($client)
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
-    /**
-     * Get client
-     *
-     * @return string
-     */
-    public function getClient()
-    {
-        return $this->client;
     }
 
     /**
@@ -123,5 +98,29 @@ class Bill
     public function getDateReturn()
     {
         return $this->date_return;
+    }
+
+    /**
+     * Set customer
+     *
+     * @param \UserBundle\Entity\User $customer
+     *
+     * @return Bill
+     */
+    public function setCustomer(\UserBundle\Entity\User $customer = null)
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    /**
+     * Get customer
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
     }
 }

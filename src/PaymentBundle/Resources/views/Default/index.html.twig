@@ -7,29 +7,9 @@
 	<p>
 		Avec la ou les locations choisie(s), le montant du paiement est de ...
 	</p>
-	<!-- formulaire de coordonnées de paiement -->
-	<form id="payement" class="jumbotron" method="POST" novalidate="true">
-		<div class="form-group col-sm-12 col-md-6">
-			<label for="name">Nom du titulaire</label>
-			<input id="name" class="form-control" name="name" placeholder="Nom du titulaire de la carte" />
-		</div>
-		<div class="form-group col-sm-12 col-md-6">
-			<label for="name">Numéro de carte</label>
-			<input id="number_cb" class="form-control" name="number_cb" placeholder="Numéro de carte bancaire" />
-		</div>
-		<div class="form-group col-sm-12 col-md-9">
-			<label for="name">Date d'expiration</label>
-			<input id="date_exp" class="form-control" name="date_exp" type="date" placeholder="Date expiration" />
-		</div>
-		<div class="form-group col-sm-12 col-md-3">
-			<label for="name">Numéro CCV</label>
-			<input id="number_ccv" class="form-control" name="number_ccv" placeholder="Numéro du cryptogramme" />
-			
-		</div>
-		<button type="submit" class="form-control btn btn-primary">Envoyer</button>
-		<!-- <div class="form-group">
-			<input id="captcha" class="form-control" name="captcha" placeholder="captcha" />
-		</div> -->
+	 {{ form_start(form, {'attr': {'novalidate': 'true', 'method':'POST','class':'jumbotron'}} )}}
+        {{ form_widget(form) }}
+    {{ form_end(form) }}
 		
 	</form>
 	<!-- TODO

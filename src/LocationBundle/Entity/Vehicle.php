@@ -78,8 +78,7 @@ class Vehicle
     private $pricePurchase;
 
     /**
-     * @ORM\ManyToOne(targetEntity="LocationBundle\Entity\Offer", inversedBy="vehicles")
-     * @ORM\JoinColumn(name="offer_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Offer", mappedBy="vehicle")
      */
     private $offer;
 

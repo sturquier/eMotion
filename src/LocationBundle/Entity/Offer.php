@@ -43,9 +43,10 @@ class Offer
     private $date_end;
 
     /**
-     * @ORM\OneToMany(targetEntity="LocationBundle\Entity\Vehicle", mappedBy="offer")
+     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Vehicle", inversedBy="offer")
+     * @ORM\JoinColumn(name="vehicle_id", referencedColumnName="id")
      */
-    private $vehicles;
+    private $vehicle;
 
     /**
      * Get id
@@ -128,45 +129,28 @@ class Offer
     {
         return $this->date_end;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->vehicles = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add vehicle
+     * Set vehicle
      *
      * @param \LocationBundle\Entity\Vehicle $vehicle
      *
      * @return Offer
      */
-    public function addVehicle(\LocationBundle\Entity\Vehicle $vehicle)
+    public function setVehicle(\LocationBundle\Entity\Vehicle $vehicle = null)
     {
-        $this->vehicles[] = $vehicle;
+        $this->vehicle = $vehicle;
 
         return $this;
     }
 
     /**
-     * Remove vehicle
+     * Get vehicle
      *
-     * @param \LocationBundle\Entity\Vehicle $vehicle
+     * @return \LocationBundle\Entity\Vehicle
      */
-    public function removeVehicle(\LocationBundle\Entity\Vehicle $vehicle)
+    public function getVehicle()
     {
-        $this->vehicles->removeElement($vehicle);
-    }
-
-    /**
-     * Get vehicles
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getVehicles()
-    {
-        return $this->vehicles;
+        return $this->vehicle;
     }
 }

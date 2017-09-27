@@ -28,13 +28,6 @@ class Bill
     private $customer;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="offer", type="integer")
-     */
-    private $offer;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_return", type="datetime")
@@ -50,30 +43,6 @@ class Bill
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set offer
-     *
-     * @param integer $offer
-     *
-     * @return Bill
-     */
-    public function setOffer($offer)
-    {
-        $this->offer = $offer;
-
-        return $this;
-    }
-
-    /**
-     * Get offer
-     *
-     * @return int
-     */
-    public function getOffer()
-    {
-        return $this->offer;
     }
 
     /**

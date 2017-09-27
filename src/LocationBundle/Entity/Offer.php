@@ -49,6 +49,12 @@ class Offer
     private $vehicle;
 
     /**
+     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Bill")
+     * @ORM\JoinColumn(name="bill_id", referencedColumnName="id")
+     */
+    private $bill;
+
+    /**
      * Get id
      *
      * @return int
@@ -152,5 +158,29 @@ class Offer
     public function getVehicle()
     {
         return $this->vehicle;
+    }
+
+    /**
+     * Set bill
+     *
+     * @param \LocationBundle\Entity\Bill $bill
+     *
+     * @return Offer
+     */
+    public function setBill(\LocationBundle\Entity\Bill $bill = null)
+    {
+        $this->bill = $bill;
+
+        return $this;
+    }
+
+    /**
+     * Get bill
+     *
+     * @return \LocationBundle\Entity\Bill
+     */
+    public function getBill()
+    {
+        return $this->bill;
     }
 }

@@ -20,11 +20,7 @@
 		    </tr>
 			{% for o in offers %}
 			<tr> 
-				<td>
-					{% for vehicle in o.vehicles %}
-						<div>{{ vehicle.brand ~ " " ~ vehicle.model ~ " " ~ vehicle.numberPlate }}</div>
-					{% endfor %}
-				</td>
+				<td>{{ o.vehicle.brand ~ " " ~ o.vehicle.model ~ " ( " ~ o.vehicle.numberPlate ~ " ) " }}</td>
 				<td>{{ o.priceLocation }}</td>
 				<td>{{ o.dateBegin|date('d M Y H:i:s') }}</td>
 				<td>{{ o.dateEnd|date('d M Y H:i:s') }}</td>

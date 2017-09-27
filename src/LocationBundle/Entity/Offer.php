@@ -43,7 +43,7 @@ class Offer
     private $date_end;
 
     /**
-     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Vehicle", inversedBy="offer")
+     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Vehicle", inversedBy="offer", fetch="EAGER")
      * @ORM\JoinColumn(name="vehicle_id", referencedColumnName="id")
      */
     private $vehicle;

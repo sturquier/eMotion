@@ -16,12 +16,14 @@ class LoadOfferData extends AbstractFixture implements OrderedFixtureInterface
 
         for ($i = 0; $i < 100; $i++) {
 
+            $ref_vehicle = $this->getReference('vehicle' . $i);
+
             $offer = new Offer();
             $offer->setPriceLocation($faker->numberBetween($min = 10, $max = 150));
             $offer->setDateBegin($faker->dateTimeBetween($starDate = 'now', $endDate = '+10 days', $timezone = date_default_timezone_get()));
             $offer->setDateEnd($faker->dateTimeBetween($starDate ='+11 days', $endDate = '+30 days', $timezone = date_default_timezone_get()));
 
-            $this->addReference('offer' . $i , $offer);
+            $offer->setVehicle($ref_vehicle);
 
             $manager->persist($offer);
         }
@@ -31,7 +33,7 @@ class LoadOfferData extends AbstractFixture implements OrderedFixtureInterface
     
     public function getOrder()
     {
-        return 10;
+        return 15;
     }
     
 }

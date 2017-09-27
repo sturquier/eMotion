@@ -17,26 +17,20 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
 
         for ($i = 0; $i < 100; $i++) {
 
-            $ref_offer = $this->getReference('offer' . $i);
-            $nb_vehicles = mt_rand(1, 3);
+            $vehicle = new Vehicle();
 
-            while ($nb_vehicles > 0) {
-                $vehicle = new Vehicle();
+            $vehicle->setBrand($faker->vehicleMake);
+            $vehicle->setModel($faker->vehicleModel);
+            $vehicle->setSerialNumber(strtoupper($faker->bothify('#??#?###??##?##??')));
+            $vehicle->setColor($faker->safeColorName);
+            $vehicle->setNumberPlate($faker->vehicleRegistration);
+            $vehicle->setKilometer($faker->numberBetween($min = 1000, $max = 100000));
+            $vehicle->setDatePurchase($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));
+            $vehicle->setPricePurchase($faker->randomFloat($nbMaxDemicals = 2, $min = 5000, $max = 1000000));        
 
-                $vehicle->setBrand($faker->vehicleMake);
-                $vehicle->setModel($faker->vehicleModel);
-                $vehicle->setSerialNumber(strtoupper($faker->bothify('#??#?###??##?##??')));
-                $vehicle->setColor($faker->safeColorName);
-                $vehicle->setNumberPlate($faker->vehicleRegistration);
-                $vehicle->setKilometer($faker->numberBetween($min = 1000, $max = 100000));
-                $vehicle->setDatePurchase($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));
-                $vehicle->setPricePurchase($faker->randomFloat($nbMaxDemicals = 2, $min = 5000, $max = 1000000));
-                $vehicle->setOffer($ref_offer);
+            $this->addReference('vehicle' . $i , $vehicle);
 
-                $manager->persist($vehicle);
-
-                $nb_vehicles--;
-            }
+            $manager->persist($vehicle);
         }
 
         $manager->flush();
@@ -44,7 +38,7 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
     
     public function getOrder()
     {
-        return 15;
+        return 10;
     }
     
 }

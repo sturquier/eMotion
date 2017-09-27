@@ -14,7 +14,7 @@ class OfferController extends Controller
     /**
      * View all offers 
      *
-     * @Route("/offer/view", name="view_offers")
+     * @Route("/offers/view", name="view_offers")
      */
     public function viewOffersAction()
     {

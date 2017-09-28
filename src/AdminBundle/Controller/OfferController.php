@@ -41,6 +41,31 @@ class OfferController extends Controller
     }
 
     /**
+     * Displays a form to edit an existing offer entity.
+     *
+     * @Route("/admin/offer/{id}/edit", name="admin_edit_offer")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function adminEditOfferAction(Request $request, Offer $offer)
+    {
+        $editForm = $this->createForm('LocationBundle\Form\OfferType', $offer);
+        $editForm->handleRequest($request);
+    
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Offre bien modifiée');
+            return $this->redirectToRoute('view_offers');
+        }
+
+        return $this->render('AdminBundle:offer:admin_edit_offer.html.twig', [
+            'offer'     => $offer,
+            'edit_form' => $editForm->createView(),
+        ]);
+    }
+
+    /**
      * Delete a offer entity.
      *
      * @Route("/admin/offer/{id}/delete", name="admin_delete_offer")

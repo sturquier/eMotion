@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Edition d'une offre de location</h1>
+
+	 {{ form_start(edit_form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_widget(edit_form) }}
+    {{ form_end(edit_form) }}
+{% endblock %}

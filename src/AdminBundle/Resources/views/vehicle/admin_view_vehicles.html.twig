@@ -3,41 +3,85 @@
 
 {% block body %}
 	
-	<h4>Liste des véhicules </h4>
-	<div class="">
-		<table class="table table-striped">
-			<tr> 
-		    	<th>Marque</th>
-		    	<th>Modèle</th>
-		    	<th>Numéro de série</th>
-		    	<th>Couleur</th>
-		    	<th>N° d'immatriculation</th>
-		    	<th>Nombre de kilomètres au compteur</th>
-		    	<th>Date d'achat</th>
-		    	<th>Prix d'achat</th>
-		    	<th>Edition</th>
-		    	<th>Suppression</th>
-		      </tr>
-			{% for v in vehicles %}
-			<tr> 
-				<td>{{ v.brand }}</td>
-				<td>{{ v.model }}</td>
-				<td>{{ v.serialNumber }}</td>
-				<td>{{ v.color }}</td>
-				<td>{{ v.numberPlate }}</td>
-				<td>{{ v.kilometer }}</td>
-				<td>{{ v.datePurchase|date('d M Y') }}</td>
-				<td>{{ v.pricePurchase }}</td>
-				<td><a href="{{ path('admin_edit_vehicle',  { 'id': v.id } ) }}">Editer</a></td>
-				<td><a href="{{ path('admin_delete_vehicle', { 'id': v.id }) }}">Supprimer</a></td>
-			</tr>
-			{% else %}
-				    <tr>
-				    	<td>Pas de voitures ajoutés</td>
-				    </tr>
-			{% endfor %}
-		</table>
-		<a href="{{ path('admin_add_vehicle') }}">Ajouter un véhicule</a>
-	</div>
+	<div style="display:flex; justify-content:space-between;">	
+		<h4>Liste des véhicules </h4>
 
+		{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
+		<a class="btn btn-info" href="{{ path('admin_add_vehicle') }}">Ajouter un véhicule</a>
+		{% endif %}
+
+	</div>
+	<br/>
+
+		<div id="filter"><label>Affiner votre recherche : &nbsp;</label></div>
+
+		<table class="table table-striped" id="vehicles_table">
+			<thead>
+				<tr> 
+		    		<th class="sort">Marque</th>
+		    		<th class="sort">Modèle</th>
+			    	<th class="sort">Couleur</th>
+			    	<th>Date d'achat</th>
+		    		<th>Prix d'achat</th>
+		    		<th>Nombre de kilomètres au compteur</th>
+			    	<th>N° d'immatriculation</th>
+			    	<th>Numéro de série</th>
+		    	
+			    	<th>Edition</th>
+			    	<th>Suppression</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+				{% for v in vehicles %}
+				<tr> 
+					<td>{{ v.brand }}</td>
+					<td>{{ v.model }}</td>
+					<td>{{ v.color }}</td>
+					<td>{{ v.datePurchase|date('d M Y') }}</td>
+					<td>{{ v.pricePurchase }}</td>
+					<td>{{ v.kilometer }}</td>
+					<td>{{ v.numberPlate }}</td>
+					<td>{{ v.serialNumber }}</td>
+				
+					<td><a href="{{ path('admin_edit_vehicle',  { 'id': v.id } ) }}">Editer</a></td>
+					<td><a href="{{ path('admin_delete_vehicle', { 'id': v.id }) }}">Supprimer</a></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+{% endblock %}
+
+{% block css_vehicles %}
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" type="text/css" />
+{% endblock %}
+{% block javascript_vehicles %}
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+	<script>
+$(document).ready(function() {
+	var table=$('#vehicles_table').DataTable({
+		"lengthMenu": [ [10, 50, 100, -1], [10, 50, 100, "All"] ],
+		"pageLength": -1,
+		"order": [[ 0, 'asc' ]], // tri sur la premiere colonne (voiture) par ordre croissant
+		initComplete: function () {
+			this.api().columns(['.sort']).every(function () {
+				var column = this;
+				var select = $('<select><option value=""></option></select>')
+					.appendTo( $('#filter') )
+					.on( 'change', function () {
+						var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+						column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+					} );
+				column.data().unique().sort().each( function ( d, j ) {
+					select.append( '<option value="'+d+'">'+d+'</option>' )
+				} );
+			});
+		}
+	} );
+});
+	</script>
 {% endblock %}

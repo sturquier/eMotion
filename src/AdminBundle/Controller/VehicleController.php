@@ -46,6 +46,7 @@ class VehicleController extends Controller
             $em->persist($vehicle);
             $em->flush();
 
+            $this->addFlash('success', 'Vehicule ajouté');
             return $this->redirectToRoute('admin_view_vehicles');
         }
 
@@ -70,6 +71,7 @@ class VehicleController extends Controller
             
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Vehicule modifié');
             return $this->redirectToRoute('admin_view_vehicles');
         }
 
@@ -91,6 +93,7 @@ class VehicleController extends Controller
         $em->remove($vehicle);
         $em->flush();
 
+        $this->addFlash('danger', 'Vehicule et offres associées supprimés ');
         return $this->redirectToRoute('admin_view_vehicles');
     }
 }

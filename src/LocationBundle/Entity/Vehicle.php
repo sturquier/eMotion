@@ -3,6 +3,7 @@
 namespace LocationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Vehicle
@@ -78,10 +79,15 @@ class Vehicle
     private $pricePurchase;
 
     /**
-     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Offer", mappedBy="vehicle")
+     * @ORM\OneToMany(targetEntity="LocationBundle\Entity\Offer", mappedBy="vehicle", cascade={"remove"})
      */
-    private $offer;
-    
+    private $offers;
+
+    public function __construct()
+    {
+        $this->offers = new ArrayCollection();
+    }
+
     /**
      * Get id
      *
@@ -285,34 +291,44 @@ class Vehicle
     }
 
     /**
-     * Set offer
-     *
-     * @param \LocationBundle\Entity\Offer $offer
-     *
-     * @return Vehicle
-     */
-    public function setOffer(\LocationBundle\Entity\Offer $offer = null)
-    {
-        $this->offer = $offer;
-
-        return $this;
-    }
-
-    /**
-     * Get offer
-     *
-     * @return \LocationBundle\Entity\Offer
-     */
-    public function getOffer()
-    {
-        return $this->offer;
-    }
-
-    /**
      * For Offer Forms
      */
     public function getDisplayName()
     {
         return $this->brand . " - " . $this->model . " ( numero de serie : " . $this->serialNumber . " ) ";
+    }
+
+    /**
+     * Add offer
+     *
+     * @param \LocationBundle\Entity\Offer $offer
+     *
+     * @return Vehicle
+     */
+    public function addOffer(\LocationBundle\Entity\Offer $offer)
+    {
+        $this->offers[] = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Remove offer
+     *
+     * @param \LocationBundle\Entity\Offer $offer
+     */
+    public function removeOffer(\LocationBundle\Entity\Offer $offer)
+    {
+        $this->offers->removeElement($offer);
+    }
+
+    /**
+     * Get offers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOffers()
+    {
+        return $this->offers;
     }
 }

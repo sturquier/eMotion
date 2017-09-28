@@ -31,6 +31,7 @@ class OfferController extends Controller
             $em->persist($offer);
             $em->flush();
 
+            $this->addFlash('success', 'Offre ajoutée');
             return $this->redirectToRoute('view_offers');
         }
 
@@ -55,7 +56,7 @@ class OfferController extends Controller
             
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Offre bien modifiée');
+            $this->addFlash('success', 'Offre modifiée');
             return $this->redirectToRoute('view_offers');
         }
 
@@ -81,7 +82,7 @@ class OfferController extends Controller
         $em->remove($offer);
         $em->flush();
 
-        $this->addFlash('success', 'Offre bien supprimée');
+        $this->addFlash('danger', 'Offre supprimée');
         return $this->redirectToRoute('view_offers');
     }
 }

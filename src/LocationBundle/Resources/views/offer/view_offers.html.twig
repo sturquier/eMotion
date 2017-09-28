@@ -5,7 +5,11 @@
 	
 	<div style="display:flex; justify-content:space-between;">	
 		<h4>Liste des offres de location </h4>
+
+		{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
 		<a class="btn btn-info" href="{{ path('admin_add_offer') }}">Ajouter une offre</a>
+		{% endif %}
+
 	</div>
 	<br/>
 
@@ -21,8 +25,9 @@
 		    		<th>Date de début</th>
 		    		<th>Date de fin</th>
 		    		<th>Fiche technique du véhicule</th>
-		   		 	<!--<th>Edition</th>-->
-		    		<!--<th>Suppression</th>-->
+		   		 	{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
+		   		 	<th>Editer / Supprimer l'offre</th>
+		   		 	{% endif %}
 		    	</tr>
 			</thead>
 			<tbody>
@@ -35,8 +40,12 @@
 					<td>{{ o.dateBegin|date('d M Y H:i:s') }}</td>
 					<td>{{ o.dateEnd|date('d M Y H:i:s') }}</td>
 					<td><a href="{{ path('view_vehicle', {'id': o.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
-					<!--<td><a href="{#{ path('edit_offer',  { 'id': o.id } ) }#}">Editer</a></td>-->
-					<!--<td><a href="{#{ path('delete_offer', { 'id': o.id }) }#}">Supprimer</a></td>-->
+					{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
+					<td style="display:flex; justify-content:space-around;">
+						<a href=""><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
+						<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+					</td>
+					{% endif %}
 				</tr>
 				{% endfor %}
 			</tbody>

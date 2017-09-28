@@ -4,6 +4,7 @@ namespace AdminBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -39,4 +40,23 @@ class OfferController extends Controller
         ]);
     }
 
+    /**
+     * Delete a offer entity.
+     *
+     * @Route("/admin/offer/{id}/delete", name="admin_delete_offer")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function adminDeleteOfferAction($id)
+    {   
+        $em = $this->getDoctrine()->getManager();
+
+        $rep = $this->getDoctrine()->getRepository('LocationBundle:Offer');
+        $offer = $rep->find($id);
+
+        $em->remove($offer);
+        $em->flush();
+
+        $this->addFlash('success', 'Offre bien supprimée');
+        return $this->redirectToRoute('view_offers');
+    }
 }

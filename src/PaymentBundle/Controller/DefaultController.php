@@ -19,7 +19,7 @@ class DefaultController extends Controller
 	/**
      * Payment 
      *
-     * @Route("/payment/mail", name="payment_envoi_mail_view")
+     * @Route("/payment/mail", name="payment_send_mail_view")
      */
     public function envoiMailAction()
 	{

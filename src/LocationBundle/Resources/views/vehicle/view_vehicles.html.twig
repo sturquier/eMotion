@@ -24,6 +24,8 @@
 			    	<th>Date d'achat</th>
 		    		<th>Nombre de kilomètres au compteur</th>
 		    		<th>Fiche technique du véhicule</th>
+		    		<th>Offre(s) associée(s)</th>
+
 		    		{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
 		   		 	<th>Editer / Supprimer le véhicule</th>
 		   		 	{% endif %}
@@ -38,7 +40,8 @@
 					<td>{{ v.datePurchase|date('d M Y') }}</td>
 					<td>{{ v.kilometer ~ " kms " }}</td>
 					<td><a href="{{ path('view_vehicle', {'id': v.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
-				
+					<td>{{ v.offers|length }}</td>
+
 					{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
 					<td style="display:flex; justify-content:space-around;">
 						<a href="{{ path('admin_edit_vehicle', {'id': v.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>

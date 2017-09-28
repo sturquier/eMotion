@@ -18,6 +18,14 @@ class OfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        ->add('vehicle', EntityType::class, [
+            'label' => 'Vehicle de location',
+            'class' => 'LocationBundle:Vehicle',
+            'choice_label' => function ($vehicle) {
+                return $vehicle->getDisplayName();
+            }
+
+        ])
         ->add('priceLocation', NumberType::class, ['label' => 'Prix de la location'])
         ->add('date_begin', DateTimeType::class, ['label' => 'Date de début'])
         ->add('date_end', DateTimeType::class, ['label' => 'Date de fin'])

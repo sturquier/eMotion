@@ -46,7 +46,7 @@ class VehicleController extends Controller
             $em->persist($vehicle);
             $em->flush();
 
-            return $this->redirectToRoute('view_vehicles');
+            return $this->redirectToRoute('admin_view_vehicles');
         }
 
         return $this->render('AdminBundle:vehicle:admin_add_vehicle.html.twig', [
@@ -70,7 +70,7 @@ class VehicleController extends Controller
             
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('view_vehicles');
+            return $this->redirectToRoute('admin_view_vehicles');
         }
 
         return $this->render('AdminBundle:vehicle:admin_edit_vehicle.html.twig', [
@@ -91,6 +91,6 @@ class VehicleController extends Controller
         $em->remove($vehicle);
         $em->flush();
 
-        return $this->redirectToRoute('view_vehicles');
+        return $this->redirectToRoute('admin_view_vehicles');
     }
 }

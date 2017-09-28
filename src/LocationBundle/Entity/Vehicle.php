@@ -284,11 +284,6 @@ class Vehicle
         return $this->pricePurchase;
     }
 
-    public function __toString()
-    {
-        return $this->brand;
-    }
-
     /**
      * Set offer
      *
@@ -311,5 +306,13 @@ class Vehicle
     public function getOffer()
     {
         return $this->offer;
+    }
+
+    /**
+     * For Offer Forms
+     */
+    public function getDisplayName()
+    {
+        return $this->brand . " - " . $this->model . " ( numero de serie : " . $this->serialNumber . " ) ";
     }
 }

@@ -9,7 +9,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use LocationBundle\Entity\Vehicle;
 
 class OfferType extends AbstractType
 {
@@ -18,10 +17,7 @@ class OfferType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('vehicles', EntityType::class, array(
-                'class' => 'LocationBundle:Vehicle',
-                'choice_label' => 'brand',
-        ))
+        $builder
         ->add('priceLocation', NumberType::class, ['label' => 'Prix de la location'])
         ->add('date_begin', DateTimeType::class, ['label' => 'Date de début'])
         ->add('date_end', DateTimeType::class, ['label' => 'Date de fin'])

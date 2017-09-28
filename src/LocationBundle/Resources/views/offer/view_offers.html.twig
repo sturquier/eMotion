@@ -42,7 +42,7 @@
 					<td><a href="{{ path('view_vehicle', {'id': o.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
 					{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
 					<td style="display:flex; justify-content:space-around;">
-						<a href=""><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
+						<a href="{{ path('admin_edit_offer', {'id': o.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
 						<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
 					</td>
 					{% endif %}

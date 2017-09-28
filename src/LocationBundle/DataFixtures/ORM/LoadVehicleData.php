@@ -31,7 +31,6 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
             shuffle($colors);
 
             $vehicle->setNumberPlate($faker->vehicleRegistration);
-            $vehicle->setColor($faker->safeColorName);
             $vehicle->setNumberPlate(strtoupper($faker->bothify('??-###-?? ##')));
             $vehicle->setKilometer($faker->numberBetween($min = 1000, $max = 100000));
             $vehicle->setDatePurchase($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));

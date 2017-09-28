@@ -31,7 +31,7 @@
 					<td>{{ o.vehicle.brand }}</td>
 					<td>{{ o.vehicle.model }}</td>
 					<td>{{ o.vehicle.color }}</td>
-					<td>{{ o.priceLocation }}</td>
+					<td>{{ o.priceLocation ~ " € " }}</td>
 					<td>{{ o.dateBegin|date('d M Y H:i:s') }}</td>
 					<td>{{ o.dateEnd|date('d M Y H:i:s') }}</td>
 					<td><a href="{{ path('view_vehicle', {'id': o.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>

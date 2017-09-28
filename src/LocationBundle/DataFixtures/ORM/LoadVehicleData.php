@@ -15,6 +15,8 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
         $faker = Faker\Factory::create('fr_FR');
         $faker->addProvider(new \MattWells\Faker\Vehicle\Provider($faker));
 
+        $colors = ['Rouge','Jaune','Vert','Blanc','Gris','Noir','Rose','Violet','Maron','Bleu','Saumon','Orange'];
+
         for ($i = 0; $i < 100; $i++) {
 
             $vehicle = new Vehicle();
@@ -22,7 +24,12 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
             $vehicle->setBrand($faker->vehicleMake);
             $vehicle->setModel($faker->vehicleModel);
             $vehicle->setSerialNumber(strtoupper($faker->bothify('#??#?###??##?##??')));
-            $vehicle->setColor($faker->safeColorName);
+
+            foreach ($colors as $color) {
+                $vehicle->setColor($color);
+            }
+            shuffle($colors);
+
             $vehicle->setNumberPlate($faker->vehicleRegistration);
             $vehicle->setKilometer($faker->numberBetween($min = 1000, $max = 100000));
             $vehicle->setDatePurchase($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));

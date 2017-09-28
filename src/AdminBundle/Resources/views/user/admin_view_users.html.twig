@@ -9,15 +9,15 @@
     	{% for user in users %}
            	<div class="col-md-2" style="border:1px solid black; margin:10px;">
 
-           		<div>{{ user.username }}</div>
-              <div>{{ user.firstName ~ " " ~ user.lastName }}
-					{% if "ROLE_ADMIN" not in user.roles %}
-					<a 	onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce profil ?'));" 
-					href="{{ path('admin_delete_user',  { 'id': user.id } ) }}">
-						<i class="fa fa-lg fa-times" aria-hidden="true"></i>
-					</a>
-				{% endif %}
-              </div>
+           		<div style="display:flex; justify-content:space-between;">
+                <div>{{ user.username }}</div>
+                {% if "ROLE_ADMIN" not in user.roles %}
+                <a onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce profil ?'));" href="{{ path('admin_delete_user',  { 'id': user.id } ) }}">
+                  <i class="fa fa-lg fa-times" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+                </div>
+              <div>{{ user.firstName ~ " " ~ user.lastName }}</div>
               	
            	</div>
         

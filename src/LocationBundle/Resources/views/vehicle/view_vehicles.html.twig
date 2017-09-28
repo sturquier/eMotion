@@ -22,13 +22,11 @@
 		    		<th class="sort">Modèle</th>
 			    	<th class="sort">Couleur</th>
 			    	<th>Date d'achat</th>
-		    		<th>Prix d'achat</th>
 		    		<th>Nombre de kilomètres au compteur</th>
-			    	<th>N° d'immatriculation</th>
-			    	<th>Numéro de série</th>
-		    	
-			    	<th>Edition</th>
-			    	<th>Suppression</th>
+		    		<th>Fiche technique du véhicule</th>
+		    		{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
+		   		 	<th>Editer / Supprimer le véhicule</th>
+		   		 	{% endif %}
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -38,13 +36,15 @@
 					<td>{{ v.model }}</td>
 					<td>{{ v.color }}</td>
 					<td>{{ v.datePurchase|date('d M Y') }}</td>
-					<td>{{ v.pricePurchase }}</td>
-					<td>{{ v.kilometer }}</td>
-					<td>{{ v.numberPlate }}</td>
-					<td>{{ v.serialNumber }}</td>
+					<td>{{ v.kilometer ~ " kms " }}</td>
+					<td><a href="{{ path('view_vehicle', {'id': v.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
 				
-					<td><a href="{{ path('admin_edit_vehicle',  { 'id': v.id } ) }}">Editer</a></td>
-					<td><a href="{{ path('admin_delete_vehicle', { 'id': v.id }) }}">Supprimer</a></td>
+					{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
+					<td style="display:flex; justify-content:space-around;">
+						<a href="{{ path('admin_edit_vehicle', {'id': v.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
+						<a href="{{ path('admin_delete_vehicle', {'id': v.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+					</td>
+					{% endif %}
 				</tr>
 				{% endfor %}
 			</tbody>

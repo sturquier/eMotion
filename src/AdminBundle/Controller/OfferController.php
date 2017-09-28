@@ -82,7 +82,7 @@ class OfferController extends Controller
         $em->remove($offer);
         $em->flush();
 
-        $this->addFlash('danger', 'Offre supprimée');
+        $this->addFlash('error', 'Offre supprimée');
         return $this->redirectToRoute('view_offers');
     }
 }

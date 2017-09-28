@@ -15,6 +15,7 @@
 
 			<ul class="nav navbar-nav">
 				<li><a href="{{ path('view_offers') }}">Voir les offres de location</a></li>
+				<li><a href="{{ path('view_vehicles') }}">Voir les véhicules</a></li>
 				<li><a href="{{ path('payment_send_mail_view') }}">Tester Mail</a></li>
 			</ul>
 
@@ -23,11 +24,9 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zone admin <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li class="dropdown-header">Offres </li>
-						<li><a href="{{ path('view_offers') }}">Voir les offres</a></li>
+						<li role="separator" class="divider"></li>
 						<li><a href="{{ path('admin_add_offer') }}">Ajouter une offre</a></li>
-						<li class="dropdown-header">Voitures </li>
-						<li><a href="{{ path('admin_view_vehicles') }}">Voir les véhicules</a></li>
+						<li role="separator" class="divider"></li>
 						<li><a href="{{ path('admin_add_vehicle') }}">Ajouter un vehicule</a></li>
 						<li role="separator" class="divider"></li>
 						<li><a href="{{ path('admin_view_users') }}">Gestion utilisateurs</a></li>

@@ -5,7 +5,8 @@
 	<h2>Paiement</h2>
 	<!-- la location souhaitée -->
 	<p>
-		Avec la ou les locations choisie(s), le montant du paiement est de ...
+		Vous allez payer un montant de :
+		{{ dump()}}
 	</p>
 	 {{ form_start(form, {'attr': {'novalidate': 'true', 'method':'POST','class':'jumbotron'}} )}}
         {{ form_widget(form) }}

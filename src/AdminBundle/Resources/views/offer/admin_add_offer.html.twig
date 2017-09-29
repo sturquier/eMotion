@@ -4,9 +4,10 @@
 {% block body %}
 	
 	<div class="">
-
 		<h4>Ajouter une nouvelle offre</h4>
-		{{ form(form) }}
+		{{ form_start(form, {'attr': {'novalidate': 'true'}} )}}
+		   {{ form_widget(form) }}
+		{{ form_end(form) }}
 	</div>
 
 {% endblock %}

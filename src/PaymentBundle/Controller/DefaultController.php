@@ -9,6 +9,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use PaymentBundle\Resources\config\config;
 
 class DefaultController extends Controller
 {
@@ -22,22 +25,28 @@ class DefaultController extends Controller
 	    $form = $this->createFormBuilder()
 	        ->add('name', TextType::class, array(
 	        	'required' => true,
+	        	'constraints' => array(new NotBlank()),
 	        	'label' => 'Nom du titulaire de la carte',
                 'attr' => [
                     'placeholder' => 'Nom du titulaire de la carte',
                 ]
 	        ))
-	        ->add('number_card', IntegerType::class, array(
+	        ->add('number_card',TextType::class, array(
 	        	'required' => true,
 	        	'label' => 'Numéro de carte',
+	        	'constraints' => array(
+	        		new NotBlank(),
+	        		new Assert\Range(array(
+			            'min' => 16
+			        ))
+	        	),
                 'attr' => [
                     'placeholder' => 'ex: 1203 4521 7854 6589',
-                    'min' => 16,
-                    'max' => 16,
                 ]
 	        ))
 	        ->add('number_cvc', IntegerType::class, array(
 	        	'required' => true,
+	        	'constraints' => array(new NotBlank()),
 	        	'label' => 'Numéro cryptogramme',
                 'attr' => [
                     'placeholder' => 'ex: 230',
@@ -47,6 +56,7 @@ class DefaultController extends Controller
 	        ))
 	        ->add('date_exp', DateType::class, array(
 	        	'required' => true,
+	        	'constraints' => array(new NotBlank()),
                 'format' => 'ddMMyyyy',
                 'label' => 'Date d\'expiration'
 	        ))
@@ -58,10 +68,18 @@ class DefaultController extends Controller
 	    $form->handleRequest($request);
 
 	    if ($form->isSubmitted() && $form->isValid()) {
-	        // data is an array with "name", "email", and "message" keys
 	        $data = $form->getData();
+	        dump($data);
+	        // paiement
+	        Stripe::setApiKey('sk_test_sOYMH9QVjgTyYof1TCyOYWpb');
 
-	        return $this->redirectToRoute('payment_submit');
+		    $charge = Stripe\Charge::create(array(
+		    	'customer' => (string)$this->getUser()->getId(),
+		    	'amount' => 2000,
+		    	'currency' => 'eur'
+		    ));
+		    $this->get('session')->getFlashBag()->add('success', 'Paiement effectué !');
+	        return $this->redirectToRoute('homepage');
 	    }
 
         return $this->render('PaymentBundle:Default:index.html.twig', [
@@ -69,24 +87,6 @@ class DefaultController extends Controller
         ]);
     }
 
-    /**
-     * Payment action 
-     *
-     * @Route("/payment/form/submit", name="payment_submit")
-     */
-    public function paymentSubmitAction()
-    {
-    	var_dump((string)$this->getUser()->getId());
-
-	    /*\Stripe\Stripe::setApiKey('pk_test_7RFP43V6JWGyPLVJFZlzk7Z0');
-
-	    $charge = Stripe_Charge::create(array(
-	    	'customer' => (string)$this->getUser()->getId(),
-	    	'amount' => 2000,
-	    	'currency' => 'eur'
-	    ));*/
-	    return $this->render('PaymentBundle:Default:payment_confirm.html.twig');
-    }
 	/**
      * Payment 
      *

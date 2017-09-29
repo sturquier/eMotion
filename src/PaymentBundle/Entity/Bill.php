@@ -1,6 +1,6 @@
 <?php
 
-namespace LocationBundle\Entity;
+namespace PaymentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Bill
  *
  * @ORM\Table(name="bill")
- * @ORM\Entity(repositoryClass="LocationBundle\Repository\BillRepository")
+ * @ORM\Entity(repositoryClass="PaymentBundle\Repository\BillRepository")
  */
 class Bill
 {
@@ -26,6 +26,11 @@ class Bill
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
     private $customer;
+
+    /**
+     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Offer", mappedBy="bill")
+     */
+    private $offer;
 
     /**
      * @var \DateTime
@@ -91,5 +96,29 @@ class Bill
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    /**
+     * Set offer
+     *
+     * @param \LocationBundle\Entity\Offer $offer
+     *
+     * @return Bill
+     */
+    public function setOffer(\LocationBundle\Entity\Offer $offer = null)
+    {
+        $this->offer = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Get offer
+     *
+     * @return \LocationBundle\Entity\Offer
+     */
+    public function getOffer()
+    {
+        return $this->offer;
     }
 }

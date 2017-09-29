@@ -9,11 +9,10 @@
 	<div>{{ " Du : " ~ offer.dateBegin|date('d M Y') ~ " au " ~ offer.dateEnd|date('d M Y') }}</div>
 	<div>{{ " Vehicule : " ~ offer.vehicle.brand ~ "-" ~ offer.vehicle.model ~ " " ~ offer.vehicle.color }}</div>
 	<div>{{ " Plaque d'immatriculation : " ~ offer.vehicle.numberPlate }}</div>
-	<div>{{ " Acheté le : " ~ offer.vehicle.datePurchase|date('d M Y') ~ " à " ~ offer.vehicle.pricePurchase ~ " € " }}</div>
-	<div>{{ " Nb de kms au compteur : " ~ offer.vehicle.kilometer }}</div>
+	<div>{{ " Nb de kms au compteur : " ~ offer.vehicle.kilometer  ~ " kms " }}</div>
 	<div>{{ " Numero de série : " ~ offer.vehicle.serialNumber }}</div>
 
 	<br/>
-	<div><a href="{{ path('payment_form', {id: offer.id }) }}" class="btn btn-success">Payer</a></div>
+	<div><a href="{{ path('offer_payment_form', {id: offer.id }) }}" class="btn btn-success">Payer</a></div>
 
 {% endblock %}

@@ -3,13 +3,12 @@
 
 {% block body %}
 	<h2>Paiement</h2>
-	<!-- la location souhaitée -->
-	<p>
-		Vous allez payer un montant de :
-		<!-- {{ dump()}} -->
-	</p>
+
+	<p>{{ " Vous allez payer un montant de " ~ offer.priceLocation ~ " € " }}</p>
+
 	<script src="https://js.stripe.com/v3/" data-key="pk_test_7RFP43V6JWGyPLVJFZlzk7Z0"></script>
 	 {{ form_start(form, {'attr': {'novalidate': 'true', 'method':'POST','class':'jumbotron', 'id':'payment-form'}} )}}
+	
         {{ form_widget(form) }}
         <label for="card-element">Informations de la carte</label>
         <div class="form-group">

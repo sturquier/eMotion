@@ -65,7 +65,7 @@ class Offer
     private $vehicle;
 
     /**
-     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Bill")
+     * @ORM\OneToOne(targetEntity="PaymentBundle\Entity\Bill", inversedBy="offer")
      * @ORM\JoinColumn(name="bill_id", referencedColumnName="id")
      */
     private $bill;
@@ -179,11 +179,11 @@ class Offer
     /**
      * Set bill
      *
-     * @param \LocationBundle\Entity\Bill $bill
+     * @param \PaymentBundle\Entity\Bill $bill
      *
      * @return Offer
      */
-    public function setBill(\LocationBundle\Entity\Bill $bill = null)
+    public function setBill(\PaymentBundle\Entity\Bill $bill = null)
     {
         $this->bill = $bill;
 
@@ -193,7 +193,7 @@ class Offer
     /**
      * Get bill
      *
-     * @return \LocationBundle\Entity\Bill
+     * @return \PaymentBundle\Entity\Bill
      */
     public function getBill()
     {

@@ -24,7 +24,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="LocationBundle\Entity\Bill", mappedBy="customer")
+     * @ORM\OneToMany(targetEntity="PaymentBundle\Entity\Bill", mappedBy="customer")
      */
     private $bills;
 

@@ -12,6 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use PaymentBundle\Resources\config\config;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use LocationBundle\Entity\Offer;
+use PaymentBundle\Entity\Bill;
 
 class DefaultController extends Controller
 {
@@ -70,12 +73,15 @@ class DefaultController extends Controller
 	/**
      * Payment form view
      *
-     * @Route("/payment/{id}/form", name="payment_form")
+     * @Route("/offer/{id}/payment_form", name="offer_payment_form")
+     * @ParamConverter("offer", class="LocationBundle:Offer")
      */
-    public function paymentFormAction(Request $request)
+    public function paymentFormAction(Request $request, Offer $offer)
     {
-	    $form = $this->createPaymentForm();
+    	$bill = new Bill();
+    	$em = $this->getDoctrine()->getManager();
 
+	    $form = $this->createPaymentForm();
 	    $form->handleRequest($request);
 
 	    if ($form->isSubmitted() && $form->isValid()) {
@@ -91,12 +97,19 @@ class DefaultController extends Controller
 		    	'amount' => 2000,
 		    	'currency' => 'eur'
 		    ));
-		    $this->get('session')->getFlashBag()->add('success', 'Paiement effectué !');
+
+	        // TODO : persister la facture client, envoyer un mail et payer avec Stripe
+	        $bill->setCustomer($this->getUser());
+	        $bill->setOffer($offer);
+	        $em->persist($bill);
+
+	        $this->addFlash('success', 'Paiement bien effectué. Vous allez recevoir un mail récapitulatif');
 	        return $this->redirectToRoute('homepage');
 	    }
 
         return $this->render('PaymentBundle:default:payment_form.html.twig', [
-        	'form' => $form->createView()
+        	'form' 	=> $form->createView(),
+        	'offer'	=> $offer,
         ]);
     }
 

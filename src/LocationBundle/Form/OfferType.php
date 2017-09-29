@@ -9,6 +9,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class OfferType extends AbstractType
 {
@@ -23,13 +25,20 @@ class OfferType extends AbstractType
             'class' => 'LocationBundle:Vehicle',
             'choice_label' => function ($vehicle) {
                 return $vehicle->getDisplayName();
-            }
-
+            },
         ])
-        ->add('priceLocation', NumberType::class, ['label' => 'Prix de la location'])
-        ->add('date_begin', DateTimeType::class, ['label' => 'Date de début'])
-        ->add('date_end', DateTimeType::class, ['label' => 'Date de fin'])
-        ->add('submit', SubmitType::class, ['label' => 'Enregister']);
+        ->add('priceLocation', NumberType::class, [
+            'label' => 'Prix de la location',
+        ])
+        ->add('date_begin', DateTimeType::class, [
+            'label' => 'Date de début',
+        ])
+        ->add('date_end', DateTimeType::class, [
+            'label' => 'Date de fin',
+        ])
+        ->add('submit', SubmitType::class, [
+            'label' => 'Enregister',
+        ]);
     }
     
     /**

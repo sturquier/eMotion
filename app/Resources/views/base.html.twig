@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Location eMotion{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset ('css/bootstrap.min.css') }}" type="text/css" />
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
             <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" />
@@ -36,7 +36,7 @@
             <script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
             <script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
             <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-            <script src="https://js.stripe.com/v3/" data-key="pk_test_7RFP43V6JWGyPLVJFZlzk7Z0"></script>
+            <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
         {% endblock %}
         {% block javascript_offers %}{% endblock %}
         {% block javascript_vehicles %}{% endblock %}

@@ -29,7 +29,7 @@ class DefaultController extends Controller
                     'placeholder' => 'Nom du titulaire de la carte',
                 ]
 	        ))
-	        ->add('number_card',TextType::class, array(
+	        /*->add('number_card',TextType::class, array(
 	        	'required' => true,
 	        	'label' => 'Numéro de carte',
 	        	'constraints' => array(
@@ -40,6 +40,7 @@ class DefaultController extends Controller
 	        	),
                 'attr' => [
                     'placeholder' => 'ex: 1203 4521 7854 6589',
+                    'id' => 'card-element'
                 ]
 	        ))
 	        ->add('number_cvc', IntegerType::class, array(
@@ -57,10 +58,10 @@ class DefaultController extends Controller
 	        	'constraints' => array(new NotBlank()),
                 'format' => 'ddMMyyyy',
                 'label' => 'Date d\'expiration'
-	        ))
+	        )) 
 	        ->add('send', SubmitType::class, array(
 	        	'label' => 'Envoyer'
-	        ))
+	        )) */
 	        ->getForm();
 
 	    return $form;
@@ -81,9 +82,11 @@ class DefaultController extends Controller
 	        $data = $form->getData();
 	        dump($data);
 	        // paiement
-	        Stripe::setApiKey('sk_test_sOYMH9QVjgTyYof1TCyOYWpb');
+	        \Stripe\Stripe::setApiKey('sk_test_sOYMH9QVjgTyYof1TCyOYWpb');
 
-		    $charge = Stripe\Charge::create(array(
+	        $post = $_POST['stripeToken'];
+
+		    $charge = Charge::create(array(
 		    	'customer' => (string)$this->getUser()->getId(),
 		    	'amount' => 2000,
 		    	'currency' => 'eur'

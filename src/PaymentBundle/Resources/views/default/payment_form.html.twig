@@ -6,13 +6,18 @@
 	<!-- la location souhaitée -->
 	<p>
 		Vous allez payer un montant de :
-		{{ dump()}}
+		<!-- {{ dump()}} -->
 	</p>
-	 {{ form_start(form, {'attr': {'novalidate': 'true', 'method':'POST','class':'jumbotron'}} )}}
+	<script src="https://js.stripe.com/v3/" data-key="pk_test_7RFP43V6JWGyPLVJFZlzk7Z0"></script>
+	 {{ form_start(form, {'attr': {'novalidate': 'true', 'method':'POST','class':'jumbotron', 'id':'payment-form'}} )}}
         {{ form_widget(form) }}
+        <label for="card-element">Informations de la carte</label>
+        <div class="form-group">
+      		<div id="card-element" class="field form-control"></div>
+      	</div>
+       	<button type="submit" class="btn">Envoyer</button>   
     {{ form_end(form) }}
-		
-	</form>
+	
 	<!-- TODO
 	* - confirmation de paiement
 	* - enregistrement du paiement avec stripe

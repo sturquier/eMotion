@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% use 'templates/menu.html.twig' %}
+
+{% block body %}
+
+	<h4>Recapitulatif de votre commande :</h4>
+
+	<div>{{ " Prix : " ~ offer.priceLocation ~ " € " }}</div>
+	<div>{{ " Du : " ~ offer.dateBegin|date('d M Y') ~ " au " ~ offer.dateEnd|date('d M Y') }}</div>
+	<div>{{ " Vehicule : " ~ offer.vehicle.brand ~ "-" ~ offer.vehicle.model ~ " " ~ offer.vehicle.color }}</div>
+	<div>{{ " Plaque d'immatriculation : " ~ offer.vehicle.numberPlate }}</div>
+	<div>{{ " Acheté le : " ~ offer.vehicle.datePurchase|date('d M Y') ~ " à " ~ offer.vehicle.pricePurchase ~ " € " }}</div>
+	<div>{{ " Nb de kms au compteur : " ~ offer.vehicle.kilometer }}</div>
+	<div>{{ " Numero de série : " ~ offer.vehicle.serialNumber }}</div>
+
+	<br/>
+	<div><a href="" class="btn btn-success">Payer</a></div>
+
+{% endblock %}

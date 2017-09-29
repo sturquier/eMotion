@@ -25,6 +25,9 @@
 		    		<th>Date de début</th>
 		    		<th>Date de fin</th>
 		    		<th>Fiche technique du véhicule</th>
+		    		<th>Paiement</th>
+
+
 		   		 	{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
 		   		 	<th>Editer / Supprimer l'offre</th>
 		   		 	{% endif %}
@@ -40,6 +43,8 @@
 					<td>{{ o.dateBegin|date('d M Y H:i:s') }}</td>
 					<td>{{ o.dateEnd|date('d M Y H:i:s') }}</td>
 					<td><a href="{{ path('view_vehicle', {'id': o.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
+					<td><a href="{{ path('view_offer_recap', {id: o.id }) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></td>
+
 					{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
 					<td style="display:flex; justify-content:space-around;">
 						<a href="{{ path('admin_edit_offer', {'id': o.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>

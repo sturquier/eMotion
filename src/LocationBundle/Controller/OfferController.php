@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use LocationBundle\Entity\Offer;
 use LocationBundle\Form\OfferType;
 
@@ -23,6 +24,18 @@ class OfferController extends Controller
 
         return $this->render('LocationBundle:offer:view_offers.html.twig', [
             'offers' => $offers
+        ]);
+    }
+
+    /**
+     * View offer recap before payment
+     *
+     * @Route("/offer/{id}/recap", name="view_offer_recap")
+     */
+    public function viewOfferRecapAction(Offer $offer)
+    {
+        return $this->render('LocationBundle:offer:view_offer_recap.html.twig', [
+            'offer' => $offer
         ]);
     }
 }

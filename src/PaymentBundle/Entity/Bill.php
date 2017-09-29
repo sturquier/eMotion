@@ -28,7 +28,7 @@ class Bill
     private $customer;
 
     /**
-     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Offer", inversedBy="bill")
+     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Offer", inversedBy="bill", fetch="EAGER")
      * @ORM\JoinColumn(name="offer_id", referencedColumnName="id")
      */
     private $offer;

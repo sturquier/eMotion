@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% use 'templates/menu.html.twig' %}
+
+{% block body %}
+	
+	<div>Historique de vos commandes</div>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Date de début de location</th>
+				<th>Date de retour supposée</th>
+				<th>Date de retour réelle</th>
+				<th>Voiture de location</th>
+				<th>Prix</th>
+				<th>Fiche technique</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for b in app.user.bills %}
+			<tr>
+				<td>{{ b.offer.dateBegin|date('d M Y') }}</td>
+				<td>{{ b.offer.dateEnd|date('d M Y') }}</td>
+				<td>{{ b.dateReturn }}</td>
+				<td>{{ b.offer.vehicle.brand ~ "-" ~ b.offer.vehicle.model ~ " " ~ b.offer.vehicle.color }}</td>
+				<td>{{ b.offer.priceLocation }}</td>
+				<td><a href="{{ path('view_vehicle', {id: b.offer.vehicle.id}) }}" class="btn btn-info"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	
+{% endblock %}

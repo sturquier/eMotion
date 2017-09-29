@@ -22,5 +22,15 @@ class DefaultController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('homepage');
-	}   
+	}
+
+    /**
+     * Display all bills for a user
+     *
+     * @Route("/user/bills/view", name="view_bills")
+     */
+    public function viewBillsAction()
+    {
+        return $this->render('UserBundle:default:view_bills.html.twig');
+    }   
 }

@@ -28,6 +28,11 @@ class Bill
     private $customer;
 
     /**
+     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Offer", mappedBy="bill")
+     */
+    private $offer;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_return", type="datetime")
@@ -91,5 +96,29 @@ class Bill
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    /**
+     * Set offer
+     *
+     * @param \LocationBundle\Entity\Offer $offer
+     *
+     * @return Bill
+     */
+    public function setOffer(\LocationBundle\Entity\Offer $offer = null)
+    {
+        $this->offer = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Get offer
+     *
+     * @return \LocationBundle\Entity\Offer
+     */
+    public function getOffer()
+    {
+        return $this->offer;
     }
 }

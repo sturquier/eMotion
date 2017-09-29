@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use LocationBundle\Entity\Offer;
+use PaymentBundle\Entity\Bill;
 
 
 class DefaultController extends Controller
@@ -67,15 +68,23 @@ class DefaultController extends Controller
      */
     public function paymentFormAction(Request $request, Offer $offer)
     {
-	    $form = $this->createPaymentForm();
+    	$bill = new Bill();
+    	$em = $this->getDoctrine()->getManager();
 
+	    $form = $this->createPaymentForm();
 	    $form->handleRequest($request);
 
 	    if ($form->isSubmitted() && $form->isValid()) {
 	        // data is an array with "name", "email", and "message" keys
 	        $data = $form->getData();
 
-	        return $this->redirectToRoute('payment_submit');
+	        // TODO : persister la facture client, envoyer un mail et payer avec Stripe
+	        $bill->setCustomer($this->getUser());
+	        $bill->setOffer($offer);
+	        $em->persist($bill);
+
+	        $this->addFlash('success', 'Paiement bien effectué. Vous allez recevoir un mail récapitulatif');
+	        return $this->redirectToRoute('homepage');
 	    }
 
         return $this->render('PaymentBundle:default:payment_form.html.twig', [
@@ -84,24 +93,6 @@ class DefaultController extends Controller
         ]);
     }
 
-    /**
-     * Payment action 
-     *
-     * @Route("/payment/form/submit", name="payment_submit")
-     */
-    public function paymentSubmitAction()
-    {
-    	var_dump((string)$this->getUser()->getId());
-
-	    /*\Stripe\Stripe::setApiKey('pk_test_7RFP43V6JWGyPLVJFZlzk7Z0');
-
-	    $charge = Stripe_Charge::create(array(
-	    	'customer' => (string)$this->getUser()->getId(),
-	    	'amount' => 2000,
-	    	'currency' => 'eur'
-	    ));*/
-	    return $this->render('PaymentBundle:default:payment_confirm.html.twig');
-    }
 	/**
      * Payment 
      *

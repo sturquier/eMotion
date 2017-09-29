@@ -3,6 +3,7 @@
 namespace LocationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Offer
@@ -25,6 +26,13 @@ class Offer
      * @var float
      *
      * @ORM\Column(name="price_location", type="float")
+     * @Assert\NotBlank()
+     * @Assert\Range(
+     *      min = 10,
+     *      max = 200,
+     *      minMessage = "Le prix doit être supérieur à {{ limit }}.",
+     *      maxMessage = "Le prix doit être inférieur à {{ limit }}."
+     * )
      */
     private $priceLocation;
 
@@ -32,6 +40,9 @@ class Offer
      * @var \DateTime
      *
      * @ORM\Column(name="date_begin", type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\DateTime()
+     * @Assert\GreaterThan("today UTC")
      */
     private $date_begin;
 
@@ -39,12 +50,17 @@ class Offer
      * @var \DateTime
      *
      * @ORM\Column(name="date_end", type="datetime")
+     * @Assert\NotBlank()
+     * @Assert\DateTime()
+     * @Assert\GreaterThan("+1 day")
+     * @Assert\LessThan("+10 day")
      */
     private $date_end;
 
     /**
      * @ORM\ManyToOne(targetEntity="LocationBundle\Entity\Vehicle", inversedBy="offers", fetch="EAGER")
      * @ORM\JoinColumn(name="vehicle_id", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     private $vehicle;
 

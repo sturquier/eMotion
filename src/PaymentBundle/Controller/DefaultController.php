@@ -86,22 +86,23 @@ class DefaultController extends Controller
 
 	    if ($form->isSubmitted() && $form->isValid()) {
 	        $data = $form->getData();
-	        dump($data);
+	        //dump($data);
 	        // paiement
-	        \Stripe\Stripe::setApiKey('sk_test_sOYMH9QVjgTyYof1TCyOYWpb');
+	        //\Stripe\Stripe::setApiKey('sk_test_sOYMH9QVjgTyYof1TCyOYWpb');
 
-	        $post = $_POST['stripeToken'];
+	        //$post = $_POST['stripeToken'];
 
-		    $charge = Charge::create(array(
-		    	'customer' => (string)$this->getUser()->getId(),
-		    	'amount' => 2000,
-		    	'currency' => 'eur'
-		    ));
+		    //$charge = Charge::create(array(
+		    //	'customer' => (string)$this->getUser()->getId(),
+		    //	'amount' => 2000,
+		    //	'currency' => 'eur'
+		    //));
 
 	        // TODO : persister la facture client, envoyer un mail et payer avec Stripe
 	        $bill->setCustomer($this->getUser());
 	        $bill->setOffer($offer);
 	        $em->persist($bill);
+	        $em->flush();
 
 	        $this->addFlash('success', 'Paiement bien effectué. Vous allez recevoir un mail récapitulatif');
 	        return $this->redirectToRoute('homepage');

@@ -65,8 +65,7 @@ class Offer
     private $vehicle;
 
     /**
-     * @ORM\OneToOne(targetEntity="PaymentBundle\Entity\Bill", inversedBy="offer")
-     * @ORM\JoinColumn(name="bill_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="PaymentBundle\Entity\Bill", mappedBy="offer")
      */
     private $bill;
 

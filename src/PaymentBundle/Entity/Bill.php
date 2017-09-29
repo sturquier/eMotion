@@ -28,17 +28,17 @@ class Bill
     private $customer;
 
     /**
-     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Offer", mappedBy="bill")
+     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Offer", inversedBy="bill")
+     * @ORM\JoinColumn(name="offer_id", referencedColumnName="id")
      */
     private $offer;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_return", type="datetime")
+     * @ORM\Column(name="date_return", type="datetime", nullable = true, options={"default": 0})
      */
     private $date_return;
-
 
     /**
      * Get id

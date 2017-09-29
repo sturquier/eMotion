@@ -16,13 +16,11 @@ use PaymentBundle\Resources\config\config;
 class DefaultController extends Controller
 {
 	/**
-     * Payment view
-     *
-     * @Route("/payment/form", name="payment_view")
-     */
-    public function indexAction(Request $request)
-    {
-	    $form = $this->createFormBuilder()
+	 * Creates a payment form
+	 */
+	private function createPaymentForm()
+	{
+		$form = $this->createFormBuilder()
 	        ->add('name', TextType::class, array(
 	        	'required' => true,
 	        	'constraints' => array(new NotBlank()),
@@ -65,6 +63,18 @@ class DefaultController extends Controller
 	        ))
 	        ->getForm();
 
+	    return $form;
+	}
+
+	/**
+     * Payment form view
+     *
+     * @Route("/payment/{id}/form", name="payment_form")
+     */
+    public function paymentFormAction(Request $request)
+    {
+	    $form = $this->createPaymentForm();
+
 	    $form->handleRequest($request);
 
 	    if ($form->isSubmitted() && $form->isValid()) {
@@ -82,7 +92,7 @@ class DefaultController extends Controller
 	        return $this->redirectToRoute('homepage');
 	    }
 
-        return $this->render('PaymentBundle:Default:index.html.twig', [
+        return $this->render('PaymentBundle:default:payment_form.html.twig', [
         	'form' => $form->createView()
         ]);
     }
@@ -103,6 +113,6 @@ class DefaultController extends Controller
 	    $this->get('mailer')->send($message);
 
 
-	    return $this->render('PaymentBundle:Default:confirmation.html.twig');
+	    return $this->render('PaymentBundle:default:confirmation.html.twig');
 	}
 }

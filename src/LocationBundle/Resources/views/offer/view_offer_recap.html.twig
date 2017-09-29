@@ -14,6 +14,6 @@
 	<div>{{ " Numero de série : " ~ offer.vehicle.serialNumber }}</div>
 
 	<br/>
-	<div><a href="" class="btn btn-success">Payer</a></div>
+	<div><a href="{{ path('payment_form', {id: offer.id }) }}" class="btn btn-success">Payer</a></div>
 
 {% endblock %}

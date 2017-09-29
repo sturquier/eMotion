@@ -1,6 +1,6 @@
 <?php
 
-namespace LocationBundle\Repository;
+namespace PaymentBundle\Repository;
 
 /**
  * BillRepository

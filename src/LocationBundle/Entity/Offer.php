@@ -65,7 +65,7 @@ class Offer
     private $vehicle;
 
     /**
-     * @ORM\OneToOne(targetEntity="LocationBundle\Entity\Bill")
+     * @ORM\OneToOne(targetEntity="PaymentBundle\Entity\Bill")
      * @ORM\JoinColumn(name="bill_id", referencedColumnName="id")
      */
     private $bill;

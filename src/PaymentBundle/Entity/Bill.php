@@ -1,6 +1,6 @@
 <?php
 
-namespace LocationBundle\Entity;
+namespace PaymentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Bill
  *
  * @ORM\Table(name="bill")
- * @ORM\Entity(repositoryClass="LocationBundle\Repository\BillRepository")
+ * @ORM\Entity(repositoryClass="PaymentBundle\Repository\BillRepository")
  */
 class Bill
 {

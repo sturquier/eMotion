@@ -4,10 +4,9 @@
 {% block body %}
 	<h2>Paiement</h2>
 	<!-- la location souhaitée -->
-	<p>
-		Vous allez payer un montant de :
-		{{ dump()}}
-	</p>
+	{{ dump()}}
+	<p>{{ " Vous allez payer un montant de " ~ offer.priceLocation ~ " € " }}</p>
+
 	 {{ form_start(form, {'attr': {'novalidate': 'true', 'method':'POST','class':'jumbotron'}} )}}
         {{ form_widget(form) }}
     {{ form_end(form) }}

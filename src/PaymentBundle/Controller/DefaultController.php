@@ -9,6 +9,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use LocationBundle\Entity\Offer;
+
 
 class DefaultController extends Controller
 {
@@ -59,9 +62,10 @@ class DefaultController extends Controller
 	/**
      * Payment form view
      *
-     * @Route("/payment/{id}/form", name="payment_form")
+     * @Route("/offer/{id}/payment_form", name="offer_payment_form")
+     * @ParamConverter("offer", class="LocationBundle:Offer")
      */
-    public function paymentFormAction(Request $request)
+    public function paymentFormAction(Request $request, Offer $offer)
     {
 	    $form = $this->createPaymentForm();
 
@@ -75,7 +79,8 @@ class DefaultController extends Controller
 	    }
 
         return $this->render('PaymentBundle:default:payment_form.html.twig', [
-        	'form' => $form->createView()
+        	'form' 	=> $form->createView(),
+        	'offer'	=> $offer,
         ]);
     }
 

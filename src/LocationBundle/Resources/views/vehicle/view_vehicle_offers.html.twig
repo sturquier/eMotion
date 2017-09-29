@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% use 'templates/menu.html.twig' %}
+
+{% block body %}
+
+	<div style="display:flex; justify-content:space-between;">
+		<h4>Offres de location associées au véhicule : {{  vehicle.brand ~ " " ~ vehicle.model ~ " " ~ vehicle.color }}</h4>
+		<div><a href="{{ path('view_vehicle', {'id' : vehicle.id}) }}" class="btn btn-info">Fiche technique du véhicule</a></div>
+	</div>
+	<hr/>
+
+	<div>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Date de début</th>
+					<th>Date de fin</th>
+					<th>Prix de location</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for o in vehicle.offers %}
+				<tr>
+					<td>{{ o.dateBegin|date('d M Y') }}</td>
+					<td>{{ o.dateEnd|date('d M Y') }}</td>
+					<td>{{ o.priceLocation ~ " € " }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+
+		</table>
+
+	</div>
+
+{% endblock %}

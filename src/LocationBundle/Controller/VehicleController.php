@@ -40,4 +40,18 @@ class VehicleController extends Controller
             'vehicle' => $vehicle,
         ]);
     }
+
+    /**
+     * View associated offers to a specific vehicle
+     *
+     * @Route("/vehicle/{id}/offers", name="view_vehicle_offers")
+     * @ParamConverter("vehicle", class="LocationBundle:Vehicle")
+     */
+    public function viewVehicleOffersAction(Vehicle $vehicle)
+    {
+
+        return $this->render('LocationBundle:vehicle:view_vehicle_offers.html.twig', [
+            'vehicle' => $vehicle,
+        ]);  
+    }
 }

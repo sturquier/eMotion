@@ -53,7 +53,6 @@ class Offer
      * @Assert\NotBlank()
      * @Assert\DateTime()
      * @Assert\GreaterThan("+1 day")
-     * @Assert\LessThan("+10 day")
      */
     private $date_end;
 

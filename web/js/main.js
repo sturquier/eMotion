@@ -43,6 +43,8 @@ card.addEventListener('change', function(event) {
 var form = document.getElementById('payment-form');
 form.addEventListener('submit', function(event) {
   event.preventDefault();
+  var form = document.querySelector('form');
+  console.log(form);
 
   stripe.createToken(card).then(function(result) {
     if (result.error) {
@@ -56,22 +58,6 @@ form.addEventListener('submit', function(event) {
   });
 });
 
-// Create a token or display an error when the form is submitted.
-var form = document.getElementById('payment-form');
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  stripe.createToken(card).then(function(result) {
-    if (result.error) {
-      // Inform the user if there was an error
-      var errorElement = document.getElementById('card-errors');
-      errorElement.textContent = result.error.message;
-    } else {
-      // Send the token to your server
-      stripeTokenHandler(result.token);
-    }
-  });
-});
 
 function stripeTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server

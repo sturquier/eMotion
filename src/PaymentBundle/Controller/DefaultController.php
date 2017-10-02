@@ -24,12 +24,12 @@ class DefaultController extends Controller
 	private function createPaymentForm()
 	{
 		$form = $this->createFormBuilder()
-	        ->add('name', TextType::class, array(
+	        ->add('customer', TextType::class, array(
 	        	'required' => true,
 	        	'constraints' => array(new NotBlank()),
 	        	'label' => 'Nom du titulaire de la carte',
                 'attr' => [
-                    'placeholder' => 'Nom du titulaire de la carte',
+                    'placeholder' => 'Prénom Nom',
                 ]
 	        ))
 	        /*->add('number_card',TextType::class, array(
@@ -88,15 +88,22 @@ class DefaultController extends Controller
 	        $data = $form->getData();
 	        //dump($data);
 	        // paiement
-	        //\Stripe\Stripe::setApiKey('sk_test_sOYMH9QVjgTyYof1TCyOYWpb');
+	        \Stripe\Stripe::setApiKey('sk_test_sOYMH9QVjgTyYof1TCyOYWpb');
 
-	        //$post = $_POST['stripeToken'];
+	        $post = $_POST['stripeToken'];
 
-		    //$charge = Charge::create(array(
-		    //	'customer' => (string)$this->getUser()->getId(),
-		    //	'amount' => 2000,
-		    //	'currency' => 'eur'
-		    //));
+			// Create a Customer:
+			$customer = \Stripe\Customer::create(array(
+			  "description" => $data['customer'],
+			  "source" => $post,
+			));
+
+		    $charge = \Stripe\Charge::create(array(
+		    	'customer' => $customer->id,
+		    	'amount' => $_POST['amount']*100,
+		    	'currency' => 'eur'
+		    ));
+
 
 	        // TODO : envoyer un mail et payer avec Stripe
 	        $bill->setCustomer($this->getUser());

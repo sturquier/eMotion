@@ -9,7 +9,7 @@
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4">
 
-			{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+			{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'novalidate': 'true','class': 'fos_user_registration_register'}}) }}
     		{{ form_widget(form) }}
 			{{ form_end(form) }}
 

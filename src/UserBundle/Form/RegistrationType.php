@@ -42,7 +42,10 @@ class RegistrationType extends AbstractType
             'required' => true,
             'constraints' => array(
                 new Assert\NotBlank(),
-            )
+            ),
+            'attr' => [
+                'placeholder' => 'ex: 23 Boulevard De Lune 75003 Paris',
+            ]
         ])
         ->add('birthDate', DateType::class, [
             'label' => 'Date de naissance',
@@ -58,15 +61,22 @@ class RegistrationType extends AbstractType
             'constraints' => array(
                 new Assert\NotBlank(),
                 new Assert\Type('numeric')
-            )
+            ),
+            'attr' => [
+                'placeholder' => 'ex: 0610252540',
+            ]
         ])
         ->add('drivingLicense', TextType::class, [
             'label' => 'Numéro de permis de conduire',
             'required' => true,
             'constraints' => array(
                 new Assert\NotBlank(),
-                new Assert\Type('string')
-            )
+                new Assert\Type('string'),
+                new Assert\Length(array('max' => 9))
+            ),
+            'attr' => [
+                'placeholder' => 'ex: 12AF42569',
+            ]
         ])
         ->add('save', SubmitType::class, ['label' => 'Enregistrer']);
     }

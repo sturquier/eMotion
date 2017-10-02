@@ -9,6 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use LocationBundle\Entity\Offer;
 use LocationBundle\Form\OfferType;
+use LocationBundle\Service\OfferChecker;
 
 class OfferController extends Controller
 {
@@ -32,8 +33,13 @@ class OfferController extends Controller
      *
      * @Route("/offer/{id}/recap", name="view_offer_recap")
      */
-    public function viewOfferRecapAction(Offer $offer)
+    public function viewOfferRecapAction(Offer $offer, OfferChecker $checker)
     {
+        if (!$checker->isAvailableOffer($offer)) {
+            $this->addFlash('error', 'Cette offre est désactivée !');
+            return $this->redirectToRoute('homepage');
+        }
+
         return $this->render('LocationBundle:offer:view_offer_recap.html.twig', [
             'offer' => $offer
         ]);

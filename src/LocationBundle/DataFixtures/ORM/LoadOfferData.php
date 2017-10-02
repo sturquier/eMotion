@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\DataFixtures\ORM;
+namespace LocationBundle\DataFixtures\ORM;
 
 use LocationBundle\Entity\Offer;
 use Doctrine\Common\DataFixtures\AbstractFixture;

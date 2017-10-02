@@ -234,11 +234,11 @@ class User extends BaseUser
     /**
      * Add bill
      *
-     * @param \LocationBundle\Entity\Bill $bill
+     * @param \PaymentBundle\Entity\Bill $bill
      *
      * @return User
      */
-    public function addBill(\LocationBundle\Entity\Bill $bill)
+    public function addBill(\PaymentBundle\Entity\Bill $bill)
     {
         $this->bills[] = $bill;
 
@@ -248,9 +248,9 @@ class User extends BaseUser
     /**
      * Remove bill
      *
-     * @param \LocationBundle\Entity\Bill $bill
+     * @param \PaymentBundle\Entity\Bill $bill
      */
-    public function removeBill(\LocationBundle\Entity\Bill $bill)
+    public function removeBill(\PaymentBundle\Entity\Bill $bill)
     {
         $this->bills->removeElement($bill);
     }

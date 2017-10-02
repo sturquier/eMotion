@@ -35,23 +35,43 @@
 			</thead>
 			<tbody>
 				{% for o in offers %}
-				<tr> 
-					<td>{{ o.vehicle.brand }}</td>
-					<td>{{ o.vehicle.model }}</td>
-					<td>{{ o.vehicle.color }}</td>
-					<td>{{ o.priceLocation ~ " € " }}</td>
-					<td>{{ o.dateBegin|date('d M Y H:i:s') }}</td>
-					<td>{{ o.dateEnd|date('d M Y H:i:s') }}</td>
-					<td><a href="{{ path('view_vehicle', {'id': o.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
-					<td><a href="{{ path('view_offer_recap', {id: o.id }) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></td>
+					{% if o.isAvailable != 1 %}
+					<tr class="disabled"> 
+						<td>{{ o.vehicle.brand }}</td>
+						<td>{{ o.vehicle.model }}</td>
+						<td>{{ o.vehicle.color }}</td>
+						<td>{{ o.priceLocation ~ " € " }}</td>
+						<td>{{ o.dateBegin|date('d M Y H:i:s') }}</td>
+						<td>{{ o.dateEnd|date('d M Y H:i:s') }}</td>
+						<td><i class="fa fa-wrench disabled" aria-hidden="true"></i></td>
+						<td><i class="fa fa-shopping-cart disabled" aria-hidden="true"></i></td>
 
 					{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
-					<td style="display:flex; justify-content:space-around;">
-						<a href="{{ path('admin_edit_offer', {'id': o.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
-						<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
-					</td>
+						<td style="display:flex; justify-content:space-around;">
+							<i class="fa fa-lg fa-pencil disabled" aria-hidden="true"></i>
+							<i class="fa fa-times disabled" aria-hidden="true"></i>
+						</td>
 					{% endif %}
-				</tr>
+					</tr>	
+					{% else %}
+					<tr> 
+						<td>{{ o.vehicle.brand }}</td>
+						<td>{{ o.vehicle.model }}</td>
+						<td>{{ o.vehicle.color }}</td>
+						<td>{{ o.priceLocation ~ " € " }}</td>
+						<td>{{ o.dateBegin|date('d M Y H:i:s') }}</td>
+						<td>{{ o.dateEnd|date('d M Y H:i:s') }}</td>
+						<td><a href="{{ path('view_vehicle', {'id': o.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
+						<td><a href="{{ path('view_offer_recap', {id: o.id }) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></td>
+
+					{% if (app.user) and ("ROLE_ADMIN" in app.user.roles) %}
+						<td style="display:flex; justify-content:space-around;">
+							<a href="{{ path('admin_edit_offer', {'id': o.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
+							<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+						</td>
+					{% endif %}
+					</tr>
+					{% endif %}
 				{% endfor %}
 			</tbody>
 		</table>

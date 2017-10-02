@@ -100,8 +100,7 @@ class VehicleType extends AbstractType
         ->add('pricePurchase', NumberType::class, [
             'label' => 'Prix d\'achat',
             'constraints' => array(
-                new Assert\NotBlank(),
-                new Assert\Date()
+                new Assert\NotBlank()
             )
         ])
         ->add('submit', SubmitType::class, ['label' => 'Enregister']);

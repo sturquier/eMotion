@@ -4,12 +4,14 @@ namespace LocationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Vehicle
  *
  * @ORM\Table(name="vehicle")
  * @ORM\Entity(repositoryClass="LocationBundle\Repository\VehicleRepository")
+ * @UniqueEntity(fields={"serialNumber","numberPlate"})
  */
 class Vehicle
 {

@@ -29,6 +29,7 @@ class UserController extends Controller
      * Delete a user entity.
      *
      * @Route("admin/user/{id}/delete", name="admin_delete_user")
+     * @Security("has_role('ROLE_ADMIN')")
      */
 	public function adminDeleteUserAction(Request $request, User $user)
 	{

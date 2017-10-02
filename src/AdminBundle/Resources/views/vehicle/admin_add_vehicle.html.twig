@@ -6,7 +6,10 @@
 	<div class="">
 
 		<h4>Ajouter un nouveau vehicule</h4>
-		{{ form(form) }}
+		{{ form_start(form, {'method': 'post', 'attr': {'novalidate': 'true'}}) }}
+    		{{ form_widget(form) }}
+		{{ form_end(form) }}
+
 	</div>
 
 {% endblock %}

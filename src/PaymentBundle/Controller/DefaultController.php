@@ -29,7 +29,7 @@ class DefaultController extends Controller
 	        	'constraints' => array(new NotBlank()),
 	        	'label' => 'Nom du titulaire de la carte',
                 'attr' => [
-                    'placeholder' => 'Nom du titulaire de la carte',
+                    'placeholder' => 'Prénom Nom',
                 ]
 	        ))
 	        /*->add('number_card',TextType::class, array(
@@ -91,8 +91,6 @@ class DefaultController extends Controller
 	        \Stripe\Stripe::setApiKey('sk_test_sOYMH9QVjgTyYof1TCyOYWpb');
 
 	        $post = $_POST['stripeToken'];
-	        var_dump($_POST);
-	        var_dump($data['customer']);
 
 			// Create a Customer:
 			$customer = \Stripe\Customer::create(array(
@@ -102,7 +100,7 @@ class DefaultController extends Controller
 
 		    $charge = \Stripe\Charge::create(array(
 		    	'customer' => $customer->id,
-		    	'amount' => $_POST['amount'],
+		    	'amount' => $_POST['amount']*100,
 		    	'currency' => 'eur'
 		    ));
 

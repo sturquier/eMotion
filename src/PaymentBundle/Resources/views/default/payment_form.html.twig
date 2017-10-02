@@ -14,7 +14,7 @@
         <div class="form-group">
       		<div id="card-element" class="field form-control"></div>
       	</div>
-      	<input type="hidden" name="amount" value="{{offer.priceLocation}}">
+      	<input type="number" name="amount" value={{offer.priceLocation}} hidden>
        	<button type="submit" class="btn">Envoyer</button>   
     {{ form_end(form) }}
 	

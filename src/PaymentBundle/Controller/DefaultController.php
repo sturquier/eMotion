@@ -90,7 +90,7 @@ class DefaultController extends Controller
 	        $em->flush();
 
 	        $this->addFlash('success', 'Paiement bien effectué. Vous allez recevoir un mail récapitulatif');
-	        return $this->redirectToRoute('homepage');
+	        return $this->redirectToRoute('view_orders');
 	    }
 
         return $this->render('PaymentBundle:default:payment_form.html.twig', [

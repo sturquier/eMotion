@@ -41,8 +41,8 @@
 						<td>{{ o.vehicle.model }}</td>
 						<td>{{ o.vehicle.color }}</td>
 						<td>{{ o.priceLocation ~ " € " }}</td>
-						<td>{{ o.dateBegin|date('d M Y H:i:s') }}</td>
-						<td>{{ o.dateEnd|date('d M Y H:i:s') }}</td>
+						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
+						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
 						<td><i class="fa fa-wrench disabled" aria-hidden="true"></i></td>
 						<td><i class="fa fa-shopping-cart disabled" aria-hidden="true"></i></td>
 
@@ -59,8 +59,8 @@
 						<td>{{ o.vehicle.model }}</td>
 						<td>{{ o.vehicle.color }}</td>
 						<td>{{ o.priceLocation ~ " € " }}</td>
-						<td>{{ o.dateBegin|date('d M Y H:i:s') }}</td>
-						<td>{{ o.dateEnd|date('d M Y H:i:s') }}</td>
+						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
+						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
 						<td><a href="{{ path('view_vehicle', {'id': o.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
 						<td><a href="{{ path('view_offer_recap', {id: o.id }) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></td>
 

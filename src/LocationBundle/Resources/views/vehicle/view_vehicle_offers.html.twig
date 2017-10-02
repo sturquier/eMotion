@@ -24,15 +24,15 @@
 				{% for o in vehicle.offers %}
 					{% if o.isAvailable != 1 %}
 					<tr class="disabled">
-						<td>{{ o.dateBegin|date('d M Y') }}</td>
-						<td>{{ o.dateEnd|date('d M Y') }}</td>
+						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
+						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
 						<td>{{ o.priceLocation ~ " € " }}</td>
 						<td><i class="fa fa-shopping-cart" aria-hidden="true"></i></td>
 					</tr>
 					{% else %}
 					<tr>
-						<td>{{ o.dateBegin|date('d M Y') }}</td>
-						<td>{{ o.dateEnd|date('d M Y') }}</td>
+						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
+						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
 						<td>{{ o.priceLocation ~ " € " }}</td>
 						<td><a href="{{ path('view_offer_recap', {id: o.id }) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></td>
 					</tr>

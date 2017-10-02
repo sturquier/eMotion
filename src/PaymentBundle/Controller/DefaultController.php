@@ -15,6 +15,7 @@ use PaymentBundle\Resources\config\config;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use LocationBundle\Entity\Offer;
 use PaymentBundle\Entity\Bill;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class DefaultController extends Controller
 {
@@ -50,6 +51,7 @@ class DefaultController extends Controller
      *
      * @Route("/offer/{id}/payment_form", name="offer_payment_form")
      * @ParamConverter("offer", class="LocationBundle:Offer")
+     * @Security("has_role('ROLE_USER')")
      */
     public function paymentFormAction(Request $request, Offer $offer)
     {
@@ -61,7 +63,6 @@ class DefaultController extends Controller
 
 	    if ($form->isSubmitted() && $form->isValid()) {
 	        $data = $form->getData();
-	        //dump($data);
 	        // paiement
 	        \Stripe\Stripe::setApiKey('sk_test_sOYMH9QVjgTyYof1TCyOYWpb');
 
@@ -79,8 +80,6 @@ class DefaultController extends Controller
 		    	'currency' => 'eur'
 		    ));
 
-
-	        // TODO : envoyer un mail et payer avec Stripe
 	        $bill->setCustomer($this->getUser());
 	        $bill->setOffer($offer);
 	        $em->persist($bill);

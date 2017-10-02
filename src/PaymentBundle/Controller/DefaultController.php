@@ -82,6 +82,7 @@ class DefaultController extends Controller
 
 	        $bill->setCustomer($this->getUser());
 	        $bill->setOffer($offer);
+	        $bill->setAmount($offer->getPriceLocation());
 	        $em->persist($bill);
 
 	        $offer->setIsAvailable(false);

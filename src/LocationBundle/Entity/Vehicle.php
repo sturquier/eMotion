@@ -11,7 +11,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="vehicle")
  * @ORM\Entity(repositoryClass="LocationBundle\Repository\VehicleRepository")
- * @UniqueEntity(fields={"serialNumber","numberPlate"})
+ * @UniqueEntity("serialNumber")
+ * @UniqueEntity("numberPlate")
  */
 class Vehicle
 {

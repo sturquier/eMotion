@@ -26,45 +26,20 @@ class DefaultController extends Controller
 		$form = $this->createFormBuilder()
 	        ->add('customer', TextType::class, array(
 	        	'required' => true,
-	        	'constraints' => array(new NotBlank()),
+	        	'constraints' => array(
+	        		new NotBlank(),
+	        		new  Assert\Regex(array(
+			            'pattern' => '/\d/',
+			            'match'   => false
+			        )),
+	        		new Assert\Length(array('min' => 2))
+	        	),
 	        	'label' => 'Nom du titulaire de la carte',
                 'attr' => [
                     'placeholder' => 'Prénom Nom',
                 ]
 	        ))
-	        /*->add('number_card',TextType::class, array(
-	        	'required' => true,
-	        	'label' => 'Numéro de carte',
-	        	'constraints' => array(
-	        		new NotBlank(),
-	        		new Assert\Range(array(
-			            'min' => 16
-			        ))
-	        	),
-                'attr' => [
-                    'placeholder' => 'ex: 1203 4521 7854 6589',
-                    'id' => 'card-element'
-                ]
-	        ))
-	        ->add('number_cvc', IntegerType::class, array(
-	        	'required' => true,
-	        	'constraints' => array(new NotBlank()),
-	        	'label' => 'Numéro cryptogramme',
-                'attr' => [
-                    'placeholder' => 'ex: 230',
-                    'min' => 3,
-                    'max' => 3,
-                ]
-	        ))
-	        ->add('date_exp', DateType::class, array(
-	        	'required' => true,
-	        	'constraints' => array(new NotBlank()),
-                'format' => 'ddMMyyyy',
-                'label' => 'Date d\'expiration'
-	        )) 
-	        ->add('send', SubmitType::class, array(
-	        	'label' => 'Envoyer'
-	        )) */
+	        
 	        ->getForm();
 
 	    return $form;

@@ -98,10 +98,14 @@ class DefaultController extends Controller
 		    //	'currency' => 'eur'
 		    //));
 
-	        // TODO : persister la facture client, envoyer un mail et payer avec Stripe
+	        // TODO : envoyer un mail et payer avec Stripe
 	        $bill->setCustomer($this->getUser());
 	        $bill->setOffer($offer);
 	        $em->persist($bill);
+
+	        $offer->setIsAvailable(false);
+	        $em->persist($offer);
+
 	        $em->flush();
 
 	        $this->addFlash('success', 'Paiement bien effectué. Vous allez recevoir un mail récapitulatif');
@@ -113,23 +117,4 @@ class DefaultController extends Controller
         	'offer'	=> $offer,
         ]);
     }
-
-	/**
-     * Payment 
-     *
-     * @Route("/payment/mail", name="payment_send_mail_view")
-     */
-    public function envoiMailAction()
-	{
-	    $message = (new \Swift_Message('Hello Email'))
-	     	->setSubject("ma qué ?")
-	        ->setFrom('haha@haha.com')
-	        ->setTo('pathe.barry.92@gmail.com')
-	        ->setBody('lol');
-
-	    $this->get('mailer')->send($message);
-
-
-	    return $this->render('PaymentBundle:default:confirmation.html.twig');
-	}
 }

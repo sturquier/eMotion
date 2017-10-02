@@ -70,6 +70,11 @@ class Offer
     private $bill;
 
     /**
+     * @ORM\Column(name="is_available", type="boolean", options={"default": true})
+     */
+    private $is_available = true;
+
+    /**
      * Get id
      *
      * @return int
@@ -197,5 +202,29 @@ class Offer
     public function getBill()
     {
         return $this->bill;
+    }
+
+    /**
+     * Set isAvailable
+     *
+     * @param boolean $isAvailable
+     *
+     * @return Offer
+     */
+    public function setIsAvailable($isAvailable)
+    {
+        $this->is_available = $isAvailable;
+
+        return $this;
+    }
+
+    /**
+     * Get isAvailable
+     *
+     * @return boolean
+     */
+    public function getIsAvailable()
+    {
+        return $this->is_available;
     }
 }

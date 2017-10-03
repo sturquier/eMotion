@@ -2,6 +2,9 @@
     color: #d0d0d0;
 }
 
+/*-----------
+	logo
+----------*/
 .navbar-brand {
 	padding: 0 !important;
 }
@@ -9,4 +12,10 @@
 .navbar-brand .logo {
 	height: 50px;
     max-width: 100%;
+}
+
+.img {
+	min-height: 15em;
+	max-height: 15em;
+	object-fit: cover;
 }

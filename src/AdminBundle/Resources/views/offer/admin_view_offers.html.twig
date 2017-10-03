@@ -2,13 +2,16 @@
 {% use 'templates/menu.html.twig' %}
 
 {% block body %}
-		
-		<h4>Liste des offres de location </h4>
-		<br/>
+	
+	<div style="display:flex; justify-content:space-between;">	
+		<h4>Gerer les offres de location </h4>
+		<a class="btn btn-info" href="{{ path('admin_add_offer') }}">Ajouter une offre</a>
+	</div>
+	<br/>
 
 		<div id="filter"><label>Affiner votre recherche : &nbsp;</label></div>
 
-		<table class="table table-striped" id="offers_table">
+		<table class="table table-striped" id="admin_offers_table">
 			<thead>
 				<tr> 
 			    	<th class="sort">Marque</th>
@@ -17,14 +20,29 @@
 			    	<th>Prix de la location</th>
 		    		<th>Date de début</th>
 		    		<th>Date de fin</th>
-		    		<th>Fiche technique du véhicule</th>
-		    		<th>Paiement</th>
-
+		    		<th>Véhicule rendu le</th>
+		   		 	<th>Editer / Supprimer l'offre</th>
+		   		 
 		    	</tr>
 			</thead>
 			<tbody>
 				{% for o in offers %}
-					{% if o.isAvailable != 0 %}
+					{% if o.isAvailable != 1 %}
+					<tr class="disabled"> 
+						<td>{{ o.vehicle.brand }}</td>
+						<td>{{ o.vehicle.model }}</td>
+						<td>{{ o.vehicle.color }}</td>
+						<td>{{ o.priceLocation ~ " € " }}</td>
+						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
+						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
+						<td>-</td>
+
+						<td style="display:flex; justify-content:space-around;">
+							<i class="fa fa-lg fa-pencil disabled" aria-hidden="true"></i>
+							<i class="fa fa-times disabled" aria-hidden="true"></i>
+						</td>
+					</tr>	
+					{% else %}
 					<tr> 
 						<td>{{ o.vehicle.brand }}</td>
 						<td>{{ o.vehicle.model }}</td>
@@ -32,8 +50,11 @@
 						<td>{{ o.priceLocation ~ " € " }}</td>
 						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
 						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
-						<td><a href="{{ path('view_vehicle', {'id': o.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
-						<td><a href="{{ path('view_offer_recap', {id: o.id }) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></td>
+						<td>-</td>
+						<td style="display:flex; justify-content:space-around;">
+							<a href="{{ path('admin_edit_offer', {'id': o.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
+							<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+						</td>
 					</tr>
 					{% endif %}
 				{% endfor %}
@@ -42,14 +63,14 @@
 
 {% endblock %}
 	
-{% block css_offers %}
+{% block css_admin_offers %}
 	<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" type="text/css" />
 {% endblock %}
-{% block javascript_offers %}
+{% block javascript_admin_offers %}
 	<script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 	<script>
 $(document).ready(function() {
-	var table=$('#offers_table').DataTable({
+	var table=$('#admin_offers_table').DataTable({
 		"lengthMenu": [ [10, 50, 100, -1], [10, 50, 100, "All"] ],
 		"pageLength": -1,
 		"order": [[ 0, 'asc' ]], // tri sur la premiere colonne (voiture) par ordre croissant

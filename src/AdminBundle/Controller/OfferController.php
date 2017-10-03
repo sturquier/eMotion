@@ -15,6 +15,22 @@ class OfferController extends Controller
 {
     
     /**
+     * View and manage all offers 
+     *
+     * @Route("/admin/offers/view", name="admin_view_offers")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function adminViewOffersAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $offers = $em->getRepository('LocationBundle:Offer')->findAll();
+
+        return $this->render('AdminBundle:offer:admin_view_offers.html.twig', [
+            'offers' => $offers
+        ]);
+    }
+
+    /**
      * Creates a new offer entity.
      *
      * @Route("/admin/offer/add", name="admin_add_offer")

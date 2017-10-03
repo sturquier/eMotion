@@ -16,6 +16,7 @@
     </head>
     <body>
 
+        {% block menu %}{% endblock %}
         {% for message in app.session.flashbag.get('success') %}
             <div class="alert alert-success" role="alert">{{message}}</div>
         {% endfor %}
@@ -28,8 +29,6 @@
         {% for message in app.session.flashbag.get('info') %}
             <div class="alert alert-info" role="alert">{{message}}</div>
         {% endfor %}
-
-        {% block menu %}{% endblock %}
         <div class="container">
             {% block body %}{% endblock %}
         </div>

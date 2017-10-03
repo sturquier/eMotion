@@ -60,6 +60,7 @@ class DefaultController extends Controller
 
 	    $form = $this->createPaymentForm();
 	    $form->handleRequest($request);
+	    $mail = $this->getUser()->getEmail();
 
 	    if ($form->isSubmitted() && $form->isValid()) {
 	        $data = $form->getData();
@@ -68,16 +69,19 @@ class DefaultController extends Controller
 
 	        $post = $_POST['stripeToken'];
 
-			// Create a Customer:
+	        // Create a Customer:
 			$customer = \Stripe\Customer::create(array(
-			  "description" => $data['customer'],
-			  "source" => $post,
+				'email' => $mail,
+				'description' => $data['customer'],
+				'source' => $post
 			));
 
 		    $charge = \Stripe\Charge::create(array(
 		    	'customer' => $customer->id,
-		    	'amount' => $_POST['amount']*100,
-		    	'currency' => 'eur'
+		    	'amount' => $_POST['amount']*100, // for add cents
+		    	'currency' => 'eur',
+		    	'description' => 'location',
+		    	'receipt_email' => $mail, // to send automatically receipt (not working on test mode)
 		    ));
 
 	        $bill->setCustomer($this->getUser());

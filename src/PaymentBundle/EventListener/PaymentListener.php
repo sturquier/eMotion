@@ -30,7 +30,7 @@ class PaymentListener
 
         $msg = \Swift_Message::newInstance()
             ->setSubject('Confirmation de paiement')
-			->setFrom($from)
+			->setFrom($this->from)
             ->setTo($entity->getCustomer()->getEmail())
             ->addPart(
                 " Vous avez payé le montant initial de " .$entity->getAmount() ." € \n".

@@ -28,7 +28,7 @@
 				{% if b.dateReturn is null %}
 				<td>{{ " - " }}</td>
 				{% else %}
-				<td>{{ b.dateReturn }}</td>
+				<td>{{ b.dateReturn|date('d M Y H:i') }}</td>
 				{% endif %}
 				<td><a href="{{ path('view_vehicle', {id: b.offer.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
 			</tr>

@@ -20,7 +20,7 @@
 			    	<th>Prix de la location</th>
 		    		<th>Date de début</th>
 		    		<th>Date de fin</th>
-		    		<th>Véhicule rendu le</th>
+		    		<th>Véhicule rendu ?</th>
 		   		 	<th>Editer / Supprimer l'offre</th>
 		   		 
 		    	</tr>
@@ -28,18 +28,25 @@
 			<tbody>
 				{% for o in offers %}
 					{% if o.isAvailable != 1 %}
-					<tr class="disabled"> 
-						<td>{{ o.vehicle.brand }}</td>
-						<td>{{ o.vehicle.model }}</td>
-						<td>{{ o.vehicle.color }}</td>
-						<td>{{ o.priceLocation ~ " € " }}</td>
-						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
-						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
-						<td>-</td>
+					<tr> 
+						<td class="disabled">{{ o.vehicle.brand }}</td>
+						<td class="disabled">{{ o.vehicle.model }}</td>
+						<td class="disabled">{{ o.vehicle.color }}</td>
+						<td class="disabled">{{ o.priceLocation ~ " € " }}</td>
+						<td class="disabled">{{ o.dateBegin|date('d M Y H:i') }}</td>
+						<td class="disabled">{{ o.dateEnd|date('d M Y H:i') }}</td>
+						<td>
+							<a href="{{ path('admin_bill_returned', { id: o.bill.id }) }}">{{ o.bill.isReturned ? "Oui le " ~ o.bill.dateReturn|date('d M Y H:i') : "Non" }}</a>
+						</td>
 
 						<td style="display:flex; justify-content:space-around;">
 							<i class="fa fa-lg fa-pencil disabled" aria-hidden="true"></i>
+							{% if o.bill.isReturned == true %}
+							<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+	
+							{% else %}
 							<i class="fa fa-times disabled" aria-hidden="true"></i>
+							{% endif %}
 						</td>
 					</tr>	
 					{% else %}
@@ -50,7 +57,7 @@
 						<td>{{ o.priceLocation ~ " € " }}</td>
 						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
 						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
-						<td>-</td>
+						<td></td>
 						<td style="display:flex; justify-content:space-around;">
 							<a href="{{ path('admin_edit_offer', {'id': o.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
 							<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>

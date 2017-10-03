@@ -62,6 +62,11 @@ class Bill
     private $lateness_costs = 0;
 
     /**
+     * @ORM\Column(name="is_returned", type="boolean", options={"default":true})
+     */
+    private $is_returned = true;
+
+    /**
      * Get id
      *
      * @return int
@@ -213,5 +218,29 @@ class Bill
     public function getLatenessCosts()
     {
         return $this->lateness_costs;
+    }
+
+    /**
+     * Set isReturned
+     *
+     * @param boolean $isReturned
+     *
+     * @return Bill
+     */
+    public function setIsReturned($isReturned)
+    {
+        $this->is_returned = $isReturned;
+
+        return $this;
+    }
+
+    /**
+     * Get isReturned
+     *
+     * @return boolean
+     */
+    public function getIsReturned()
+    {
+        return $this->is_returned;
     }
 }

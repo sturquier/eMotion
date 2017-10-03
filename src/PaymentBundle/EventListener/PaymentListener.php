@@ -11,14 +11,16 @@ class PaymentListener
 {
     private $mailer;
     private $router;
+    private $from;
 
-    public function __construct(\Swift_Mailer $mailer, Router $router)
+    public function __construct(\Swift_Mailer $mailer, Router $router, $from)
     {
         $this->mailer = $mailer;
         $this->router = $router;
+        $this->from   = $from;
     }
 
-    /*public function postPersist(LifecycleEventArgs $args)
+    public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
 
@@ -28,13 +30,13 @@ class PaymentListener
 
         $msg = \Swift_Message::newInstance()
             ->setSubject('Confirmation de paiement')
-			->setFrom('admin@example.com')
-            ->setTo($entity->getCustomer())
+			->setFrom($from)
+            ->setTo($entity->getCustomer()->getEmail())
             ->addPart(
-                " Vous avez payé le montant initial de " .$entity->getAmount() ."\n"
-                " Le ". $entity->getDatePayment()
+                " Vous avez payé le montant initial de " .$entity->getAmount() ." € \n".
+                " Le ". $entity->getDatePayment()->format('d M Y H:i')
             );
 
         $this->mailer->send($msg);
-    }*/
+    }
 }

@@ -4,5 +4,6 @@ services:
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
  payment_listener:
         class: PaymentBundle\EventListener\PaymentListener
+        arguments: ["@mailer", "@router", "%mailer_user%"]
         tags:
           - { name: doctrine.event_listener, event: postPersist }

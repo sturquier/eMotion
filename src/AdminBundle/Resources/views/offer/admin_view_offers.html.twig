@@ -36,12 +36,17 @@
 						<td class="disabled">{{ o.dateBegin|date('d M Y H:i') }}</td>
 						<td class="disabled">{{ o.dateEnd|date('d M Y H:i') }}</td>
 						<td>
-							<a href="{{ path('admin_bill_returned', { id: o.bill.id }) }}">{{ o.bill.isReturned ? 'Oui' : 'Non' }}</a>
+							<a href="{{ path('admin_bill_returned', { id: o.bill.id }) }}">{{ o.bill.isReturned ? "Oui le " ~ o.bill.dateReturn|date('d M Y H:i') : "Non" }}</a>
 						</td>
 
 						<td style="display:flex; justify-content:space-around;">
 							<i class="fa fa-lg fa-pencil disabled" aria-hidden="true"></i>
+							{% if o.bill.isReturned == true %}
+							<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+	
+							{% else %}
 							<i class="fa fa-times disabled" aria-hidden="true"></i>
+							{% endif %}
 						</td>
 					</tr>	
 					{% else %}

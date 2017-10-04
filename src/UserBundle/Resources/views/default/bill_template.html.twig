@@ -1,6 +1,4 @@
-<html>
-<head>
-	<meta charset="utf-8">	
+<body>
 	<style>
 		.invoice-box {
 			margin: 3em;
@@ -8,41 +6,29 @@
 		.table {
 			border: 1px solid grey;
 		}
+		.blue {
+			color: darkblue;
+		}
 	</style>
-</head>
-
-<body>
 	<div class="invoice-box">
 		<table cellpadding="0" cellspacing="0" width="100%">
 			<tr class="top">
-				<td colspan="4" style="position: relative;">
-					<table class="first">
-						<tr>
-							<td colspan="3" class="logo">
-								<img src="{{ asset('img/logo.png') }}">
-							</td>
-						</tr>
-					</table>
+				<td colspan="2">
+					<h3 style="font-size: 24px; color: darkblue;">eMotion</h3>
+					<hr>
+
+					43 Rue de Rivoli<br>
+					75002 Paris<br>
+					Siret : 404 833 048 02907
 				</td>
 			</tr>
-		</table>
-		<table cellpadding="0" cellspacing="0" width="100%">
-			<tr class="top">
-					<td colspan="2">
-						eMotion<br>
-						13 avenue des champs élysées<br>
-						75001 Paris
-					</td>
-					
-					<td colspan="2" style="text-align: right;">
-						{% for b in bill.customer %}
-							{{ b.firstName }} {{ b.lastName }}<br>
-							{{ b.address }}<br>
-							{{ b.phoneNumber }}<br><br>
-							Paris, Le ...
-						{% endfor %}
-					</td>
-
+			<tr>
+				<td colspan="2" style="text-align: right;">
+						{{ bill.customer.firstName }} {{ bill.customer.lastName }}<br>
+						{{ bill.customer.address }}<br>
+						{{ bill.customer.phoneNumber }}<br><br>
+						Paris, Le {{ "now"|date("d M Y") }}
+				</td>
 			</tr>
 			<tr class="information">
 				<td colspan="4">
@@ -59,43 +45,37 @@
 			<tr class="heading">
 				<table class="table" width="100%">
 					<tr>
-						<td>
-							Véhicule loué
-						</td>
-						
-						<td>
-							Date Début
-						</td>
-						<td> 
-							Date fin
-						</td>
-						<td>
-							Date retour
-						</td>
-						<td>
-							Pénalité retard
-						</td>
-						<td>
-							Prix location
-						</td>
-						<td>
-							Prix total
-						</td>
+						<th class="blue">Véhicule loué</th>	
+						<th class="blue">Date Début</th>
+						<th class="blue">Date fin</th>
+						<th class="blue">Date retour</th>
+						<th class="blue">Pénalité retard</th>
+						<th class="blue">Prix location</th>
+						<th class="blue">Prix total</th>
+					</tr>
+					<tr>
+						<td>{{ bill.offer.vehicle.brand ~ " " ~ bill.offer.vehicle.model ~ " " ~ bill.offer.vehicle.color }}</td>
+						<td>{{ bill.offer.dateBegin|date('d M Y H:i') }}</td>
+						<td>{{ bill.offer.dateEnd|date('d M Y H:i') }}</td>
+						<td>{{ bill.dateReturn|date('d M Y H:i') }}</td>
+						<td>calcul ?</td>
+						<td>{{ bill.amount }}</td>
+						<td>calcul total ?</td>
 					</tr>
 				</table>
 			</tr>
 			
 			<tr class="information last">
 				<td colspan="4">
-					<table width="100%">
+					<table width="100%" style="margin-top: 6em;">
 						<tr>
 							<td>
 								<p>
 									Conformément aux conditions générales de vente, eMotion se réserve le droit de modifier la facture suite au retard du rendu d véhicule ou encore lié aux dégats matériels causés.
 									<br/>
 									<br/>
-									eMotion SARL <br />
 								</p>
+								<p style="text-align:right;">eMotion SARL</p>
 							</td>
 						</tr>
 					</table>
@@ -104,4 +84,3 @@
 		</table>
 	</div>
 </body>
-</html>

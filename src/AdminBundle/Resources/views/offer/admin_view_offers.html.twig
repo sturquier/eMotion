@@ -79,10 +79,12 @@
 {% endblock %}
 {% block javascript_admin_offers %}
 
-	<script type="text/javascript" src="{{ asset('js/jquery.datetimepicker.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/jquery.datetimepicker.full.min.js') }}"></script>
 
 	<script>
-	jQuery('.datetimepicker').datetimepicker();
+		jQuery('.datetimepicker').datetimepicker({
+			format: 'd.m.Y H:i'
+		});
 	</script>
 
 	<script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>

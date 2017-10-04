@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use UserBundle\Entity\User;
+use PaymentBundle\Entity\Bill;
 use UserBundle\Service\UserChecker;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 class DefaultController extends Controller
 {
@@ -19,7 +21,7 @@ class DefaultController extends Controller
 	public function deleteUserAction(User $user, UserChecker $checker)
 	{  
         if (!$checker->check($user, $this->getUser())) {
-            $this->addFlash('error', 'Vous ne pouvez pas supprimer une autre utilisateur que vous-meme');
+            $this->addFlash('error', 'Vous ne pouvez pas supprimer un autre utilisateur que vous-meme');
             return $this->redirectToRoute('homepage');
         }
 
@@ -39,5 +41,22 @@ class DefaultController extends Controller
     public function viewOrdersAction()
     {
         return $this->render('UserBundle:default:view_orders.html.twig');
-    }   
+    }  
+
+    /**
+     * Generate a bill
+     *
+     * @Route("/user/orders/{id}/generate", name="create_bill")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function createPDFAction(Bill $bill)
+    {
+        $html = $this->renderView('UserBundle:default:bill_template.html.twig', array(
+                'bill'  =>  $bill
+        ));
+
+        return new \PdfResponse($this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            'bill.pdf'
+        );
+    } 
 }

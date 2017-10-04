@@ -36,7 +36,10 @@
 						<td class="disabled">{{ o.dateBegin|date('d M Y H:i') }}</td>
 						<td class="disabled">{{ o.dateEnd|date('d M Y H:i') }}</td>
 						<td>
-							<a href="{{ path('admin_bill_returned', { id: o.bill.id }) }}">{{ o.bill.isReturned ? "Oui le " ~ o.bill.dateReturn|date('d M Y H:i') : "Non" }}</a>
+							<!--<a href="{#{ path('admin_bill_returned', { id: o.bill.id }) }#}">{#{ o.bill.isReturned ? "Oui le " ~ o.bill.dateReturn|date('d M Y H:i') : "Non" }#}</a>-->
+							{{form_start(form)}}
+							{{form_widget(form)}}
+							{{form_end(form)}}
 						</td>
 
 						<td style="display:flex; justify-content:space-around;">
@@ -71,9 +74,17 @@
 {% endblock %}
 	
 {% block css_admin_offers %}
+	<link rel="stylesheet" href="{{ asset('css/jquery.datetimepicker.min.css') }}" type="text/css">
 	<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" type="text/css" />
 {% endblock %}
 {% block javascript_admin_offers %}
+
+	<script type="text/javascript" src="{{ asset('js/jquery.datetimepicker.min.js') }}"></script>
+
+	<script>
+	jQuery('.datetimepicker').datetimepicker();
+	</script>
+
 	<script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 	<script>
 $(document).ready(function() {

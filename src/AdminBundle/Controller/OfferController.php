@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use LocationBundle\Entity\Offer;
 use LocationBundle\Form\OfferType;
+use PaymentBundle\Form\BillType;
 
 class OfferController extends Controller
 {
@@ -20,13 +21,17 @@ class OfferController extends Controller
      * @Route("/admin/offers/view", name="admin_view_offers")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function adminViewOffersAction()
+    public function adminViewOffersAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $offers = $em->getRepository('LocationBundle:Offer')->findAll();
 
+        $form = $this->createForm(BillType::class);
+        $form->handleRequest($request);
+
         return $this->render('AdminBundle:offer:admin_view_offers.html.twig', [
-            'offers' => $offers
+            'offers'    => $offers,
+            'form'      => $form->createView(),
         ]);
     }
 

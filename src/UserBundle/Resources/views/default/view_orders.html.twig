@@ -32,8 +32,7 @@
 					<td><div style="background-color:green">{{ b.dateReturn|date('d M Y H:i') }}</div></td>
 				{% endif %}
 				<td><a href="{{ path('view_vehicle', {id: b.offer.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
-				<td><a href="{{ path('create_bill', {id: b.offer.bill.id }) }}">Générer facture</a></td>
-
+				<td><a href="{{ path('create_bill', {id: b.offer.bill.id }) }}">Afficher la facture</a></td>
 			</tr>
 			{% endfor %}
 		</tbody>

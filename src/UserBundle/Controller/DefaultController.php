@@ -3,9 +3,11 @@
 namespace UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use UserBundle\Entity\User;
+use LocationBundle\Entity\Offer;
 use PaymentBundle\Entity\Bill;
 use UserBundle\Service\UserChecker;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
@@ -46,17 +48,25 @@ class DefaultController extends Controller
     /**
      * Generate a bill
      *
-     * @Route("/user/orders/{id}/generate", name="create_bill")
+     * @Route("/user/orders/{id}/bill-emotion", name="create_bill")
      * @Security("has_role('ROLE_USER')")
      */
     public function createPDFAction(Bill $bill)
     {
+        $snappy = $this->get('knp_snappy.pdf');
+        $snappy->setOption('no-outline', true);
+        $snappy->setOption('page-size','LETTER');
+        $snappy->setOption('encoding', 'UTF-8');
+
+        $img = __DIR__.'../../../web/img/logo.png';
         $html = $this->renderView('UserBundle:default:bill_template.html.twig', array(
-                'bill'  =>  $bill
+                'bill'  =>  $bill,
+                'img' => $img
         ));
 
-        return new \PdfResponse($this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-            'bill.pdf'
-        );
+        return new Response($snappy->getOutputFromHtml($html),200, array(
+            'Content-Type'          => 'application/pdf',
+            'Content-Disposition'   => 'inline; filename="bill.pdf"'
+        ));
     } 
 }

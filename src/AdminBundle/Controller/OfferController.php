@@ -47,7 +47,7 @@ class OfferController extends Controller
             $em->flush();
 
             $this->addFlash('success', 'Date du retour du véhicule mise a jour');
-            return $this->redirectToRoute('admin_view_current_offers');
+            return $this->redirectToRoute('admin_view_reservations');
 
         }
 

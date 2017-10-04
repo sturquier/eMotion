@@ -3,7 +3,11 @@
 		.invoice-box {
 			margin: 3em;
 		}
-		.table {
+		/*.table {
+			border: 1px solid grey;
+		}*/
+		.table td, .table th {
+			text-align: center;
 			border: 1px solid grey;
 		}
 		.blue {
@@ -49,17 +53,25 @@
 						<th class="blue">Date Début</th>
 						<th class="blue">Date fin</th>
 						<th class="blue">Date retour</th>
-						<th class="blue">Pénalité retard</th>
-						<th class="blue">Prix location</th>
-						<th class="blue">Prix total</th>
+						
 					</tr>
 					<tr>
 						<td>{{ bill.offer.vehicle.brand ~ " " ~ bill.offer.vehicle.model ~ " " ~ bill.offer.vehicle.color }}</td>
 						<td>{{ bill.offer.dateBegin|date('d M Y H:i') }}</td>
 						<td>{{ bill.offer.dateEnd|date('d M Y H:i') }}</td>
 						<td>{{ bill.dateReturn|date('d M Y H:i') }}</td>
-						<td>calcul ?</td>
+						
+					</tr>
+					<tr>
+						<th></th>
+						<th class="blue">Prix location</th>
+						<th class="blue">Pénalité retard</th>
+						<th class="blue">Prix total</th>
+					</tr>
+					<tr>
+						<td></td>	
 						<td>{{ bill.amount }}</td>
+						<td>calcul ?</td>	
 						<td>calcul total ?</td>
 					</tr>
 				</table>
@@ -71,7 +83,7 @@
 						<tr>
 							<td>
 								<p>
-									Conformément aux conditions générales de vente, eMotion se réserve le droit de modifier la facture suite au retard du rendu d véhicule ou encore lié aux dégats matériels causés.
+									Conformément aux conditions générales de vente, eMotion se réserve le droit de modifier la facture suite au retard du rendu du véhicule ou encore lié aux dégats matériels causés.
 									<br/>
 									<br/>
 								</p>

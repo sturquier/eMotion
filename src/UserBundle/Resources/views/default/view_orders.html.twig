@@ -11,9 +11,9 @@
 				<th>Acheté le : </th>
 				<th>Voiture de location</th>
 				<th>Prix</th>
-				<th>Date de début de location</th>
-				<th>Date de retour supposée</th>
-				<th>Rendu le</th>
+				<th>Début</th>
+				<th>Fin supposée</th>
+				<th>Fin réelle</th>
 				<th>Fiche technique</th>
 				<th>Facture</th>
 			</tr>
@@ -26,13 +26,12 @@
 				<td>{{ b.amount ~ " € " }}</td>
 				<td>{{ b.offer.dateBegin|date('d M Y H:i') }}</td>
 				<td>{{ b.offer.dateEnd|date('d M Y H:i') }}</td>
-				{% if b.dateReturn is null %}
-				<td>{{ " - " }}</td>
+				{% if "ago" in b.offer.dateEnd|time_diff(b.dateReturn) %}
+					<td><div style="background-color:red">{{ b.dateReturn|date('d M Y H:i') }}</div></td>
 				{% else %}
-				<td>{{ b.dateReturn|date('d M Y H:i') }}</td>
+					<td><div style="background-color:green">{{ b.dateReturn|date('d M Y H:i') }}</div></td>
 				{% endif %}
 				<td><a href="{{ path('view_vehicle', {id: b.offer.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
-				<!-- {{ dump(b.offer) }} -->
 				<td><a href="{{ path('create_bill', {id: b.offer.bill.id }) }}">Générer facture</a></td>
 
 			</tr>

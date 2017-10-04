@@ -2,7 +2,7 @@
 {% use 'templates/menu.html.twig' %}
 
 {% block body %}
-	
+
 	<div style="display:flex; justify-content:space-between;">	
 		<h4>Gerer les offres de location </h4>
 		<a class="btn btn-info" href="{{ path('admin_add_offer') }}">Ajouter une offre</a>
@@ -20,7 +20,7 @@
 			    	<th>Prix de la location</th>
 		    		<th>Date de début</th>
 		    		<th>Date de fin</th>
-		    		<th>Véhicule rendu ?</th>
+		    		<th>Véhicule rendu le </th>
 		   		 	<th>Editer / Supprimer l'offre</th>
 		   		 
 		    	</tr>
@@ -36,10 +36,10 @@
 						<td class="disabled">{{ o.dateBegin|date('d M Y H:i') }}</td>
 						<td class="disabled">{{ o.dateEnd|date('d M Y H:i') }}</td>
 						<td>
-							<!--<a href="{#{ path('admin_bill_returned', { id: o.bill.id }) }#}">{#{ o.bill.isReturned ? "Oui le " ~ o.bill.dateReturn|date('d M Y H:i') : "Non" }#}</a>-->
-							{{form_start(form)}}
-							{{form_widget(form)}}
-							{{form_end(form)}}
+							{{ form_start(forms[o.id]) }}
+							<input type="hidden" name="offer_id" value="{{ o.id }}">
+							{{ form_end(forms[o.id]) }}
+							{{ o.bill.dateReturn|date('d M Y H:i') }}
 						</td>
 
 						<td style="display:flex; justify-content:space-around;">
@@ -60,7 +60,9 @@
 						<td>{{ o.priceLocation ~ " € " }}</td>
 						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
 						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
-						<td></td>
+						<td>
+							WWWWWWWWWWWWWWWww
+						</td>
 						<td style="display:flex; justify-content:space-around;">
 							<a href="{{ path('admin_edit_offer', {'id': o.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
 							<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -85,6 +87,9 @@
 		jQuery('.datetimepicker').datetimepicker({
 			format: 'd.m.Y H:i'
 		});
+/*		jQuery('.datetimepicker').blur(function() {
+			jQuery('form').submit();
+		});*/
 	</script>
 
 	<script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>

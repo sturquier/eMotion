@@ -15,6 +15,7 @@
 				<th>Date de retour supposée</th>
 				<th>Rendu le</th>
 				<th>Fiche technique</th>
+				<th>Facture</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -31,6 +32,9 @@
 				<td>{{ b.dateReturn|date('d M Y H:i') }}</td>
 				{% endif %}
 				<td><a href="{{ path('view_vehicle', {id: b.offer.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
+				<!-- {{ dump(b.offer) }} -->
+				<td><a href="{{ path('create_bill', {id: b.offer.bill.id }) }}">Générer facture</a></td>
+
 			</tr>
 			{% endfor %}
 		</tbody>

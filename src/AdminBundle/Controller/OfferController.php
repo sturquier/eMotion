@@ -16,21 +16,19 @@ class OfferController extends Controller
 {
     
     /**
-     * View and manage all offers 
+     * View and manage all reservations 
      *
-     * @Route("/admin/offers/view", name="admin_view_offers")
+     * @Route("/admin/reservations/view", name="admin_view_reservations")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function adminViewOffersAction(Request $request)
+    public function adminViewReservationsAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $offers = $em->getRepository('LocationBundle:Offer')->findAll();
 
         foreach ($offers as $key => $offer) {
-            if ($offer->getIsAvailable() == false) {
-                $form = $this->createForm(BillType::class);
-                $forms[$offer->getId()] = $form->createView();
-            }
+            $form = $this->createForm(BillType::class);
+            $forms[$offer->getId()] = $form->createView();
         }
 
         $form->handleRequest($request);
@@ -49,12 +47,12 @@ class OfferController extends Controller
             $em->flush();
 
             $this->addFlash('success', 'Date du retour du véhicule mise a jour');
-            return $this->redirectToRoute('admin_view_offers');
+            return $this->redirectToRoute('admin_view_current_offers');
 
         }
 
 
-        return $this->render('AdminBundle:offer:admin_view_offers.html.twig', [
+        return $this->render('AdminBundle:offer:admin_view_reservations.html.twig', [
             'offers'    => $offers,
             'forms'     => $forms,
         ]);

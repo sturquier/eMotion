@@ -3,56 +3,28 @@
 
 {% block body %}
 
-	<div style="display:flex; justify-content:space-between;">	
-		<h4>Gerer les offres de location </h4>
-		<a class="btn btn-info" href="{{ path('admin_add_offer') }}">Ajouter une offre</a>
-	</div>
-	<br/>
+		<h4>Gerer les reservations</h4>
+		<br/>
 
 		<div id="filter"><label>Affiner votre recherche : &nbsp;</label></div>
 
-		<table class="table table-striped" id="admin_offers_table">
+		<table class="table table-striped" id="admin_current_offers_table">
 			<thead>
 				<tr> 
 			    	<th class="sort">Marque</th>
 			    	<th class="sort">Modèle</th>
 			    	<th class="sort">Couleur</th>
 			    	<th>Prix de la location</th>
-		    		<th>Date de début</th>
-		    		<th>Date de fin</th>
-		    		<th>Véhicule rendu le </th>
-		   		 	<th>Editer / Supprimer l'offre</th>
-		   		 
+		    		<th>Début</th>
+		    		<th>Fin supposée</th>
+		    		<th>Fin réelle</th>
+		    		<th>MAJ fin réelle</th>
+		    		
 		    	</tr>
 			</thead>
 			<tbody>
 				{% for o in offers %}
 					{% if o.isAvailable != 1 %}
-					<tr> 
-						<td class="disabled">{{ o.vehicle.brand }}</td>
-						<td class="disabled">{{ o.vehicle.model }}</td>
-						<td class="disabled">{{ o.vehicle.color }}</td>
-						<td class="disabled">{{ o.priceLocation ~ " € " }}</td>
-						<td class="disabled">{{ o.dateBegin|date('d M Y H:i') }}</td>
-						<td class="disabled">{{ o.dateEnd|date('d M Y H:i') }}</td>
-						<td>
-							{{ form_start(forms[o.id]) }}
-							<input type="hidden" name="offer_id" value="{{ o.id }}">
-							{{ form_end(forms[o.id]) }}
-							{{ o.bill.dateReturn|date('d M Y H:i') }}
-						</td>
-
-						<td style="display:flex; justify-content:space-around;">
-							<i class="fa fa-lg fa-pencil disabled" aria-hidden="true"></i>
-							{% if o.bill.isReturned == true %}
-							<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
-	
-							{% else %}
-							<i class="fa fa-times disabled" aria-hidden="true"></i>
-							{% endif %}
-						</td>
-					</tr>	
-					{% else %}
 					<tr> 
 						<td>{{ o.vehicle.brand }}</td>
 						<td>{{ o.vehicle.model }}</td>
@@ -60,12 +32,17 @@
 						<td>{{ o.priceLocation ~ " € " }}</td>
 						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
 						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
+						
+					{% if "ago" in o.dateEnd|time_diff(o.bill.dateReturn) %}
+						<td><div style="background-color:red">{{ o.bill.dateReturn|date('d M Y H:i') }}</div></td>
+					{% else %}
+						<td><div style="background-color:green">{{ o.bill.dateReturn|date('d M Y H:i') }}</div></td>
+					{% endif %}
 						<td>
-							WWWWWWWWWWWWWWWww
-						</td>
-						<td style="display:flex; justify-content:space-around;">
-							<a href="{{ path('admin_edit_offer', {'id': o.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
-							<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+							{{ form_start(forms[o.id]) }}
+							<input type="hidden" name="offer_id" value="{{ o.id }}">
+							{{ form_end(forms[o.id]) }}
+							
 						</td>
 					</tr>
 					{% endif %}
@@ -95,7 +72,7 @@
 	<script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 	<script>
 $(document).ready(function() {
-	var table=$('#admin_offers_table').DataTable({
+	var table=$('#admin_current_offers_table').DataTable({
 		"lengthMenu": [ [10, 50, 100, -1], [10, 50, 100, "All"] ],
 		"pageLength": -1,
 		"order": [[ 0, 'asc' ]], // tri sur la premiere colonne (voiture) par ordre croissant

@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+{% use 'templates/menu.html.twig' %}
+
+{% block body %}
+	
+	<div style="display:flex; justify-content:space-between;">	
+		<h4>Gerer les offres de location </h4>
+		<a class="btn btn-info" href="{{ path('admin_add_offer') }}">Ajouter une offre</a>
+	</div>
+	<br/>
+
+		<div id="filter"><label>Affiner votre recherche : &nbsp;</label></div>
+
+		<table class="table table-striped" id="admin_offers_table">
+			<thead>
+				<tr> 
+			    	<th class="sort">Marque</th>
+			    	<th class="sort">Modèle</th>
+			    	<th class="sort">Couleur</th>
+			    	<th>Prix de la location</th>
+		    		<th>Date de début</th>
+		    		<th>Date de fin</th>
+		   		 	<th>Editer / Supprimer l'offre</th>
+		   		 
+		    	</tr>
+			</thead>
+			<tbody>
+				{% for o in offers %}
+					{% if o.isAvailable == 1 %}
+					<tr> 
+						<td>{{ o.vehicle.brand }}</td>
+						<td>{{ o.vehicle.model }}</td>
+						<td>{{ o.vehicle.color }}</td>
+						<td>{{ o.priceLocation ~ " € " }}</td>
+						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
+						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
+						<td style="display:flex; justify-content:space-around;">
+							<a href="{{ path('admin_edit_offer', {'id': o.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
+							<a href="{{ path('admin_delete_offer', {'id': o.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+						</td>
+					</tr>
+					{% endif %}
+				{% endfor %}
+			</tbody>
+		</table>
+
+{% endblock %}
+	
+{% block css_admin_offers %}
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" type="text/css" />
+{% endblock %}
+{% block javascript_admin_offers %}
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+	<script>
+$(document).ready(function() {
+	var table=$('#admin_offers_table').DataTable({
+		"lengthMenu": [ [10, 50, 100, -1], [10, 50, 100, "All"] ],
+		"pageLength": -1,
+		"order": [[ 0, 'asc' ]], // tri sur la premiere colonne (voiture) par ordre croissant
+		initComplete: function () {
+			this.api().columns(['.sort']).every(function () {
+				var column = this;
+				var select = $('<select><option value=""></option></select>')
+					.appendTo( $('#filter') )
+					.on( 'change', function () {
+						var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+						column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+					} );
+				column.data().unique().sort().each( function ( d, j ) {
+					select.append( '<option value="'+d+'">'+d+'</option>' )
+				} );
+			});
+		}
+	} );
+});
+	</script>
+{% endblock %}

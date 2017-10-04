@@ -26,12 +26,37 @@ class OfferController extends Controller
         $em = $this->getDoctrine()->getManager();
         $offers = $em->getRepository('LocationBundle:Offer')->findAll();
 
-        $form = $this->createForm(BillType::class);
+        foreach ($offers as $key => $offer) {
+            if ($offer->getIsAvailable() == false) {
+                $form = $this->createForm(BillType::class);
+                $forms[$offer->getId()] = $form->createView();
+            }
+        }
+
         $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $offer_id = $request->request->get('offer_id');
+            $date_return = $request->request->get('bill')['date_return'];
+
+            $rep = $this->getDoctrine()->getRepository('PaymentBundle:Bill');
+            $bill = $rep->findOneByOffer($offer_id);
+            $bill->setDateReturn(new \DateTime($date_return));
+            $bill->setIsReturned(true);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($bill);
+            $em->flush();
+
+            $this->addFlash('success', 'Date du retour du véhicule mise a jour');
+            return $this->redirectToRoute('admin_view_offers');
+
+        }
+
 
         return $this->render('AdminBundle:offer:admin_view_offers.html.twig', [
             'offers'    => $offers,
-            'form'      => $form->createView(),
+            'forms'     => $forms,
         ]);
     }
 
@@ -53,7 +78,7 @@ class OfferController extends Controller
             $em->flush();
 
             $this->addFlash('success', 'Offre ajoutée');
-            return $this->redirectToRoute('view_offers');
+            return $this->redirectToRoute('admin_view_offers');
         }
 
         return $this->render('AdminBundle:offer:admin_add_offer.html.twig', [
@@ -78,7 +103,7 @@ class OfferController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'Offre modifiée');
-            return $this->redirectToRoute('view_offers');
+            return $this->redirectToRoute('admin_view_offers');
         }
 
         return $this->render('AdminBundle:offer:admin_edit_offer.html.twig', [
@@ -104,6 +129,6 @@ class OfferController extends Controller
         $em->flush();
 
         $this->addFlash('error', 'Offre supprimée');
-        return $this->redirectToRoute('view_offers');
+        return $this->redirectToRoute('admin_view_offers');
     }
 }

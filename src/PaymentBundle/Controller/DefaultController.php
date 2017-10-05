@@ -79,7 +79,7 @@ class DefaultController extends Controller
 	        $post = $_POST['stripeToken'];
 
 	        if($customerId == null) {
-		        // Create a Customer:
+		        // Create a Customer
 				$customer = \Stripe\Customer::create(array(
 					'email' => $mail,
 					'description' => $data['customer'],
@@ -94,7 +94,7 @@ class DefaultController extends Controller
 			    	'receipt_email' => $mail, // to send automatically receipt (not working on test mode)
 			    ));
 			} else {
-
+				// Retrieve the Customer
 				$customer = \Stripe\Customer::retrieve($customerId);
 
 				$charge = \Stripe\Charge::create(array(
@@ -140,6 +140,69 @@ class DefaultController extends Controller
      */
     public function postLocationPaymentFormAction(Offer $offer)
     {
+    	$bill = new Bill();
+    	$em = $this->getDoctrine()->getManager();
+
+	    $form = $this->createPaymentForm();
+	    $form->handleRequest($request);
+	    $mail = $this->getUser()->getEmail();
+	    dump($this->getUser());
+	    if ($form->isSubmitted() && $form->isValid()) {
+	        $data = $form->getData();
+	        // paiement
+	        \Stripe\Stripe::setApiKey('sk_test_sOYMH9QVjgTyYof1TCyOYWpb');
+
+	        $user = $this->getUser();
+	        $customerId = $user->getCustomerId();
+
+	        $post = $_POST['stripeToken'];
+
+	        if($customerId == null) {
+		        // Create a Customer
+				$customer = \Stripe\Customer::create(array(
+					'email' => $mail,
+					'description' => $data['customer'],
+					'source' => $post
+				));
+
+				$charge = \Stripe\Charge::create(array(
+			    	'customer' => $customer->id,
+			    	'amount' => $_POST['amount']*100, // for add cents
+			    	'currency' => 'eur',
+			    	'description' => 'location',
+			    	'receipt_email' => $mail, // to send automatically receipt (not working on test mode)
+			    ));
+			} else {
+				// Retrieve the Customer
+				$customer = \Stripe\Customer::retrieve($customerId);
+
+				$charge = \Stripe\Charge::create(array(
+			    	'customer' => $customer->id,
+			    	'amount' => $_POST['amount']*100, // for add cents
+			    	'currency' => 'eur',
+			    	'description' => 'location',
+			    	'receipt_email' => $mail, // to send automatically receipt (not working on test mode)
+			    ));
+			}
+
+	        $bill->setCustomer($this->getUser());
+	        $bill->setOffer($offer);
+	        $bill->setAmount($offer->getPriceLocation());
+	        $bill->setIsReturned(false);
+	        $em->persist($bill);
+
+	        $offer->setIsAvailable(false);
+	        $em->persist($offer);
+
+	        
+	        $user->setCustomerId($customer->id);
+	        $em->persist($user);
+
+	        $em->flush();
+
+	        $this->addFlash('success', 'Paiement bien effectué. Vous allez recevoir un mail récapitulatif');
+	        return $this->redirectToRoute('view_orders');
+	    }
     	return $this->render('PaymentBundle:default:post_location_payment_form.html.twig');
     }
 }

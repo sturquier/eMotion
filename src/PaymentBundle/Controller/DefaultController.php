@@ -55,6 +55,12 @@ class DefaultController extends Controller
      */
     public function paymentFormAction(Request $request, Offer $offer)
     {
+
+    	if (!$offer->getBill() == null) {
+    		$this->addFlash('error', 'Cette location a deja été reservée par qqn d\'autre. Desole !');
+    		return $this->redirectToRoute('view_offers');
+    	}
+
     	$bill = new Bill();
     	$em = $this->getDoctrine()->getManager();
 

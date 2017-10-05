@@ -15,6 +15,22 @@ class VehicleController extends Controller
 {   
 
     /**
+     * View and manages all vehicles
+     *
+     * @Route("/admin/vehicles/view", name="admin_view_vehicles")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function adminViewVehiclesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $vehicles = $em->getRepository('LocationBundle:Vehicle')->findAll();
+
+        return $this->render('AdminBundle:vehicle:admin_view_vehicles.html.twig', [
+            'vehicles' => $vehicles
+        ]);
+    }
+
+    /**
      * Creates a new vehicle entity.
      *
      * @Route("/admin/vehicle/add", name="admin_add_vehicle")

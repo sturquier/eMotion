@@ -76,6 +76,13 @@ class User extends BaseUser
      */
     private $drivingLicense;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="customer_id", type="string", nullable = true, length=255)
+     */
+    private $customerId;
+
 
     /**
      * Get id
@@ -230,6 +237,30 @@ class User extends BaseUser
     {
         return $this->drivingLicense;
     }
+
+        /**
+     * Set customerId
+     *
+     * @param string $customerId
+     *
+     * @return User
+     */
+    public function setcustomerId($customerId)
+    {
+        $this->customerId = $customerId;
+
+        return $this;
+    }
+
+    /**
+     * Get customerId
+     *
+     * @return string
+     */
+    public function getcustomerId()
+    {
+        return $this->customerId;
+    }    
 
     /**
      * Add bill

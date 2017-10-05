@@ -61,28 +61,44 @@ class DefaultController extends Controller
 	    $form = $this->createPaymentForm();
 	    $form->handleRequest($request);
 	    $mail = $this->getUser()->getEmail();
-
+	    dump($this->getUser());
 	    if ($form->isSubmitted() && $form->isValid()) {
 	        $data = $form->getData();
 	        // paiement
 	        \Stripe\Stripe::setApiKey('sk_test_sOYMH9QVjgTyYof1TCyOYWpb');
 
+	        $user = $this->getUser();
+	        $customerId = $user->getCustomerId();
+
 	        $post = $_POST['stripeToken'];
 
-	        // Create a Customer:
-			$customer = \Stripe\Customer::create(array(
-				'email' => $mail,
-				'description' => $data['customer'],
-				'source' => $post
-			));
+	        if($customerId == null) {
+		        // Create a Customer:
+				$customer = \Stripe\Customer::create(array(
+					'email' => $mail,
+					'description' => $data['customer'],
+					'source' => $post
+				));
 
-		    $charge = \Stripe\Charge::create(array(
-		    	'customer' => $customer->id,
-		    	'amount' => $_POST['amount']*100, // for add cents
-		    	'currency' => 'eur',
-		    	'description' => 'location',
-		    	'receipt_email' => $mail, // to send automatically receipt (not working on test mode)
-		    ));
+				$charge = \Stripe\Charge::create(array(
+			    	'customer' => $customer->id,
+			    	'amount' => $_POST['amount']*100, // for add cents
+			    	'currency' => 'eur',
+			    	'description' => 'location',
+			    	'receipt_email' => $mail, // to send automatically receipt (not working on test mode)
+			    ));
+			} else {
+
+				$customer = \Stripe\Customer::retrieve($customerId);
+
+				$charge = \Stripe\Charge::create(array(
+			    	'customer' => $customer->id,
+			    	'amount' => $_POST['amount']*100, // for add cents
+			    	'currency' => 'eur',
+			    	'description' => 'location',
+			    	'receipt_email' => $mail, // to send automatically receipt (not working on test mode)
+			    ));
+			}
 
 	        $bill->setCustomer($this->getUser());
 	        $bill->setOffer($offer);
@@ -92,6 +108,10 @@ class DefaultController extends Controller
 
 	        $offer->setIsAvailable(false);
 	        $em->persist($offer);
+
+	        
+	        $user->setCustomerId($customer->id);
+	        $em->persist($user);
 
 	        $em->flush();
 

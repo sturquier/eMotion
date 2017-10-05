@@ -55,12 +55,6 @@ class DefaultController extends Controller
      */
     public function paymentFormAction(Request $request, Offer $offer)
     {
-
-    	if (!$offer->getBill() == null) {
-    		$this->addFlash('error', 'Cette location a déjà été reservée par quelqu\'un d\'autre. Désolé !');
-    		return $this->redirectToRoute('view_offers');
-    	}
-
     	$bill = new Bill();
     	$em = $this->getDoctrine()->getManager();
 
@@ -138,15 +132,15 @@ class DefaultController extends Controller
      * @ParamConverter("offer", class="LocationBundle:Offer")
      * @Security("has_role('ROLE_USER')")
      */
-    public function postLocationPaymentFormAction(Offer $offer)
+    public function postLocationPaymentFormAction(Request $request, Offer $offer)
     {
-    	$bill = new Bill();
-    	$em = $this->getDoctrine()->getManager();
+    	$bill = $offer->getBill();
+    	dump($bill);
 
 	    $form = $this->createPaymentForm();
 	    $form->handleRequest($request);
 	    $mail = $this->getUser()->getEmail();
-	    dump($this->getUser());
+
 	    if ($form->isSubmitted() && $form->isValid()) {
 	        $data = $form->getData();
 	        // paiement
@@ -157,52 +151,33 @@ class DefaultController extends Controller
 
 	        $post = $_POST['stripeToken'];
 
-	        if($customerId == null) {
-		        // Create a Customer
-				$customer = \Stripe\Customer::create(array(
-					'email' => $mail,
-					'description' => $data['customer'],
-					'source' => $post
-				));
-
-				$charge = \Stripe\Charge::create(array(
-			    	'customer' => $customer->id,
-			    	'amount' => $_POST['amount']*100, // for add cents
-			    	'currency' => 'eur',
-			    	'description' => 'location',
-			    	'receipt_email' => $mail, // to send automatically receipt (not working on test mode)
-			    ));
-			} else {
-				// Retrieve the Customer
-				$customer = \Stripe\Customer::retrieve($customerId);
-
-				$charge = \Stripe\Charge::create(array(
-			    	'customer' => $customer->id,
-			    	'amount' => $_POST['amount']*100, // for add cents
-			    	'currency' => 'eur',
-			    	'description' => 'location',
-			    	'receipt_email' => $mail, // to send automatically receipt (not working on test mode)
-			    ));
-			}
-
-	        $bill->setCustomer($this->getUser());
-	        $bill->setOffer($offer);
-	        $bill->setAmount($offer->getPriceLocation());
-	        $bill->setIsReturned(false);
-	        $em->persist($bill);
-
-	        $offer->setIsAvailable(false);
-	        $em->persist($offer);
-
 	        
-	        $user->setCustomerId($customer->id);
-	        $em->persist($user);
+			// Retrieve the Customer
+			$customer = \Stripe\Customer::retrieve($customerId);
+
+			$charge = \Stripe\Charge::create(array(
+		    	'customer' => $customer->id,
+		    	'amount' => $_POST['amount']*100, 
+		    	'currency' => 'eur',
+		    	'description' => 'frais de location',
+		    	'receipt_email' => $mail,
+		    ));
+
+	        $bill->setLatenessCost($_POST['amount']);
+	        $em->persist($bill);
 
 	        $em->flush();
 
 	        $this->addFlash('success', 'Paiement bien effectué. Vous allez recevoir un mail récapitulatif');
 	        return $this->redirectToRoute('view_orders');
 	    }
-    	return $this->render('PaymentBundle:default:post_location_payment_form.html.twig');
+    	
+    	$hours_diff = date_diff($offer->getDateEnd(), $offer->getBill()->getDateReturn())->format('%h');
+
+    	return $this->render('PaymentBundle:default:post_location_payment_form.html.twig', [
+    		'form'			=> $form->createView(),
+    		'offer' 		=> $offer,
+    		'hours_diff'	=> $hours_diff,
+		]);
     }
 }

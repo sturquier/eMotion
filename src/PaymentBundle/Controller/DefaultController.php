@@ -120,11 +120,21 @@ class DefaultController extends Controller
      */
     public function postLocationPaymentFormAction(Offer $offer)
     {
-    	$hours_diff = date_diff($offer->getDateEnd(), $offer->getBill()->getDateReturn())->format('%h');
+    	$date_diff = date_diff($offer->getDateEnd(), $offer->getBill()->getDateReturn());
+
+    	$days_diff = $date_diff->d;
+    	$hours_diff = $date_diff->h;
+
+    	if ($days_diff != 0) {
+    		$total_diff = ($days_diff * 24) + $hours_diff;
+    	} else {
+    		$total_diff = $hours_diff;
+    	}
 
     	return $this->render('PaymentBundle:default:post_location_payment_form.html.twig', [
     		'offer' 		=> $offer,
-    		'hours_diff'	=> $hours_diff,
+    		'total_diff'	=> $total_diff,
+    		'total_post_loc_payment' => $total_diff * 2,
 		]);
     }
 }

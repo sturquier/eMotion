@@ -141,6 +141,20 @@ class DefaultController extends Controller
 	    $form->handleRequest($request);
 	    $mail = $this->getUser()->getEmail();
 
+
+    	$date_diff = date_diff($offer->getDateEnd(), $offer->getBill()->getDateReturn());
+
+    	$days_diff = $date_diff->d;
+    	$hours_diff = $date_diff->h;
+
+    	if ($days_diff != 0) {
+    		$total_diff = ($days_diff * 24) + $hours_diff;
+    	} else {
+    		$total_diff = $hours_diff;
+    	}
+
+    	$lateCost = $total_diff * 2;
+
 	    if ($form->isSubmitted() && $form->isValid()) {
 	        $data = $form->getData();
 	        // paiement
@@ -157,13 +171,14 @@ class DefaultController extends Controller
 
 			$charge = \Stripe\Charge::create(array(
 		    	'customer' => $customer->id,
-		    	'amount' => $_POST['amount']*100, 
+		    	'amount' => $lateCost*100, 
 		    	'currency' => 'eur',
 		    	'description' => 'frais de location',
 		    	'receipt_email' => $mail,
 		    ));
 
-	        $bill->setLatenessCost($_POST['amount']);
+			$em = $this->getDoctrine()->getManager();
+	        $bill->setLatenessCosts($lateCost);
 	        $em->persist($bill);
 
 	        $em->flush();
@@ -171,13 +186,12 @@ class DefaultController extends Controller
 	        $this->addFlash('success', 'Paiement bien effectué. Vous allez recevoir un mail récapitulatif');
 	        return $this->redirectToRoute('view_orders');
 	    }
-    	
-    	$hours_diff = date_diff($offer->getDateEnd(), $offer->getBill()->getDateReturn())->format('%h');
 
     	return $this->render('PaymentBundle:default:post_location_payment_form.html.twig', [
     		'form'			=> $form->createView(),
     		'offer' 		=> $offer,
-    		'hours_diff'	=> $hours_diff,
+    		'total_diff'	=> $total_diff,
+    		'total_post_loc_payment' => $total_diff * 2,
 		]);
     }
 }

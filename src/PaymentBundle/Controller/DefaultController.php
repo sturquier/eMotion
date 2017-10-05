@@ -57,7 +57,7 @@ class DefaultController extends Controller
     {
 
     	if (!$offer->getBill() == null) {
-    		$this->addFlash('error', 'Cette location a deja été reservée par qqn d\'autre. Desole !');
+    		$this->addFlash('error', 'Cette location a deja été reservée par quelqu\'un d\'autre. Desole !');
     		return $this->redirectToRoute('view_offers');
     	}
 

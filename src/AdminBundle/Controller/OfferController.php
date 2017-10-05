@@ -16,6 +16,22 @@ class OfferController extends Controller
 {
     
     /**
+     * View and manage all offers (not reservated)
+     *
+     * @Route("/admin/offers/view", name="admin_view_offers")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function adminViewOffersAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $offers = $em->getRepository('LocationBundle:Offer')->findAll();
+
+        return $this->render('AdminBundle:offer:admin_view_offers.html.twig', [
+            'offers' => $offers,
+        ]);
+    }
+
+    /**
      * View and manage all reservations 
      *
      * @Route("/admin/reservations/view", name="admin_view_reservations")
@@ -47,7 +63,7 @@ class OfferController extends Controller
             $em->flush();
 
             $this->addFlash('success', 'Date du retour du véhicule mise a jour');
-            return $this->redirectToRoute('admin_view_current_offers');
+            return $this->redirectToRoute('admin_view_reservations');
 
         }
 

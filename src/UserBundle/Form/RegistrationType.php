@@ -5,6 +5,7 @@ namespace UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -47,7 +48,7 @@ class RegistrationType extends AbstractType
                 'placeholder' => 'ex: 23 Boulevard De Lune 75003 Paris',
             ]
         ])
-        ->add('birthDate', DateType::class, [
+        ->add('birthDate', BirthdayType::class, [
             'label' => 'Date de naissance',
             'required' => true,
             'constraints' => array(
@@ -67,7 +68,7 @@ class RegistrationType extends AbstractType
             ]
         ])
         ->add('drivingLicense', TextType::class, [
-            'label' => 'Numéro de permis de conduire',
+            'label' => 'Permis de conduire',
             'required' => true,
             'constraints' => array(
                 new Assert\NotBlank(),

@@ -103,10 +103,10 @@ stof_doctrine_extensions:
 knp_snappy:
     pdf:
         enabled: true
-        binary: "@PaymentBundle/../../lib/wkhtmltopdf/bin/wkhtmltopdf.exe"
+        binary: "%kernel.project_dir%/lib/wkhtmltopdf/bin/wkhtmltopdf.exe"
         options: []
     image:
         enabled: true
-        binary: "@PaymentBundle/../../lib/wkhtmltopdf/bin/wkhtmltopdf.exe"
+        binary: "%kernel.project_dir%/lib/wkhtmltopdf/bin/wkhtmltopdf.exe"
         options: []
     temporary_folder: %kernel.cache_dir%/snappy

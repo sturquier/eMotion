@@ -22,7 +22,7 @@ class BillType extends AbstractType
                 'label' => false,
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'x',
+                'label' => 'o',
 
             ])
         ;

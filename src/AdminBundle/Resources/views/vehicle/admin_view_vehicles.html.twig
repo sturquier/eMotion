@@ -2,13 +2,16 @@
 {% use 'templates/menu.html.twig' %}
 
 {% block body %}
-		
-		<h4>Liste des véhicules </h4>
-		<br/>
+	
+	<div style="display:flex; justify-content:space-between;">	
+		<h4>Gerer le parc de véhicules </h4>
+		<a class="btn btn-info" href="{{ path('admin_add_vehicle') }}">Ajouter un véhicule</a>
+	</div>
+	<br/>
 
 		<div id="filter"><label>Affiner votre recherche : &nbsp;</label></div>
 
-		<table class="table table-striped" id="vehicles_table">
+		<table class="table table-striped" id="admin_vehicles_table">
 			<thead>
 				<tr> 
 		    		<th class="sort">Marque</th>
@@ -19,6 +22,7 @@
 		    		<th>Fiche technique du véhicule</th>
 		    		
 		    		<th>Offre(s) disponible(s)</th>
+		   		 	<th>Editer / Supprimer le véhicule</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -36,6 +40,10 @@
 					{% else %}
 						<td class="disabled">{{ v.offers|length }}</td>
 					{% endif %}
+					<td style="display:flex; justify-content:space-around;">
+						<a href="{{ path('admin_edit_vehicle', {'id': v.id}) }}"><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></a>
+						<a href="{{ path('admin_delete_vehicle', {'id': v.id}) }}"><i class="fa fa-times" aria-hidden="true"></i></a>
+					</td>
 				</tr>
 				{% endfor %}
 			</tbody>
@@ -43,14 +51,14 @@
 
 {% endblock %}
 
-{% block css_vehicles %}
+{% block css_admin_vehicles %}
 	<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" type="text/css" />
 {% endblock %}
-{% block javascript_vehicles %}
+{% block javascript_admin_vehicles %}
 	<script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 	<script>
 $(document).ready(function() {
-	var table=$('#vehicles_table').DataTable({
+	var table=$('#admin_vehicles_table').DataTable({
 		"lengthMenu": [ [10, 50, 100, -1], [10, 50, 100, "All"] ],
 		"pageLength": -1,
 		"order": [[ 0, 'asc' ]], // tri sur la premiere colonne (voiture) par ordre croissant

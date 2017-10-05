@@ -37,7 +37,7 @@ class OfferController extends Controller
     {
         if (!$checker->isAvailableOffer($offer)) {
             $this->addFlash('error', 'Cette offre est désactivée !');
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('view_offers');
         }
 
         return $this->render('LocationBundle:offer:view_offer_recap.html.twig', [

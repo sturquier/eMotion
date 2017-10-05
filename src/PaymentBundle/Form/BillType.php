@@ -17,7 +17,7 @@ class BillType extends AbstractType
             ->add('date_return', TextType::class, [
                 'attr' => array(
                     'class' => 'datetimepicker',
-                    'style' => 'width: 70%; float:left; margin-right:2px'
+                    'style' => 'width: 75%; float:left; margin-right:2px'
                 ),
                 'label' => false,
             ])

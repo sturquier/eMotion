@@ -3,6 +3,10 @@
 
 {% block body %}
 
-	<h4>Frais supplémentaires de location :</h4>
+	<h4>Vous avez {{ hours_diff }} heures de retard :</h4>
+	<br/>
+	<h4>Frais supplémentaires de location : {{ hours_diff * 2 }} € </h4>
+
+	{{ dump()}}
 
 {% endblock %}

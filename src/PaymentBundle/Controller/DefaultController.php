@@ -61,7 +61,7 @@ class DefaultController extends Controller
 	    $form = $this->createPaymentForm();
 	    $form->handleRequest($request);
 	    $mail = $this->getUser()->getEmail();
-	    dump($this->getUser());
+
 	    if ($form->isSubmitted() && $form->isValid()) {
 	        $data = $form->getData();
 	        // paiement
@@ -183,7 +183,7 @@ class DefaultController extends Controller
 
 	        $em->flush();
 
-	        $this->addFlash('success', 'Paiement bien effectué. Vous allez recevoir un mail récapitulatif');
+	        $this->addFlash('success', 'Paiement des frais de retard bien effectué. Vous allez recevoir un mail');
 	        return $this->redirectToRoute('view_orders');
 	    }
 
@@ -191,7 +191,7 @@ class DefaultController extends Controller
     		'form'			=> $form->createView(),
     		'offer' 		=> $offer,
     		'total_diff'	=> $total_diff,
-    		'total_post_loc_payment' => $total_diff * 2,
+    		'lateCost' 		=> $lateCost,
 		]);
     }
 }

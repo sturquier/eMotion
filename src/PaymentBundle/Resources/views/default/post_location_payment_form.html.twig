@@ -5,7 +5,7 @@
 
 	<h4>Vous avez {{ total_diff }} heures de retard :</h4>
 	<br/>
-	<h4>Frais supplémentaires de location : {{ total_post_loc_payment }} € </h4>
+	<h4>Frais supplémentaires de location : {{ lateCost }} € </h4>
 	
 	<script src="https://js.stripe.com/v3/" data-key="pk_test_7RFP43V6JWGyPLVJFZlzk7Z0"></script>
 	 {{ form_start(form, {'attr': {'novalidate': 'true', 'method':'POST','class':'jumbotron', 'id':'payment-form'}} )}}

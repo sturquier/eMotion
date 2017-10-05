@@ -16,7 +16,7 @@ class LoadOfferData extends AbstractFixture implements OrderedFixtureInterface
 
         for ($i = 0; $i < 100; $i++) {
 
-            $nb_offers = mt_rand(0, 4);
+            $nb_offers = mt_rand(0, 1);
             $ref_vehicle = $this->getReference('vehicle' . $i);
 
             while ($nb_offers > 0) {

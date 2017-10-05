@@ -3,13 +3,16 @@
 
 {% block body %}
 	
-	<div>Historique de vos commandes</div>
+	<div><h4>Historique de vos commandes</h4></div>
+	<hr/>
 
-	<table class="table table-striped">
+	<div id="filter"><label>Affiner votre recherche : &nbsp;</label></div>
+
+	<table class="table table-striped" id="offers_history_table">
 		<thead>
 			<tr>
 				<th>Acheté le : </th>
-				<th>Voiture de location</th>
+				<th class="sort">Voiture de location</th>
 				<th>Prix</th>
 				<th>Début</th>
 				<th>Fin supposée</th>
@@ -26,16 +29,54 @@
 				<td>{{ b.amount ~ " € " }}</td>
 				<td>{{ b.offer.dateBegin|date('d M Y H:i') }}</td>
 				<td>{{ b.offer.dateEnd|date('d M Y H:i') }}</td>
-				{% if "ago" in b.offer.dateEnd|time_diff(b.dateReturn) %}
-					<td><div style="background-color:red">{{ b.dateReturn|date('d M Y H:i') }}</div></td>
+				{% if b.dateReturn is null %}
+					<td>-</td>
 				{% else %}
-					<td><div style="background-color:green">{{ b.dateReturn|date('d M Y H:i') }}</div></td>
+					{% if "ago" in b.offer.dateEnd|time_diff(b.dateReturn) %}
+						<td><div style="background-color:red">{{ b.dateReturn|date('d M Y H:i') }}</div></td>
+					{% else %}
+						<td><div style="background-color:green">{{ b.dateReturn|date('d M Y H:i') }}</div></td>
+					{% endif %}
 				{% endif %}
-				<td><a href="{{ path('view_vehicle', {id: b.offer.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
-				<td><a href="{{ path('create_bill', {id: b.offer.bill.id }) }}">Afficher la facture</a></td>
+					<td><a href="{{ path('view_vehicle', {id: b.offer.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
+					<td><a href="{{ path('create_bill', {id: b.offer.bill.id }) }}">Afficher la facture</a></td>
 			</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 	
+{% endblock %}
+
+{% block css_offers_history %}
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css" type="text/css" />
+{% endblock %}
+{% block javascript_offers_history %}
+	<script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+	<script>
+$(document).ready(function() {
+	var table=$('#offers_history_table').DataTable({
+		"lengthMenu": [ [10, 50, 100, -1], [10, 50, 100, "All"] ],
+		"pageLength": -1,
+		"order": [[ 0, 'dsc' ]], // tri sur la premiere colonne (date d'achat) par ordre decroissant
+		initComplete: function () {
+			this.api().columns(['.sort']).every(function () {
+				var column = this;
+				var select = $('<select><option value=""></option></select>')
+					.appendTo( $('#filter') )
+					.on( 'change', function () {
+						var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+						column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+					} );
+				column.data().unique().sort().each( function ( d, j ) {
+					select.append( '<option value="'+d+'">'+d+'</option>' )
+				} );
+			});
+		}
+	} );
+});
+	</script>
 {% endblock %}

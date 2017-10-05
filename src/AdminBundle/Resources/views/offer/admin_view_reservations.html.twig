@@ -18,7 +18,8 @@
 		    		<th>Début</th>
 		    		<th>Fin supposée</th>
 		    		<th>Fin réelle</th>
-		    		<th>MAJ fin réelle</th>
+		    		<th>Fin de location</th>
+		    		<th>Frais supplémentaires</th>
 		    		
 		    	</tr>
 			</thead>
@@ -32,17 +33,27 @@
 						<td>{{ o.priceLocation ~ " € " }}</td>
 						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
 						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
-						
-					{% if "ago" in o.dateEnd|time_diff(o.bill.dateReturn) %}
-						<td><div style="background-color:red">{{ o.bill.dateReturn|date('d M Y H:i') }}</div></td>
-					{% else %}
-						<td><div style="background-color:green">{{ o.bill.dateReturn|date('d M Y H:i') }}</div></td>
-					{% endif %}
+						{% if o.bill.dateReturn is null %}
+							<td>-</td>
+						{% else %}
+							{% if "ago" in o.dateEnd|time_diff(o.bill.dateReturn) %}
+								<td><div style="background-color:red">{{ o.bill.dateReturn|date('d M Y H:i') }}</div></td>
+							{% else %}
+								<td><div style="background-color:green">{{ o.bill.dateReturn|date('d M Y H:i') }}</div></td>
+							{% endif %}
+						{% endif %}
 						<td>
 							{{ form_start(forms[o.id]) }}
 							<input type="hidden" name="offer_id" value="{{ o.id }}">
 							{{ form_end(forms[o.id]) }}
-							
+						</td>
+
+						<td>
+							{% if o.bill.dateReturn != null %}
+								{% if "ago" in o.dateEnd|time_diff(o.bill.dateReturn) %}
+									<a href="{{ path('offer_post_location_payment_form', {id: o.id }) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+								{% endif %}
+							{% endif %}
 						</td>
 					</tr>
 					{% endif %}

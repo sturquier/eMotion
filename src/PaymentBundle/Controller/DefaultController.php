@@ -110,4 +110,16 @@ class DefaultController extends Controller
         	'offer'	=> $offer,
         ]);
     }
+
+    /**
+     * Post location payment form view
+     *
+     * @Route("/offer/{id}/post_location_payment_form", name="offer_post_location_payment_form")
+     * @ParamConverter("offer", class="LocationBundle:Offer")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function postLocationPaymentFormAction(Offer $offer)
+    {
+    	return $this->render('PaymentBundle:default:post_location_payment_form.html.twig');
+    }
 }

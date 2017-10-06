@@ -70,9 +70,9 @@
 					</tr>
 					<tr>
 						<td></td>	
-						<td>{{ bill.amount }}</td>
-						<td>calcul ?</td>	
-						<td>calcul total ?</td>
+						<td>{{ bill.amount ~ " € " }}</td>
+						<td>{{ bill.latenessCosts ~ " €  " }}</td>	
+						<td>{{ bill.amount + bill.latenessCosts}} € </td>
 					</tr>
 				</table>
 			</tr>

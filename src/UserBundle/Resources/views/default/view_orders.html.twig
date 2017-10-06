@@ -39,7 +39,12 @@
 					{% endif %}
 				{% endif %}
 					<td><a href="{{ path('view_vehicle', {id: b.offer.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
+
+				{% if b.dateReturn is null %}
+					<td><span class="disabled">Pas encore disponible</span></td>
+				{% else %}
 					<td><a href="{{ path('create_bill', {id: b.offer.bill.id }) }}">Afficher la facture</a></td>
+				{% endif %}
 			</tr>
 			{% endfor %}
 		</tbody>

@@ -18,6 +18,7 @@
 				<th>Fin supposée</th>
 				<th>Fin réelle</th>
 				<th>Fiche technique</th>
+				<th>Frais supplémentaires</th>
 				<th>Facture</th>
 			</tr>
 		</thead>
@@ -39,6 +40,18 @@
 					{% endif %}
 				{% endif %}
 					<td><a href="{{ path('view_vehicle', {id: b.offer.vehicle.id}) }}"><i class="fa fa-wrench" aria-hidden="true"></i></a></td>
+
+				{% if b.dateReturn != null %}
+					{% if "ago" in b.offer.dateEnd|time_diff(b.dateReturn) %}
+						{% if b.latenessCosts != 0 %}
+							<td><span class="disabled">Deja payés</span></td>
+						{% else %}
+							<td><a href="{{ path('offer_post_location_payment_form', {id: b.offer.id }) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></td>
+						{% endif %}
+					{% else %}
+						<td><span class="disabled">Non</span></td>
+					{% endif %}
+				{% endif %}
 
 				{% if b.dateReturn is null %}
 					<td><span class="disabled">Pas encore disponible</span></td>

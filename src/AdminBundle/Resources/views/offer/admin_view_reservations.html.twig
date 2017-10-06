@@ -18,8 +18,6 @@
 		    		<th>Fin supposée</th>
 		    		<th>Fin réelle</th>
 		    		<th>Fin de location</th>
-		    		<th>Frais supplémentaires</th>
-		    		
 		    	</tr>
 			</thead>
 			<tbody>
@@ -44,14 +42,6 @@
 							{{ form_start(forms[o.id]) }}
 							<input type="hidden" name="offer_id" value="{{ o.id }}">
 							{{ form_end(forms[o.id]) }}
-						</td>
-
-						<td>
-							{% if o.bill.dateReturn != null %}
-								{% if "ago" in o.dateEnd|time_diff(o.bill.dateReturn) %}
-									<a href="{{ path('offer_post_location_payment_form', {id: o.id }) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-								{% endif %}
-							{% endif %}
 						</td>
 					</tr>
 					{% endif %}

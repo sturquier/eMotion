@@ -183,7 +183,7 @@ class DefaultController extends Controller
 
 	        $em->flush();
 
-	        $this->addFlash('success', 'Paiement des frais de retard bien effectué. Vous allez recevoir un mail');
+	        $this->addFlash('success', 'Paiement des frais de retard bien effectué. Votre facture est disponible dans votre espace utilisateur');
 	        return $this->redirectToRoute('view_orders');
 	    }
 

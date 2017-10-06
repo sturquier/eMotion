@@ -19,3 +19,20 @@
 	max-height: 15em;
 	object-fit: cover;
 }
+
+
+/*------------------
+	nav inversed
+------------------*/
+
+.bg-inverse {
+	background: #0e2e3e;
+}
+
+.drop-inverse > a {
+	color: white !important;
+}
+
+.nav-inverse li a {
+	color: white !important;
+}

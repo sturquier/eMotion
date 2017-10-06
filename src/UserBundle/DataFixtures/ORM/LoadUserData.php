@@ -43,7 +43,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $user3 = new User();
         $user3->setUsername('sailorMoon');
         $user3->setFirstName('sarah');
-        $user3->setLastName('adberemane');
+        $user3->setLastName('abderemane');
         $user3->setPlainPassword('sailorMoon');
         $user3->setEnabled(1);
         $user3->setBirthDate($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));

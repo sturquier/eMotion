@@ -96,7 +96,10 @@ class VehicleType extends AbstractType
             'constraints' => array(
                 new Assert\NotBlank(),
                 new Assert\Date()
-            )
+            ),
+            'widget' => 'single_text',
+            'attr' => ['class' => 'datepicker_admin'],
+            'html5' => false,
         ])
         ->add('pricePurchase', NumberType::class, [
             'label' => 'Prix d\'achat',

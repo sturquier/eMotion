@@ -7,6 +7,8 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -35,6 +37,16 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
             $vehicle->setKilometer($faker->numberBetween($min = 1000, $max = 100000));
             $vehicle->setDatePurchase($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));
             $vehicle->setPricePurchase($faker->randomFloat($nbMaxDemicals = 2, $min = 5000, $max = 1000000));        
+
+
+
+            $file = new File(__DIR__.'/../../../../web/uploads/vehicules/voiture_blanche_un.jpg', 'nom_du_fichier.jpg');
+            
+            dump($this->get('kernel')->getRootDir());
+            $vehicle->setPicture($file);
+
+
+
 
             $this->addReference('vehicle' . $i , $vehicle);
 

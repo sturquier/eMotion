@@ -15,7 +15,7 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
         $faker = Faker\Factory::create('fr_FR');
         $faker->addProvider(new \MattWells\Faker\Vehicle\Provider($faker));
 
-        $colors = ['Rouge','Jaune','Vert','Blanc','Gris','Noir','Rose','Violet','Marron','Bleu','Saumon','Orange'];
+        $colors = ['Rouge','Blanc','Gris','Noir','Marron','Bleu'];
 
         for ($i = 0; $i < 100; $i++) {
 

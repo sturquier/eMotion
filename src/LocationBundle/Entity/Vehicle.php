@@ -5,6 +5,7 @@ namespace LocationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Vehicle
@@ -85,6 +86,12 @@ class Vehicle
      * @ORM\OneToMany(targetEntity="LocationBundle\Entity\Offer", mappedBy="vehicle", cascade={"remove"})
      */
     private $offers;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Image()
+     */
+    private $picture;
 
     public function __construct()
     {
@@ -333,5 +340,29 @@ class Vehicle
     public function getOffers()
     {
         return $this->offers;
+    }
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return Vehicle
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
     }
 }

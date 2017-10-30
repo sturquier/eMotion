@@ -6,13 +6,18 @@
 	<h4>Fiche technique</h4>
 	<hr/>
 	
-	<div>{{ " Marque : " ~ vehicle.brand }}</div>
-	<div>{{ " Modele  : " ~ vehicle.model }}</div>
-	<div>{{ " Couleur : " ~ vehicle.color }}</div>
-	<div>{{ " Numero de serie : " ~ vehicle.serialNumber }}</div>
-	<div>{{ " Plaque d'immatriculation : " ~ vehicle.numberPlate }}</div>
-	<div>{{ " Nombre de kilomètres au compteur : " ~ vehicle.kilometer }}</div>
-	<div>{{ " Date d'achat : " ~ vehicle.datePurchase|date('d M Y') }}</div>
-	<div>{{ " Prix d'achat : " ~ vehicle.pricePurchase }}</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div>{{ " Marque : " ~ vehicle.brand }}</div>
+			<div>{{ " Modele  : " ~ vehicle.model }}</div>
+			<div>{{ " Couleur : " ~ vehicle.color }}</div>
+			<div>{{ " Numero de serie : " ~ vehicle.serialNumber }}</div>
+			<div>{{ " Plaque d'immatriculation : " ~ vehicle.numberPlate }}</div>
+			<div>{{ " Nombre de kilomètres au compteur : " ~ vehicle.kilometer }}</div>
+			<div>{{ " Date d'achat : " ~ vehicle.datePurchase|date('d M Y') }}</div>
+			<div>{{ " Prix d'achat : " ~ vehicle.pricePurchase }}</div>
+		</div>
+		<div class="col-md-6"><img src="{{ asset('uploads/vehicle_pictures/' ~ vehicle.picture) }}"></div>
+	</div>
 
 {% endblock %}

@@ -12,8 +12,8 @@ parameters:
 
     mailer_transport: gmail
     mailer_host: smtp.gmail.com
-    mailer_user: adresse_gmail
-    mailer_password: mot_de_passe
+    mailer_user: d13.emotion@gmail.com
+    mailer_password: emotion.d13
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt

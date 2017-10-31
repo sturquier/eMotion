@@ -30,27 +30,64 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
             foreach ($colors as $color) {
                 $vehicle->setColor($color);
 
-                switch ($color) {
-                    case 'Rouge':
+                $rand_vehicle = mt_rand(0,2);
+                switch ([$color, $rand_vehicle]) {
+                    case ['Rouge', 0]:
                         $vehicle->setPicture('http://eskipaper.com/images/red-car-1.jpg');
                         break;
-                    
-                    case 'Blanc':
+                    case ['Rouge', 1]:
+                        $vehicle->setPicture('https://img.autoplus.fr/news/2017/09/07/1519962/1200%7C800%7Cbde393fddc25ef4523470cd8.jpg');
+                        break;
+                    case ['Rouge', 2]:
+                        $vehicle->setPicture('https://www.mazdausa.com/siteassets/vehicles/2018/m3s/vlp/studio-360s/soul-red/my18_m3s_gt_41v_soul_red-018.jpg');
+                        break;
+
+                    case ['Blanc', 0]:
                         $vehicle->setPicture('http://eskipaper.com/images/white-car-1.jpg');
                         break;
+                    case ['Blanc', 1]:
+                        $vehicle->setPicture('http://eskipaper.com/images/white-car-3.jpg');
+                        break;
+                    case ['Blanc', 2]:
+                        $vehicle->setPicture('http://eskipaper.com/images/white-car-4.jpg');
+                        break;
 
-                    case 'Gris':
+                    case ['Gris', 0]:
                         $vehicle->setPicture('https://thumbs.dreamstime.com/b/vue-de-c-t%C3%A9-de-voiture-grise-49336430.jpg');
                         break;
+                    case ['Gris', 1]:
+                        $vehicle->setPicture('https://thumbs.dreamstime.com/b/metallic-grey-car-side-view-high-resolution-render-d-42658445.jpg');
+                        break;
+                    case ['Gris', 2]:
+                        $vehicle->setPicture('https://carwow-uk-wp-0.imgix.net/sharkgrey.jpeg?ixlib=rb-1.1.0&fit=crop&w=1600&h=&q=60&cs=tinysrgb&auto=format');
+                        break;
 
-                    case 'Noir':
+                    case ['Noir', 0]:
                         $vehicle->setPicture('http://eskipaper.com/images/black-car-2.jpg');
                         break;
-
-                    case 'Marron':
-                        $vehicle->setPicture('https://i2.cdscdn.com/pdt2/9/0/6/3/300x300/nor7426807700906/rw/renault-talisman-de-2016-marron-vison-voiture-de-c.jpg');
+                    case ['Noir', 1]:
+                        $vehicle->setPicture('http://www.blackcarlimo.ca/wp-content/uploads/2015/11/lincoln-mks.jpg');
+                        break;
+                    case ['Noir', 2]:
+                        $vehicle->setPicture('https://irp-cdn.multiscreensite.com/37db6128/dms3rep/multi/desktop/2014-E-CLASS-E250-BLUETEC-SEDAN-BASE-MH1-D-1440x600.png');
                         break;
 
+                    case ['Marron', 0]:
+                        $vehicle->setPicture('https://i2.cdscdn.com/pdt2/9/0/6/3/300x300/nor7426807700906/rw/renault-talisman-de-2016-marron-vison-voiture-de-c.jpg');
+                        break;
+                    case ['Marron', 1]:
+                        $vehicle->setPicture('https://www.actualite-voitures.fr/wp-content/uploads/2011/02/voiture-renault-clio-xv.jpg');
+                        break;
+                    case ['Marron', 2]:
+                        $vehicle->setPicture('http://photos.autocadre.com/images/actualites/photos/Renault-xv-de-france-2011-2.jpg');
+                        break;
+
+                    case ['Bleu', 0]:
+                        $vehicle->setPicture('https://i.pinimg.com/originals/e7/48/f4/e748f4f3dcb80193913ce7fadbf7307c.png');
+                        break;
+                    case ['Bleu', 1]:
+                        $vehicle->setPicture('https://us.123rf.com/450wm/podsolnukh/podsolnukh1207/podsolnukh120700031/14441902-bleu-voiture-moderne.jpg?ver=6');
+                        break;
                     default:
                         $vehicle->setPicture('http://eskipaper.com/images/blue-car-1.jpg');
                         break;

@@ -73,7 +73,7 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
                         break;
 
                     case ['Marron', 0]:
-                        $vehicle->setPicture('https://i2.cdscdn.com/pdt2/9/0/6/3/300x300/nor7426807700906/rw/renault-talisman-de-2016-marron-vison-voiture-de-c.jpg');
+                        $vehicle->setPicture('http://aws-cf.caradisiac.com/prod/mesimages/313182/Koleos%20Marron%20Cuivre%20TE.jpg');
                         break;
                     case ['Marron', 1]:
                         $vehicle->setPicture('https://www.actualite-voitures.fr/wp-content/uploads/2011/02/voiture-renault-clio-xv.jpg');

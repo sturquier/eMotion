@@ -14,6 +14,11 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('LocationBundle:default:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $vehicles = $em->getRepository('LocationBundle:Vehicle')->findAll();
+
+         return $this->render('LocationBundle:default:index.html.twig', [
+            'vehicles' => $vehicles
+        ]);
     }
 }

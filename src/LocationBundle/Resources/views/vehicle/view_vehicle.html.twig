@@ -17,9 +17,11 @@
 			<div>{{ " Date d'achat : " ~ vehicle.datePurchase|date('d M Y') }}</div>
 			<div>{{ " Prix d'achat : " ~ vehicle.pricePurchase }}</div>
 		</div>
-		<div class="col-md-6"><img src="{{ asset('uploads/vehicle_pictures/' ~ vehicle.picture) }}"></div>
-		{{ vehicle.picture }}
-		<img src="{{ vehicle.picture }}" width="500px;" height="500px;">
+		<div class="col-md-6">
+			<img src="{{ asset('uploads/vehicle_pictures/' ~ vehicle.picture) }}">
+			<img src="{{ vehicle.picture }}" width="500px;" height="auto">
+		</div>
+		
 	</div>
 
 {% endblock %}

@@ -29,6 +29,32 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
 
             foreach ($colors as $color) {
                 $vehicle->setColor($color);
+
+                switch ($color) {
+                    case 'Rouge':
+                        $vehicle->setPicture('http://eskipaper.com/images/red-car-1.jpg');
+                        break;
+                    
+                    case 'Blanc':
+                        $vehicle->setPicture('http://eskipaper.com/images/white-car-1.jpg');
+                        break;
+
+                    case 'Gris':
+                        $vehicle->setPicture('http://cdn1.bigcommerce.com/server4700/410a5/product_images/uploaded_images/matte-gun-metal-grey-car-wrap-bubble-free-bmw-m3.jpg');
+                        break;
+
+                    case 'Noir':
+                        $vehicle->setPicture('http://eskipaper.com/images/black-car-2.jpg');
+                        break;
+
+                    case 'Marron':
+                        $vehicle->setPicture('http://www.modeltoycars.com/for_sale/pc/catalog/car2/24046-WLY-MAROON-Aston-Martin-Vanquish-Diecast-Model-Toy-Car-det.jpg');
+                        break;
+
+                    default:
+                        $vehicle->setPicture('http://eskipaper.com/images/blue-car-1.jpg');
+                        break;
+                }
             }
             shuffle($colors);
 
@@ -37,16 +63,6 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
             $vehicle->setKilometer($faker->numberBetween($min = 1000, $max = 100000));
             $vehicle->setDatePurchase($faker->dateTime($max = 'now', $timezone = date_default_timezone_get()));
             $vehicle->setPricePurchase($faker->randomFloat($nbMaxDemicals = 2, $min = 5000, $max = 1000000));        
-
-
-
-            $file = new File(__DIR__.'/../../../../web/uploads/vehicules/voiture_blanche_un.jpg', 'nom_du_fichier.jpg');
-            
-            dump($this->get('kernel')->getRootDir());
-            $vehicle->setPicture($file);
-
-
-
 
             $this->addReference('vehicle' . $i , $vehicle);
 

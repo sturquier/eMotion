@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% use 'templates/menu.html.twig' %}
+
+{% block body %}
+
+	<h4>Fiche technique</h4>
+	<hr/>
+	
+	<div class="row">
+		<div class="col-md-6">
+			<div>{{ " Marque : " ~ vehicle.brand }}</div>
+			<div>{{ " Modele  : " ~ vehicle.model }}</div>
+			<div>{{ " Couleur : " ~ vehicle.color }}</div>
+			<div>{{ " Numero de serie : " ~ vehicle.serialNumber }}</div>
+			<div>{{ " Plaque d'immatriculation : " ~ vehicle.numberPlate }}</div>
+			<div>{{ " Nombre de kilomètres au compteur : " ~ vehicle.kilometer }}</div>
+			<div>{{ " Date d'achat : " ~ vehicle.datePurchase|date('d M Y') }}</div>
+			<div>{{ " Prix d'achat : " ~ vehicle.pricePurchase }}</div>
+		</div>
+		<div class="col-md-6">
+			<img src="{{ asset('uploads/vehicle_pictures/' ~ vehicle.picture) }}">
+			<img src="{{ vehicle.picture }}" width="500px;" height="auto">
+		</div>
+		<div class="col-md-12">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Date de début</th>
+						<th>Date de fin</th>
+						<th>Prix de location</th>
+						<th>Paiement</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for o in vehicle.offers %}
+					{% if o.isAvailable != 1 %}
+					<tr class="disabled">
+						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
+						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
+						<td>{{ o.priceLocation ~ " € " }}</td>
+						<td><i class="fa fa-shopping-cart" aria-hidden="true"></i></td>
+					</tr>
+					{% else %}
+					<tr>
+						<td>{{ o.dateBegin|date('d M Y H:i') }}</td>
+						<td>{{ o.dateEnd|date('d M Y H:i') }}</td>
+						<td>{{ o.priceLocation ~ " € " }}</td>
+						<td><a href="{{ path('view_offer_recap', {id: o.id }) }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></td>
+					</tr>
+					{% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{% endblock %}

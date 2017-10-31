@@ -10,11 +10,14 @@
 
 <div class="slider slick-slider">
 	{% for v in vehicles|slice(0,10) %}
-		<a class="vehicule">
-			<img src="{{ v.picture }}" class="img-home">
-			<p>{{v.brand}} {{v.model}}</p>
-			<p>{{ v.kilometer ~ " kms " }}</p>
-		</a>
+
+		{% if v.offers|length > 0 %}
+			<a class="vehicule" href="{{ path('view_vehicle_slider', {'id' : v.id}) }}">
+				<img src="{{ v.picture }}" class="img-home">
+				<p>{{v.brand}} {{v.model}}</p>
+				<p>{{ v.kilometer ~ " kms " }}</p>
+			</a>
+		{% endif %}
 	{% endfor %}
 </div>
 <p>

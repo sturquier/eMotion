@@ -57,6 +57,7 @@
 
 .slider a .img-home {
 	width: 95%;
+	min-height: 200px;
 	max-height: 210px;
 	display: block;
 	margin: 10px auto;

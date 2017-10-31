@@ -40,7 +40,7 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
                         break;
 
                     case 'Gris':
-                        $vehicle->setPicture('http://cdn1.bigcommerce.com/server4700/410a5/product_images/uploaded_images/matte-gun-metal-grey-car-wrap-bubble-free-bmw-m3.jpg');
+                        $vehicle->setPicture('https://thumbs.dreamstime.com/b/vue-de-c-t%C3%A9-de-voiture-grise-49336430.jpg');
                         break;
 
                     case 'Noir':
@@ -48,7 +48,7 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
                         break;
 
                     case 'Marron':
-                        $vehicle->setPicture('http://www.modeltoycars.com/for_sale/pc/catalog/car2/24046-WLY-MAROON-Aston-Martin-Vanquish-Diecast-Model-Toy-Car-det.jpg');
+                        $vehicle->setPicture('https://i2.cdscdn.com/pdt2/9/0/6/3/300x300/nor7426807700906/rw/renault-talisman-de-2016-marron-vison-voiture-de-c.jpg');
                         break;
 
                     default:

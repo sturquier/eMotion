@@ -4,17 +4,19 @@
 {% block body %}
 	
 <h4>Bienvenue sur eMotion, site de location de véhicules et scooters</h4>
+<p>
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis mi at nunc congue, quis viverra nulla porttitor. Proin consequat interdum sem, vel pulvinar dolor ultricies vel. Morbi feugiat ornare lorem, ut fringilla ligula vulputate sit amet. Praesent ac feugiat odio, nec vestibulum urna. 
+</p>
 
-<div class="slider">
-{% for v in vehicles|slice(0,6) %}
-	<a class="vehicule">
-		<img src="{{ v.picture }}" class="img-home">
-		<p>{{v.brand}} {{v.model}}</p>
-		<p>{{ v.kilometer ~ " kms " }}</p>
-	</a>
-{% endfor %}
+<div class="slider slick-slider">
+	{% for v in vehicles|slice(0,10) %}
+		<a class="vehicule">
+			<img src="{{ v.picture }}" class="img-home">
+			<p>{{v.brand}} {{v.model}}</p>
+			<p>{{ v.kilometer ~ " kms " }}</p>
+		</a>
+	{% endfor %}
 </div>
-
 <p>
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis mi at nunc congue, quis viverra nulla porttitor. Proin consequat interdum sem, vel pulvinar dolor ultricies vel. Morbi feugiat ornare lorem, ut fringilla ligula vulputate sit amet. Praesent ac feugiat odio, nec vestibulum urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris odio ex, rhoncus non orci blandit, varius maximus nisl. Morbi eget ante sed purus lacinia faucibus. Integer et ultrices eros. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur a quam nunc. Praesent non purus at libero varius pulvinar sed vel turpis. Sed iaculis felis nec consectetur pharetra. Pellentesque sed rutrum leo. Cras vulputate lorem vitae placerat dignissim.
 </p>

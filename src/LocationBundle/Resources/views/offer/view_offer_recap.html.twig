@@ -5,14 +5,26 @@
 
 	<h4>Recapitulatif de votre commande :</h4>
 
-	<div>{{ " Prix : " ~ offer.priceLocation ~ " € " }}</div>
-	<div>{{ " Du : " ~ offer.dateBegin|date('d M Y H:i') ~ " au " ~ offer.dateEnd|date('d M Y H:i') }}</div>
-	<div>{{ " Vehicule : " ~ offer.vehicle.brand ~ "-" ~ offer.vehicle.model ~ " " ~ offer.vehicle.color }}</div>
-	<div>{{ " Plaque d'immatriculation : " ~ offer.vehicle.numberPlate }}</div>
-	<div>{{ " Nb de kms au compteur : " ~ offer.vehicle.kilometer  ~ " kms " }}</div>
-	<div>{{ " Numero de série : " ~ offer.vehicle.serialNumber }}</div>
-
-	<br/>
-	<div><a href="{{ path('offer_payment_form', {id: offer.id }) }}" class="btn btn-success">Payer</a></div>
+	<div class="row">
+		<div class="col-md-6">
+			<div>{{ " Prix : " ~ offer.priceLocation ~ " € " }}</div>
+			<div>{{ " Du : " ~ offer.dateBegin|date('d M Y H:i') ~ " au " ~ offer.dateEnd|date('d M Y H:i') }}</div>
+			<div>{{ " Vehicule : " ~ offer.vehicle.brand ~ "-" ~ offer.vehicle.model ~ " " ~ offer.vehicle.color }}</div>
+			<div>{{ " Plaque d'immatriculation : " ~ offer.vehicle.numberPlate }}</div>
+			<div>{{ " Nb de kms au compteur : " ~ offer.vehicle.kilometer  ~ " kms " }}</div>
+			<div>{{ " Numero de série : " ~ offer.vehicle.serialNumber }}</div>
+			<br/>
+			<div><a href="{{ path('offer_payment_form', {id: offer.id }) }}" class="btn btn-success">Payer</a></div>
+		</div>
+		<div class="col-md-6">
+			<div>
+				{% if "http" in offer.vehicle.picture %}
+					<img src="{{ offer.vehicle.picture }}" width="500px" height="auto">
+				{% else %}
+					<img src="{{ asset('uploads/vehicle_pictures/' ~ offer.vehicle.picture) }}">
+				{% endif %}
+			</div>
+		</div>
+	</div>
 
 {% endblock %}

@@ -10,7 +10,8 @@
 
 		<table class="table table-striped" id="vehicles_table">
 			<thead>
-				<tr> 
+				<tr>
+					<th></th> 
 		    		<th class="sort">Marque</th>
 		    		<th class="sort">Modèle</th>
 			    	<th class="sort">Couleur</th>
@@ -23,7 +24,14 @@
 		    </thead>
 		    <tbody>
 				{% for v in vehicles %}
-				<tr> 
+				<tr>
+					<td>
+						{% if "http" in v.picture %}
+							<img src="{{ v.picture }}" width="300px" height="auto">
+						{% else %}
+							<img src="{{ asset('uploads/vehicle_pictures/' ~ v.picture) }}">
+						{% endif %}
+					</td>
 					<td>{{ v.brand }}</td>
 					<td>{{ v.model }}</td>
 					<td>{{ v.color }}</td>
@@ -53,7 +61,7 @@ $(document).ready(function() {
 	var table=$('#vehicles_table').DataTable({
 		"lengthMenu": [ [10, 50, 100, -1], [10, 50, 100, "All"] ],
 		"pageLength": -1,
-		"order": [[ 0, 'asc' ]], // tri sur la premiere colonne (voiture) par ordre croissant
+		"order": [[ 1, 'asc' ], [ 2, 'asc' ]], // tri sur la 2e & 3e colonne par ordre croissant
 		initComplete: function () {
 			this.api().columns(['.sort']).every(function () {
 				var column = this;

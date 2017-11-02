@@ -60,7 +60,7 @@ $(document).ready(function() {
 	var table=$('#offers_table').DataTable({
 		"lengthMenu": [ [10, 50, 100, -1], [10, 50, 100, "All"] ],
 		"pageLength": -1,
-		"order": [[ 0, 'asc' ]], // tri sur la premiere colonne (voiture) par ordre croissant
+		"order": [[ 1, 'asc' ], [ 2, 'asc' ]], // tri sur la 2e & 3e colonne par ordre croissant
 		initComplete: function () {
 			this.api().columns(['.sort']).every(function () {
 				var column = this;

@@ -18,8 +18,13 @@
 			<div>{{ " Prix d'achat : " ~ vehicle.pricePurchase }}</div>
 		</div>
 		<div class="col-md-6">
-			<img src="{{ asset('uploads/vehicle_pictures/' ~ vehicle.picture) }}">
-			<img src="{{ vehicle.picture }}" width="500px;" height="auto">
+			<div>
+				{% if "http" in vehicle.picture %}
+					<img src="{{ vehicle.picture }}" width="500px" height="auto">
+				{% else %}
+					<img src="{{ asset('uploads/vehicle_pictures/' ~ vehicle.picture) }}">
+				{% endif %}
+			</div>
 		</div>
 		<div class="col-md-12">
 			<table class="table table-striped">

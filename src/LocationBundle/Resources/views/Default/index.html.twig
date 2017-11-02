@@ -10,8 +10,8 @@
 
 {% set valid = "oui" %}
 <div class="slider slick-slider">
-	<!-- show 10 vehicles -->
-	{% for v in vehicles|slice(0,10) %}
+	<!-- show 15 vehicles -->
+	{% for v in vehicles|slice(0,20) %}
 	{% if v.offers|length > 0 %}
 		{% for o in v.offers %}
 		<!-- If vehicule offer is available -->

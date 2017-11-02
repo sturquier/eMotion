@@ -8,16 +8,22 @@
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis mi at nunc congue, quis viverra nulla porttitor. Proin consequat interdum sem, vel pulvinar dolor ultricies vel. Morbi feugiat ornare lorem, ut fringilla ligula vulputate sit amet. Praesent ac feugiat odio, nec vestibulum urna. 
 </p>
 
+{% set valid = "oui" %}
 <div class="slider slick-slider">
+	<!-- show 10 vehicles -->
 	{% for v in vehicles|slice(0,10) %}
-
-		{% if v.offers|length > 0 %}
+	{% if v.offers|length > 0 %}
+		{% for o in v.offers %}
+		<!-- If vehicule offer is available -->
+			{% if o.isAvailable != 0 %}
 			<a class="vehicule" href="{{ path('view_vehicle_slider', {'id' : v.id}) }}">
 				<img src="{{ v.picture }}" class="img-home">
 				<p>{{v.brand}} {{v.model}}</p>
 				<p>{{ v.kilometer ~ " kms " }}</p>
 			</a>
-		{% endif %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
 	{% endfor %}
 </div>
 <p>

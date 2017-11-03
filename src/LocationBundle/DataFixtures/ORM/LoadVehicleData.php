@@ -17,84 +17,124 @@ class LoadVehicleData extends AbstractFixture implements OrderedFixtureInterface
         $faker = Faker\Factory::create('fr_FR');
         $faker->addProvider(new \MattWells\Faker\Vehicle\Provider($faker));
 
-        $colors = ['Rouge','Blanc','Gris','Noir','Marron','Bleu'];
+        $colors = ['Rouge','Blanc','Gris','Noir', 'Bleu'];
+        $brands = ['Nissan', 'Tesla', 'Renault', 'Askoll', 'Govecs'];
+        $models = ['Leaf', 'Model_S', 'Model_3', 'Twizy', 'Zoe', 'ES2', 'ES3', 'S15', 'S26', 'S36'];
 
         for ($i = 0; $i < 100; $i++) {
 
             $vehicle = new Vehicle();
 
-            $vehicle->setBrand($faker->vehicleMake);
-            $vehicle->setModel($faker->vehicleModel);
-            $vehicle->setSerialNumber(strtoupper($faker->bothify('#??#?###??##?##??')));
+            foreach ($brands as $brand) {
+                foreach ($models as $model) {
+                    foreach ($colors as $color) {
 
-            foreach ($colors as $color) {
-                $vehicle->setColor($color);
+                        switch ([$brand, $model, $color]) {
+                            case ['Nissan', 'Leaf', 'Blanc']:
+                                $vehicle->setBrand('Nissan');
+                                $vehicle->setModel('Leaf');
+                                $vehicle->setColor('Blanc');
+                                $vehicle->setPicture('https://www.nissan-cdn.net/content/dam/Nissan/nissan_europe/range/electric-vehicles/range-electric-vehicles-leaf-zero-emission.jpg.ximg.l_4_h.smart.jpg');
+                                break;
+                            
+                            case ['Tesla', 'Model_S', 'Rouge']:
+                                $vehicle->setBrand('Tesla');
+                                $vehicle->setModel('Model_S');
+                                $vehicle->setColor('Rouge');
+                                $vehicle->setPicture('https://www.tesla.com/tesla_theme/assets/img/compare/model_s--side_profile.png?20170524');
+                                break;
+                            case ['Tesla', 'Model_3', 'Gris']:
+                                $vehicle->setBrand('Tesla');
+                                $vehicle->setModel('Model_3');
+                                $vehicle->setColor('Gris');
+                                $vehicle->setPicture('https://www.tesla.com/tesla_theme/assets/img/model3/model_3--side_profile.png?20170801');
+                                break;
 
-                $rand_vehicle = mt_rand(0,2);
-                switch ([$color, $rand_vehicle]) {
-                    case ['Rouge', 0]:
-                        $vehicle->setPicture('http://eskipaper.com/images/red-car-1.jpg');
-                        break;
-                    case ['Rouge', 1]:
-                        $vehicle->setPicture('https://img.autoplus.fr/news/2017/09/07/1519962/1200%7C800%7Cbde393fddc25ef4523470cd8.jpg');
-                        break;
-                    case ['Rouge', 2]:
-                        $vehicle->setPicture('https://www.mazdausa.com/siteassets/vehicles/2018/m3s/vlp/studio-360s/soul-red/my18_m3s_gt_41v_soul_red-018.jpg');
-                        break;
+                            case ['Renault', 'Twizy', 'Blanc']:
+                                $vehicle->setBrand('Renault');
+                                $vehicle->setModel('Twizy');
+                                $vehicle->setColor('Blanc');
+                                $vehicle->setPicture('https://www.cdn.renault.com/content/dam/Renault/FR/webrender-fr/TWIZY/renault_twizy_intens_blanc.jpg.ximg.l_12_h.smart.jpg');
+                                break;
+                            case ['Renault', 'Twizy', 'Rouge']:
+                                $vehicle->setBrand('Renault');
+                                $vehicle->setModel('Twizy');
+                                $vehicle->setColor('Rouge');
+                                $vehicle->setPicture('https://www.cdn.renault.com/content/dam/Renault/FR/webrender-fr/TWIZY/renault_twizy_intens_rouge.jpg.ximg.l_12_h.smart.jpg');
+                                break;
+                            case ['Renault', 'Twizy', 'Noir']:
+                                $vehicle->setBrand('Renault');
+                                $vehicle->setModel('Twizy');
+                                $vehicle->setColor('Noir');
+                                $vehicle->setPicture('https://www.cdn.renault.com/content/dam/Renault/FR/webrender-fr/TWIZY/renault_twizy_life_noir.jpg.ximg.l_12_h.smart.jpg');
+                                break;
+                            case ['Renault', 'Zoe', 'Gris']:
+                                $vehicle->setBrand('Renault');
+                                $vehicle->setModel('Zoe');
+                                $vehicle->setColor('Gris');
+                                $vehicle->setPicture('https://www.cdn.renault.com/content/dam/Renault/master/vehicules/zoe-b10e-ph1/versions-et-prix/zen/renault-zoe-x10-ph1-TEKNV-ZEN-MB%2010R-RTOL16.jpg.ximg.l_12_h.smart.jpg');
+                                break;
+                            case ['Renault', 'Zoe', 'Bleu']:
+                                $vehicle->setBrand('Renault');
+                                $vehicle->setModel('Zoe');
+                                $vehicle->setColor('Bleu');
+                                $vehicle->setPicture('https://www.cdn.renault.com/content/dam/Renault/master/vehicules/zoe-b10e-ph1/versions-et-prix/intens/renault-zoe-x10-ph1-TERQG-INT-MB%2010R-RALU16.jpg.ximg.l_12_h.smart.jpg');
+                                break;
+                            case ['Renault', 'Zoe', 'Noir']:
+                                $vehicle->setBrand('Renault');
+                                $vehicle->setModel('Zoe');
+                                $vehicle->setColor('Noir');
+                                $vehicle->setPicture('https://www.cdn.renault.com/content/dam/Renault/FR/webrender-fr/nouvelle-zoe/Nouvelle_Renault_ZOE-Edition_One.jpg.ximg.l_12_h.smart.jpg');
+                                break;
+                            case ['Renault', 'Twizy', 'Bleu']:
+                                $vehicle->setBrand('Renault');
+                                $vehicle->setModel('Twizy');
+                                $vehicle->setColor('Bleu');
+                                $vehicle->setPicture('https://www.cdn.renault.com/content/dam/Renault/FR/webrender-fr/TWIZY/renault_twizy_intens_bleu.jpg.ximg.l_12_h.smart.jpg');
+                                break;
 
-                    case ['Blanc', 0]:
-                        $vehicle->setPicture('http://eskipaper.com/images/white-car-1.jpg');
-                        break;
-                    case ['Blanc', 1]:
-                        $vehicle->setPicture('http://eskipaper.com/images/white-car-3.jpg');
-                        break;
-                    case ['Blanc', 2]:
-                        $vehicle->setPicture('http://eskipaper.com/images/white-car-4.jpg');
-                        break;
+                            case ['Askoll', 'ES2', 'Rouge']:
+                                $vehicle->setBrand('Askoll');
+                                $vehicle->setModel('ES2');
+                                $vehicle->setColor('Rouge');
+                                $vehicle->setPicture('http://www.avem.fr/img/scoot/askolles2.jpg');
+                                break;
+                            case ['Askoll', 'ES3', 'Noir']:
+                                $vehicle->setBrand('Askoll');
+                                $vehicle->setModel('ES3');
+                                $vehicle->setColor('Noir');
+                                $vehicle->setPicture('http://www.avem.fr/img/scoot/askolles3.jpg');
+                                break;
 
-                    case ['Gris', 0]:
-                        $vehicle->setPicture('https://thumbs.dreamstime.com/b/vue-de-c-t%C3%A9-de-voiture-grise-49336430.jpg');
-                        break;
-                    case ['Gris', 1]:
-                        $vehicle->setPicture('https://thumbs.dreamstime.com/b/metallic-grey-car-side-view-high-resolution-render-d-42658445.jpg');
-                        break;
-                    case ['Gris', 2]:
-                        $vehicle->setPicture('https://carwow-uk-wp-0.imgix.net/sharkgrey.jpeg?ixlib=rb-1.1.0&fit=crop&w=1600&h=&q=60&cs=tinysrgb&auto=format');
-                        break;
+                            case ['Govecs', 'S15', 'Blanc']:
+                                $vehicle->setBrand('Govecs');
+                                $vehicle->setModel('S15');
+                                $vehicle->setColor('Blanc');
+                                $vehicle->setPicture('http://www.avem.fr/img/scoot/govecs_S15.jpg');
+                                break;
+                            case ['Govecs', 'S26', 'Blanc']:
+                                $vehicle->setBrand('Govecs');
+                                $vehicle->setModel('S26');
+                                $vehicle->setColor('Blanc');
+                                $vehicle->setPicture('http://www.avem.fr/img/scoot/govecs_S26.jpg');
+                                break;
+                            case ['Govecs', 'S36', 'Gris']:
+                                $vehicle->setBrand('Govecs');
+                                $vehicle->setModel('S36');
+                                $vehicle->setColor('Gris');
+                                $vehicle->setPicture('http://www.govecs.fr/i/pdt/82/scooter-electrique-125cc-gris.jpg');
+                                break;
 
-                    case ['Noir', 0]:
-                        $vehicle->setPicture('http://eskipaper.com/images/black-car-2.jpg');
-                        break;
-                    case ['Noir', 1]:
-                        $vehicle->setPicture('http://www.blackcarlimo.ca/wp-content/uploads/2015/11/lincoln-mks.jpg');
-                        break;
-                    case ['Noir', 2]:
-                        $vehicle->setPicture('https://irp-cdn.multiscreensite.com/37db6128/dms3rep/multi/desktop/2014-E-CLASS-E250-BLUETEC-SEDAN-BASE-MH1-D-1440x600.png');
-                        break;
+                        }
 
-                    case ['Marron', 0]:
-                        $vehicle->setPicture('http://aws-cf.caradisiac.com/prod/mesimages/313182/Koleos%20Marron%20Cuivre%20TE.jpg');
-                        break;
-                    case ['Marron', 1]:
-                        $vehicle->setPicture('https://www.actualite-voitures.fr/wp-content/uploads/2011/02/voiture-renault-clio-xv.jpg');
-                        break;
-                    case ['Marron', 2]:
-                        $vehicle->setPicture('http://photos.autocadre.com/images/actualites/photos/Renault-xv-de-france-2011-2.jpg');
-                        break;
-
-                    case ['Bleu', 0]:
-                        $vehicle->setPicture('https://i.pinimg.com/originals/e7/48/f4/e748f4f3dcb80193913ce7fadbf7307c.png');
-                        break;
-                    case ['Bleu', 1]:
-                        $vehicle->setPicture('https://us.123rf.com/450wm/podsolnukh/podsolnukh1207/podsolnukh120700031/14441902-bleu-voiture-moderne.jpg?ver=6');
-                        break;
-                    default:
-                        $vehicle->setPicture('http://eskipaper.com/images/blue-car-1.jpg');
-                        break;
+                        shuffle($brands);
+                        shuffle($models);
+                        shuffle($colors);  
+                    }
                 }
             }
-            shuffle($colors);
 
+            $vehicle->setSerialNumber(strtoupper($faker->bothify('#??#?###??##?##??')));
             $vehicle->setNumberPlate($faker->vehicleRegistration);
             $vehicle->setNumberPlate(strtoupper($faker->bothify('??-###-?? ##')));
             $vehicle->setKilometer($faker->numberBetween($min = 1000, $max = 100000));

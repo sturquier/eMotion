@@ -58,7 +58,11 @@
 				{% if b.dateReturn is null %}
 					<td><span class="disabled">Pas encore disponible</span></td>
 				{% else %}
-					<td><a href="{{ path('create_bill', {id: b.offer.bill.id }) }}">Afficher la facture</a></td>
+					{% if ("ago" in b.offer.dateEnd|time_diff(b.dateReturn)) and (b.latenessCosts == 0) %}
+					<td><span class="disabled">Payer les frais supplementaires pour afficher la facture</span></td>
+					{% else %}
+						<td><a href="{{ path('create_bill', {id: b.offer.bill.id }) }}">Afficher la facture</a></td>
+					{% endif %}
 				{% endif %}
 			</tr>
 			{% endfor %}

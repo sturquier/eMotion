@@ -18,7 +18,6 @@
 		    		<th>Fin supposée</th>
 		    		<th>Fin réelle</th>
 		    		<th>Fin de location</th>
-		    		<th>Facture</th>
 		    	</tr>
 			</thead>
 			<tbody>
@@ -44,11 +43,6 @@
 							<input type="hidden" name="offer_id" value="{{ o.id }}">
 							{{ form_end(forms[o.id]) }}
 						</td>
-						{% if o.bill.dateReturn != null %}
-						<td><a href="{{ path('create_bill', {id: o.bill.id }) }}">Afficher la facture</a></td>
-						{% else %}
-						<td class="disabled">Facture non disponible</td>
-						{% endif %}
 					</tr>
 					{% endif %}
 				{% endfor %}
